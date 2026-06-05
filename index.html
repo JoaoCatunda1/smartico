@@ -195,7 +195,7 @@ tr:last-child td { border-bottom: none; }
   <span class="logo">Finanças Pessoais</span>
   <div style="display:flex;gap:6px;align-items:center">
     <select id="monthSelect" onchange="changeMonth()" class="month-sel"></select>
-    <button onclick="openAuthModal()" id="auth-btn" title="Entrar / Minha conta" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:6px 9px;color:white;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600">
+    <button onclick="_supaUser ? openAuthModal() : window.location.href='/auth'" id="auth-btn" title="Entrar / Minha conta" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:6px 9px;color:white;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600">
       <span class="icon" style="font-size:17px">account_circle</span>
       <span id="auth-label" style="font-size:11px">Entrar</span>
     </button>
@@ -226,6 +226,9 @@ tr:last-child td { border-bottom: none; }
   </button>
   <button class="nav-item" onclick="navTo('historico',this)">
     <span class="icon">insights</span>Histórico
+  </button>
+  <button class="nav-item" onclick="navTo('calculadoras',this)">
+    <span class="icon">calculate</span>Calculadoras
   </button>
 </nav>
 
@@ -870,6 +873,152 @@ tr:last-child td { border-bottom: none; }
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CALCULADORAS PRO                               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="panel-calculadoras" class="panel" style="display:none;padding:20px;background:#f7fafc;min-height:calc(100vh - 110px)">
+
+  <div style="max-width:700px;margin:0 auto">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+      <span class="icon" style="font-size:22px;color:#1e3a5f">calculate</span>
+      <h2 style="font-size:18px;font-weight:700;color:#1e3a5f">Calculadoras Pro</h2>
+      <span style="background:#f5c542;color:#7c4a00;font-size:11px;font-weight:800;padding:2px 10px;border-radius:50px">PRO</span>
+    </div>
+    <p style="font-size:13px;color:#718096;margin-bottom:24px">Contas que todo mundo precisa mas nunca sabe fazer. Agora em segundos.</p>
+
+    <!-- Tabs das calculadoras -->
+    <div style="display:flex;gap:0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:24px;background:white">
+      <button onclick="calcTab('rescisao',this)" id="ctab-rescisao" style="flex:1;padding:10px 6px;border:none;background:#1e3a5f;color:white;font-size:12px;font-weight:700;cursor:pointer">Rescisão</button>
+      <button onclick="calcTab('ferias',this)" id="ctab-ferias" style="flex:1;padding:10px 6px;border:none;background:white;color:#718096;font-size:12px;font-weight:700;cursor:pointer;border-left:1px solid #e2e8f0">Férias</button>
+      <button onclick="calcTab('decimo',this)" id="ctab-decimo" style="flex:1;padding:10px 6px;border:none;background:white;color:#718096;font-size:12px;font-weight:700;cursor:pointer;border-left:1px solid #e2e8f0">13º Salário</button>
+      <button onclick="calcTab('liquido',this)" id="ctab-liquido" style="flex:1;padding:10px 6px;border:none;background:white;color:#718096;font-size:12px;font-weight:700;cursor:pointer;border-left:1px solid #e2e8f0">Salário Líquido</button>
+      <button onclick="calcTab('fgts',this)" id="ctab-fgts" style="flex:1;padding:10px 6px;border:none;background:white;color:#718096;font-size:12px;font-weight:700;cursor:pointer;border-left:1px solid #e2e8f0">FGTS</button>
+    </div>
+
+    <!-- RESCISÃO -->
+    <div id="cpanel-rescisao" style="background:white;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      <h3 style="font-size:15px;font-weight:700;color:#1e3a5f;margin-bottom:16px">Calculadora de Rescisão</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Salário bruto (R$)</label>
+          <input type="number" id="res-salario" placeholder="3000" oninput="calcRescisao()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Meses trabalhados</label>
+          <input type="number" id="res-meses" placeholder="18" oninput="calcRescisao()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Dias trabalhados no mês</label>
+          <input type="number" id="res-dias" placeholder="15" oninput="calcRescisao()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Tipo de demissão</label>
+          <select id="res-tipo" onchange="calcRescisao()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;background:white">
+            <option value="semjusta">Sem justa causa</option>
+            <option value="comjusta">Com justa causa</option>
+            <option value="pedido">Pedido de demissão</option>
+            <option value="acordo">Acordo mútuo</option>
+          </select>
+        </div>
+      </div>
+      <div id="res-resultado" style="display:none;background:#f0faf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:14px">Detalhamento da Rescisão</h4>
+        <div id="res-itens"></div>
+        <div style="border-top:2px solid #16a34a;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;font-weight:700;color:#1e3a5f">Total a receber</span>
+          <span id="res-total" style="font-size:20px;font-weight:900;color:#16a34a"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FÉRIAS -->
+    <div id="cpanel-ferias" style="display:none;background:white;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      <h3 style="font-size:15px;font-weight:700;color:#1e3a5f;margin-bottom:16px">Calculadora de Férias</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Salário bruto (R$)</label>
+          <input type="number" id="fer-salario" placeholder="3000" oninput="calcFerias()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Meses trabalhados no período</label>
+          <input type="number" id="fer-meses" placeholder="12" max="12" oninput="calcFerias()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+      </div>
+      <div id="fer-resultado" style="display:none;background:#f0faf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:14px">Detalhamento das Férias</h4>
+        <div id="fer-itens"></div>
+        <div style="border-top:2px solid #16a34a;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between">
+          <span style="font-size:14px;font-weight:700;color:#1e3a5f">Total a receber</span>
+          <span id="fer-total" style="font-size:20px;font-weight:900;color:#16a34a"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13º SALÁRIO -->
+    <div id="cpanel-decimo" style="display:none;background:white;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      <h3 style="font-size:15px;font-weight:700;color:#1e3a5f;margin-bottom:16px">Calculadora de 13º Salário</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Salário bruto (R$)</label>
+          <input type="number" id="dec-salario" placeholder="3000" oninput="calcDecimo()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Meses trabalhados no ano</label>
+          <input type="number" id="dec-meses" placeholder="12" max="12" oninput="calcDecimo()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+      </div>
+      <div id="dec-resultado" style="display:none;background:#f0faf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:14px">Detalhamento do 13º</h4>
+        <div id="dec-itens"></div>
+        <div style="border-top:2px solid #16a34a;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between">
+          <span style="font-size:14px;font-weight:700;color:#1e3a5f">13º líquido</span>
+          <span id="dec-total" style="font-size:20px;font-weight:900;color:#16a34a"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALÁRIO LÍQUIDO -->
+    <div id="cpanel-liquido" style="display:none;background:white;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      <h3 style="font-size:15px;font-weight:700;color:#1e3a5f;margin-bottom:16px">Salário Bruto → Líquido</h3>
+      <div style="margin-bottom:16px">
+        <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Salário bruto (R$)</label>
+        <input type="number" id="liq-salario" placeholder="3000" oninput="calcLiquido()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+      </div>
+      <div id="liq-resultado" style="display:none;background:#f0faf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px">
+        <h4 style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:14px">Detalhamento</h4>
+        <div id="liq-itens"></div>
+        <div style="border-top:2px solid #16a34a;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between">
+          <span style="font-size:14px;font-weight:700;color:#1e3a5f">Salário líquido</span>
+          <span id="liq-total" style="font-size:20px;font-weight:900;color:#16a34a"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FGTS -->
+    <div id="cpanel-fgts" style="display:none;background:white;border-radius:14px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08)">
+      <h3 style="font-size:15px;font-weight:700;color:#1e3a5f;margin-bottom:16px">Simulador de FGTS</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Salário bruto (R$)</label>
+          <input type="number" id="fgts-salario" placeholder="3000" oninput="calcFGTS()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:#4a5568;display:block;margin-bottom:5px">Meses trabalhados</label>
+          <input type="number" id="fgts-meses" placeholder="24" oninput="calcFGTS()" style="width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none">
+        </div>
+      </div>
+      <div id="fgts-resultado" style="display:none;background:#f0faf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px">
+        <div id="fgts-itens"></div>
+        <div style="border-top:2px solid #16a34a;margin-top:14px;padding-top:14px;display:flex;justify-content:space-between">
+          <span style="font-size:14px;font-weight:700;color:#1e3a5f">Saldo estimado</span>
+          <span id="fgts-total" style="font-size:20px;font-weight:900;color:#16a34a"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════
 //  SUPABASE CONFIG
@@ -888,15 +1037,23 @@ async function initAuth() {
     _supaUser = session.user;
     updateAuthUI(true);
     await syncFromCloud(false);
+    renderAll();
+  } else {
+    // Sem sessão — redireciona para login
+    window.location.href = '/auth';
+    return;
   }
   supa.auth.onAuthStateChange(async (event, session) => {
     _supaUser = session?.user || null;
     updateAuthUI(!!_supaUser);
+    if (event === 'SIGNED_OUT') {
+      window.location.href = '/auth';
+      return;
+    }
     if (event === 'SIGNED_IN') {
       await syncFromCloud(false);
       renderAll();
     }
-    if (event === 'SIGNED_OUT') renderAll();
   });
 }
 
@@ -3483,6 +3640,169 @@ renderRapitoRecentes();
 initAuth(); // Supabase auth
 // Mark first color swatch as selected
 (function(){const first=document.querySelector('#meta-color-swatches span');if(first)first.style.border='2px solid #1e3a5f';})();
+
+// ═══════════════════════════════════════════════
+//  CALCULADORAS PRO
+// ═══════════════════════════════════════════════
+function calcTab(name, el) {
+  ['rescisao','ferias','decimo','liquido','fgts'].forEach(t => {
+    document.getElementById('cpanel-' + t).style.display = 'none';
+    document.getElementById('ctab-' + t).style.background = 'white';
+    document.getElementById('ctab-' + t).style.color = '#718096';
+  });
+  document.getElementById('cpanel-' + name).style.display = 'block';
+  el.style.background = '#1e3a5f';
+  el.style.color = 'white';
+}
+
+function linhaCalc(label, valor, cor) {
+  return `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #e2e8f0;font-size:13px">
+    <span style="color:#4a5568">${label}</span>
+    <span style="font-weight:700;color:${cor||'#1e3a5f'}">${fmt(valor)}</span>
+  </div>`;
+}
+
+// Tabela INSS 2024
+function calcINSS(salario) {
+  const faixas = [[1412,0.075],[2666.68,0.09],[4000.03,0.12],[7786.02,0.14]];
+  let inss = 0, base = salario;
+  const limites = [1412, 2666.68, 4000.03, 7786.02];
+  const aliq = [0.075, 0.09, 0.12, 0.14];
+  let ant = 0;
+  for (let i = 0; i < limites.length; i++) {
+    if (salario <= 0) break;
+    const faixa = Math.min(salario, limites[i]) - ant;
+    if (faixa <= 0) break;
+    inss += faixa * aliq[i];
+    ant = limites[i];
+    if (salario <= limites[i]) break;
+  }
+  return Math.min(inss, 908.86);
+}
+
+// Tabela IR 2024
+function calcIR(baseCalculo) {
+  if (baseCalculo <= 2259.20) return 0;
+  if (baseCalculo <= 2826.65) return baseCalculo * 0.075 - 169.44;
+  if (baseCalculo <= 3751.05) return baseCalculo * 0.15 - 381.44;
+  if (baseCalculo <= 4664.68) return baseCalculo * 0.225 - 662.77;
+  return baseCalculo * 0.275 - 896.00;
+}
+
+// RESCISÃO
+function calcRescisao() {
+  const sal = parseFloat(document.getElementById('res-salario').value) || 0;
+  const meses = parseFloat(document.getElementById('res-meses').value) || 0;
+  const dias = parseFloat(document.getElementById('res-dias').value) || 0;
+  const tipo = document.getElementById('res-tipo').value;
+  if (!sal || !meses) return;
+
+  const saldoSalario = sal / 30 * dias;
+  const decimoProp = sal / 12 * (meses % 12);
+  const feriasProp = sal / 12 * (meses % 12);
+  const umTerco = feriasProp / 3;
+  const fgtsBase = sal * 0.08 * meses;
+  const multaFGTS = tipo === 'semjusta' ? fgtsBase * 0.4 : tipo === 'acordo' ? fgtsBase * 0.2 : 0;
+  const avisoPrevio = (tipo === 'semjusta' || tipo === 'acordo') ? sal : 0;
+
+  let itens = '';
+  itens += linhaCalc('Saldo de salário (' + dias + ' dias)', saldoSalario);
+  itens += linhaCalc('13º proporcional (' + (meses%12) + ' meses)', decimoProp);
+  itens += linhaCalc('Férias proporcionais', feriasProp);
+  itens += linhaCalc('1/3 sobre férias', umTerco);
+  if (avisoPrevio > 0) itens += linhaCalc('Aviso prévio indenizado', avisoPrevio);
+  itens += linhaCalc('Saldo FGTS (8%)', fgtsBase);
+  if (multaFGTS > 0) itens += linhaCalc('Multa FGTS (' + (tipo==='acordo'?'20%':'40%') + ')', multaFGTS, '#16a34a');
+
+  const total = saldoSalario + decimoProp + feriasProp + umTerco + avisoPrevio + fgtsBase + multaFGTS;
+  document.getElementById('res-itens').innerHTML = itens;
+  document.getElementById('res-total').textContent = fmt(total);
+  document.getElementById('res-resultado').style.display = 'block';
+}
+
+// FÉRIAS
+function calcFerias() {
+  const sal = parseFloat(document.getElementById('fer-salario').value) || 0;
+  const meses = Math.min(parseFloat(document.getElementById('fer-meses').value) || 0, 12);
+  if (!sal) return;
+
+  const feriasBruta = sal / 12 * meses;
+  const umTerco = feriasBruta / 3;
+  const totalBruto = feriasBruta + umTerco;
+  const inss = calcINSS(totalBruto);
+  const ir = Math.max(calcIR(totalBruto - inss), 0);
+  const liquido = totalBruto - inss - ir;
+
+  let itens = linhaCalc('Férias proporcionais', feriasBruta);
+  itens += linhaCalc('1/3 constitucional', umTerco);
+  itens += linhaCalc('Total bruto', totalBruto);
+  itens += linhaCalc('INSS', -inss, '#ef4444');
+  itens += linhaCalc('IR', -ir, '#ef4444');
+
+  document.getElementById('fer-itens').innerHTML = itens;
+  document.getElementById('fer-total').textContent = fmt(liquido);
+  document.getElementById('fer-resultado').style.display = 'block';
+}
+
+// 13º SALÁRIO
+function calcDecimo() {
+  const sal = parseFloat(document.getElementById('dec-salario').value) || 0;
+  const meses = Math.min(parseFloat(document.getElementById('dec-meses').value) || 0, 12);
+  if (!sal) return;
+
+  const bruto = sal / 12 * meses;
+  const inss = calcINSS(bruto);
+  const ir = Math.max(calcIR(bruto - inss), 0);
+  const liquido = bruto - inss - ir;
+
+  let itens = linhaCalc('13º bruto (' + meses + ' meses)', bruto);
+  itens += linhaCalc('INSS (desconto)', -inss, '#ef4444');
+  itens += linhaCalc('IR (desconto)', -ir, '#ef4444');
+
+  document.getElementById('dec-itens').innerHTML = itens;
+  document.getElementById('dec-total').textContent = fmt(liquido);
+  document.getElementById('dec-resultado').style.display = 'block';
+}
+
+// SALÁRIO LÍQUIDO
+function calcLiquido() {
+  const sal = parseFloat(document.getElementById('liq-salario').value) || 0;
+  if (!sal) return;
+
+  const inss = calcINSS(sal);
+  const baseIR = sal - inss;
+  const ir = Math.max(calcIR(baseIR), 0);
+  const liquido = sal - inss - ir;
+
+  let itens = linhaCalc('Salário bruto', sal);
+  itens += linhaCalc('INSS', -inss, '#ef4444');
+  itens += linhaCalc('Base IR', baseIR);
+  itens += linhaCalc('IR', -ir, '#ef4444');
+
+  document.getElementById('liq-itens').innerHTML = itens;
+  document.getElementById('liq-total').textContent = fmt(liquido);
+  document.getElementById('liq-resultado').style.display = 'block';
+}
+
+// FGTS
+function calcFGTS() {
+  const sal = parseFloat(document.getElementById('fgts-salario').value) || 0;
+  const meses = parseFloat(document.getElementById('fgts-meses').value) || 0;
+  if (!sal || !meses) return;
+
+  const depositos = sal * 0.08 * meses;
+  const rendimento = depositos * 0.03 * (meses / 12); // aprox TR + 3% ao ano
+  const total = depositos + rendimento;
+  const multaSemJusta = total * 0.4;
+
+  let itens = linhaCalc('Depósitos (8% do salário × meses)', depositos);
+  itens += linhaCalc('Rendimento estimado (TR + 3% a.a.)', rendimento, '#16a34a');
+  itens += linhaCalc('Multa se demitido sem justa causa (40%)', multaSemJusta, '#f59e0b');
+
+  document.getElementById('fgts-itens').innerHTML = itens;
+  document.getElementById('fgts-total').textContent = fmt(total);
+  document.getElementById('fgts-resultado').style.display = 'block';
+}
 </script>
 </body>
 </html>
