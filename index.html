@@ -876,7 +876,7 @@ tr:last-child td { border-bottom: none; }
 <!-- ═══════════════════════════════════════════════ -->
 <!-- CALCULADORAS PRO                               -->
 <!-- ═══════════════════════════════════════════════ -->
-<div id="panel-calculadoras" class="panel" style="display:none;padding:20px;background:#f7fafc;min-height:calc(100vh - 110px)">
+<div id="panel-calculadoras" class="panel" style="padding:20px;background:#f7fafc;min-height:calc(100vh - 110px)">
 
   <div style="max-width:700px;margin:0 auto">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
@@ -3662,13 +3662,11 @@ function linhaCalc(label, valor, cor) {
   </div>`;
 }
 
-// Tabela INSS 2024
+// Tabela INSS 2025 (Portaria MPS nº 1.716/2025)
 function calcINSS(salario) {
-  const faixas = [[1412,0.075],[2666.68,0.09],[4000.03,0.12],[7786.02,0.14]];
-  let inss = 0, base = salario;
-  const limites = [1412, 2666.68, 4000.03, 7786.02];
-  const aliq = [0.075, 0.09, 0.12, 0.14];
-  let ant = 0;
+  const limites = [1518.00, 2793.88, 4190.83, 8157.41];
+  const aliq    = [0.075,   0.09,    0.12,    0.14];
+  let inss = 0, ant = 0;
   for (let i = 0; i < limites.length; i++) {
     if (salario <= 0) break;
     const faixa = Math.min(salario, limites[i]) - ant;
@@ -3677,16 +3675,21 @@ function calcINSS(salario) {
     ant = limites[i];
     if (salario <= limites[i]) break;
   }
-  return Math.min(inss, 908.86);
+  return Math.min(inss, 951.62); // teto 2025
 }
 
-// Tabela IR 2024
+// Tabela IR 2026 — Nova Lei (isento até R$ 5.000 bruto)
+// Mecanismo: tabela progressiva + desconto complementar de R$ 1.175,80
+// Quem recebe até R$ 5.000 bruto tem IR zerado pelo desconto complementar.
 function calcIR(baseCalculo) {
-  if (baseCalculo <= 2259.20) return 0;
-  if (baseCalculo <= 2826.65) return baseCalculo * 0.075 - 169.44;
-  if (baseCalculo <= 3751.05) return baseCalculo * 0.15 - 381.44;
-  if (baseCalculo <= 4664.68) return baseCalculo * 0.225 - 662.77;
-  return baseCalculo * 0.275 - 896.00;
+  const DESCONTO_COMPLEMENTAR = 1175.80; // nova lei 2026
+  let ir = 0;
+  if (baseCalculo <= 2824.00) ir = 0;
+  else if (baseCalculo <= 3751.05) ir = baseCalculo * 0.075 - 211.80;
+  else if (baseCalculo <= 5142.00) ir = baseCalculo * 0.15  - 492.58;
+  else if (baseCalculo <= 6433.57) ir = baseCalculo * 0.225 - 849.55;
+  else                              ir = baseCalculo * 0.275 - 1171.72;
+  return Math.max(0, ir - DESCONTO_COMPLEMENTAR);
 }
 
 // RESCISÃO
