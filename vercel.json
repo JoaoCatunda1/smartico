@@ -1,6 +1,15 @@
 {
   "rewrites": [
-    { "source": "/app", "destination": "/" },
-    { "source": "/app/(.*)", "destination": "/$1" }
+    { "source": "/app", "destination": "/app.html" },
+    { "source": "/app/(.*)", "destination": "/app.html" },
+    { "source": "/admin", "destination": "/admin.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
   ]
 }
