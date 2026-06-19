@@ -750,6 +750,11 @@ tr:last-child td { border-bottom: none; }
       <span>Calculadoras</span>
     </a>
 
+    <a href="#" onclick="openMarti()" class="sidebar-item" data-label="MARTI IA">
+      <span class="icon">smart_toy</span>
+      <span>🤖 MARTI - Consultor IA</span>
+    </a>
+
     <div class="sidebar-divider"></div>
 
     <a href="#" onclick="openEbookModal()" class="sidebar-item sidebar-highlight" data-label="E-book R$ 7">
@@ -4862,6 +4867,13 @@ function calcFGTS() {
 // ═══════════════════════════════════════════════════════════
 function goToKiwifyCheckout() {
   window.location.href = 'https://pay.kiwify.com.br/QPkpfKK';
+}
+
+// ═══════════════════════════════════════════════════════════
+// MARTI - Abrir Consultor Financeiro IA
+// ═══════════════════════════════════════════════════════════
+function openMarti() {
+  window.location.href = '/marti.html';
 }
 </script>
 </body>
