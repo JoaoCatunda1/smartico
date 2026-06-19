@@ -376,6 +376,39 @@
       border-left: 3px solid #f87171;
       border-radius: 6px;
     }
+
+    /* THINKING INDICATOR - Tipo Claude */
+    @keyframes thinking-pulse {
+      0%, 100% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .thinking-indicator {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+      padding: 4px 0;
+    }
+
+    .thinking-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: thinking-pulse 1s ease-in-out infinite;
+    }
+
+    .thinking-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .thinking-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
   </style>
 </head>
 <body>
@@ -508,19 +541,20 @@
     const sendBtn = document.querySelector('.marti-send-btn');
     const messagesContainer = document.querySelector('#marti-messages');
 
-    function addTypingIndicator() {
-      const typingMsg = document.createElement('div');
-      typingMsg.className = 'message ai';
-      typingMsg.id = 'typing-indicator';
-      typingMsg.innerHTML = `
-        <div class="typing-indicator">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
+    function addThinkingIndicator() {
+      const thinkingMsg = document.createElement('div');
+      thinkingMsg.className = 'message ai';
+      thinkingMsg.id = 'thinking-indicator';
+      thinkingMsg.innerHTML = `
+        <div class="thinking-indicator">
+          <div class="thinking-dot"></div>
+          <div class="thinking-dot"></div>
+          <div class="thinking-dot"></div>
         </div>
       `;
-      messagesContainer.appendChild(typingMsg);
+      messagesContainer.appendChild(thinkingMsg);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      return thinkingMsg;
     }
 
     function addAIResponse(text) {
@@ -684,11 +718,16 @@
       input.value = '';
       input.style.height = 'auto';
 
-      // Mostrar indicador de digitação
-      addTypingIndicator();
+      // Mostrar indicador de "pensando"
+      addThinkingIndicator();
 
       // Chamar Claude API
       const aiResponse = await callClaudeAPI(message);
+
+      // Remover indicador e adicionar resposta
+      const thinkingEl = document.getElementById('thinking-indicator');
+      if (thinkingEl) thinkingEl.remove();
+
       addAIResponse(aiResponse);
 
       // Salvar no banco de dados
