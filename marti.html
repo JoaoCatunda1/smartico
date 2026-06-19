@@ -27,12 +27,12 @@
 
     /* SIDEBAR - HISTÓRICO */
     .marti-sidebar {
-      width: 280px;
+      width: 200px;
       background: rgba(10, 14, 39, 0.9);
       border-right: 1px solid rgba(16, 185, 129, 0.2);
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 16px 12px;
       overflow-y: auto;
     }
 
@@ -109,15 +109,32 @@
       margin-bottom: 16px;
     }
 
-    .marti-icon {
-      font-size: 28px;
-      animation: pulse 2s ease-in-out infinite;
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 20px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(-2px);
     }
 
     .marti-title {
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.5px;
+      flex: 1;
+      text-align: center;
     }
 
     .marti-header-bottom {
@@ -374,7 +391,9 @@
       <!-- HEADER COM CONTADOR -->
       <div class="marti-header">
         <div class="marti-header-top">
-          <div class="marti-icon">🤖</div>
+          <button onclick="window.location.href='/app'" class="back-btn" title="Voltar">
+            <span style="font-size: 20px;">←</span>
+          </button>
           <div class="marti-title">MARTI</div>
         </div>
         <div class="marti-header-bottom">
