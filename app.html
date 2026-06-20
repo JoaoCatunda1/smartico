@@ -6234,7 +6234,147 @@ function goToKiwifyCheckout() {
 // MARTI - Abrir Consultor Financeiro IA
 // ═══════════════════════════════════════════════════════════
 function openMarti() {
-  window.location.href = '/marti.html';
+  // Verificar se é Premium ou Smartico
+  const userPlan = localStorage.getItem('userPlan') || 'free';
+
+  if (userPlan === 'free' || userPlan === 'pro') {
+    // Não é Premium - mostrar modal de upgrade
+    showAIUpgradeModal();
+  } else {
+    // É Premium ou Smartico - abrir MARTI
+    window.location.href = '/marti.html';
+  }
+}
+
+function showAIUpgradeModal() {
+  const modal = document.createElement('div');
+  modal.id = 'ai-upgrade-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  `;
+
+  modal.innerHTML = `
+    <div style="
+      background: linear-gradient(135deg, #0f1a14 0%, #1a2e22 100%);
+      border: 2px solid #4ade80;
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      color: white;
+      box-shadow: 0 20px 60px rgba(74,222,128,.3);
+      position: relative;
+    ">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <div style="
+          width: 80px;
+          height: 80px;
+          background: conic-gradient(#f5c542 84%, rgba(245,197,66,.2) 0);
+          border-radius: 50%;
+          margin: 0 auto 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          box-shadow: 0 0 40px rgba(245,197,66,.4);
+        ">🤖</div>
+
+        <h2 style="
+          font-size: 24px;
+          font-weight: 900;
+          margin: 0 0 12px;
+          color: white;
+        ">Desbloqueie a IA Financeira</h2>
+
+        <p style="
+          color: rgba(255,255,255,.7);
+          margin: 0 0 24px;
+          font-size: 14px;
+          line-height: 1.6;
+        ">
+          Acesse MARTI, sua consultora financeira IA, com análises personalizadas e recomendações inteligentes.
+        </p>
+      </div>
+
+      <div style="display: grid; gap: 12px; margin-bottom: 24px;">
+        <div style="
+          background: rgba(74,222,128,.1);
+          border: 1px solid rgba(74,222,128,.3);
+          padding: 16px;
+          border-radius: 12px;
+        ">
+          <p style="color: #4ade80; font-weight: 700; margin: 0 0 6px;">Premium</p>
+          <p style="color: rgba(255,255,255,.8); margin: 0; font-size: 13px;">50 mensagens/mês com a IA</p>
+        </div>
+
+        <div style="
+          background: rgba(74,222,128,.1);
+          border: 1px solid rgba(74,222,128,.3);
+          padding: 16px;
+          border-radius: 12px;
+        ">
+          <p style="color: #4ade80; font-weight: 700; margin: 0 0 6px;">Smartico</p>
+          <p style="color: rgba(255,255,255,.8); margin: 0; font-size: 13px;">200 mensagens/mês + Suporte prioritário</p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <button onclick="document.getElementById('ai-upgrade-modal').remove()" style="
+          background: rgba(255,255,255,.1);
+          border: 1px solid rgba(255,255,255,.2);
+          color: white;
+          padding: 14px;
+          border-radius: 12px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all .2s;
+        " onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+          Talvez depois
+        </button>
+
+        <button onclick="window.open('https://pay.kiwify.com.br/QPkpfKK', '_blank')" style="
+          background: linear-gradient(135deg, #15803d 0%, #4ade80 100%);
+          border: none;
+          color: white;
+          padding: 14px;
+          border-radius: 12px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all .2s;
+        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 24px rgba(74,222,128,.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+          Comprar agora
+        </button>
+      </div>
+
+      <button onclick="document.getElementById('ai-upgrade-modal').remove()" style="
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: none;
+        border: none;
+        color: rgba(255,255,255,.5);
+        font-size: 28px;
+        cursor: pointer;
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">×</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
 }
 
 // ═══════════════════════════════════════════════════════════
