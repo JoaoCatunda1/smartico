@@ -1297,8 +1297,11 @@ tr:last-child td { border-bottom: none; }
 #panel-dividas .debts-hero,
 #panel-dividas > div > div:nth-child(4) {
   background:
-    radial-gradient(circle at top right, rgba(248,113,113,.22), transparent 34%),
-    linear-gradient(135deg, #fff1f2 0%, #ffe4e6 52%, #fecdd3 100%) !important;
+    linear-gradient(
+      135deg,
+      #b91c1c 0%,
+      #dc2626 100%
+    ) !important;
 }
 
 #panel-dividas .goals-hero::after,
@@ -1327,7 +1330,7 @@ tr:last-child td { border-bottom: none; }
 }
 
 #panel-dividas .debts-hero .hero-label {
-  color: #b91c1c !important;
+  color: rgba(255,255,255,.8) !important;
 }
 
 #panel-dividas .goals-hero h2,
@@ -1342,6 +1345,10 @@ tr:last-child td { border-bottom: none; }
   z-index: 2;
 }
 
+#panel-dividas .debts-hero h2 {
+  color: #ffffff !important;
+}
+
 #panel-dividas .goals-hero p,
 #panel-dividas .debts-hero p {
   color: #475569 !important;
@@ -1349,6 +1356,10 @@ tr:last-child td { border-bottom: none; }
   margin-bottom: 18px !important;
   position: relative;
   z-index: 2;
+}
+
+#panel-dividas .debts-hero p {
+  color: rgba(255,255,255,.85) !important;
 }
 
 /* BOTÕES NOVA META/DÍVIDA */
