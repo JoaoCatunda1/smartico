@@ -993,6 +993,291 @@ tr:last-child td { border-bottom: none; }
   #panel-lancamentos { display:block!important; }
   .card-clean { box-shadow:none!important;border:1px solid #e2e8f0!important;break-inside:avoid; }
 }
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 💎 PRO PAGES - PREMIUM EXCLUSIVE VISUAL IDENTITY           */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* PRO Panel Container */
+#panel-calculadoras,
+#panel-investimentos,
+#panel-dividas,
+#panel-historico {
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%) !important;
+  min-height: calc(100vh - 70px) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* PRO Panel Overlay Effects */
+#panel-calculadoras::before,
+#panel-investimentos::before,
+#panel-dividas::before,
+#panel-historico::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(74,222,128,.08), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(20,184,166,.06), transparent 50%),
+    linear-gradient(rgba(74,222,128,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#panel-calculadoras > div,
+#panel-investimentos > div,
+#panel-dividas > div,
+#panel-historico > div {
+  position: relative;
+  z-index: 1;
+}
+
+/* PRO Header Styling */
+#panel-calculadoras h2,
+#panel-investimentos h2,
+#panel-dividas h2,
+#panel-historico h2 {
+  color: #fff !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+#panel-calculadoras .icon,
+#panel-investimentos .icon,
+#panel-dividas .icon,
+#panel-historico .icon {
+  color: #4ade80 !important;
+  font-size: 28px !important;
+}
+
+/* PRO Badge - Exclusive */
+#panel-calculadoras span[style*="background:#f5c542"],
+#panel-investimentos span[style*="background:#f5c542"],
+#panel-dividas span[style*="background:#f5c542"],
+#panel-historico span[style*="background:#f5c542"] {
+  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
+  color: white !important;
+  font-weight: 900 !important;
+  padding: 4px 14px !important;
+  border-radius: 50px !important;
+  font-size: 12px !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+  box-shadow: 0 4px 12px rgba(251,191,36,0.3) !important;
+  letter-spacing: 1px !important;
+}
+
+/* PRO Description Text */
+#panel-calculadoras p,
+#panel-investimentos p,
+#panel-dividas p,
+#panel-historico p {
+  color: rgba(255,255,255,0.75) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+
+/* PRO Tabs - Premium */
+#panel-calculadoras > div > div > div[style*="display:flex;gap:0"],
+#panel-investimentos > div > div > div[style*="display:flex;gap:0"],
+#panel-dividas > div > div > div[style*="display:flex;gap:0"],
+#panel-historico > div > div > div[style*="display:flex;gap:0"] {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(74,222,128,0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 12px !important;
+}
+
+#panel-calculadoras button[onclick*="calcTab"],
+#panel-investimentos button[onclick*="calcTab"],
+#panel-dividas button[onclick*="calcTab"],
+#panel-historico button[onclick*="calcTab"] {
+  background: transparent !important;
+  color: rgba(255,255,255,0.6) !important;
+  border-color: rgba(74,222,128,0.15) !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+#panel-calculadoras button[onclick*="calcTab"]:hover,
+#panel-investimentos button[onclick*="calcTab"]:hover,
+#panel-dividas button[onclick*="calcTab"]:hover,
+#panel-historico button[onclick*="calcTab"]:hover {
+  color: #4ade80 !important;
+  border-color: rgba(74,222,128,0.3) !important;
+  background: rgba(74,222,128,0.05) !important;
+}
+
+#panel-calculadoras button[onclick*="calcTab"][style*="background:#1e3a5f"],
+#panel-investimentos button[onclick*="calcTab"][style*="background:#1e3a5f"],
+#panel-dividas button[onclick*="calcTab"][style*="background:#1e3a5f"],
+#panel-historico button[onclick*="calcTab"][style*="background:#1e3a5f"] {
+  background: linear-gradient(135deg, #16a34a, #0d9488) !important;
+  color: white !important;
+  border-color: rgba(74,222,128,0.4) !important;
+  box-shadow: 0 4px 12px rgba(22,163,74,0.2) !important;
+}
+
+/* PRO Cards - Glassmorphic */
+#panel-calculadoras > div > div > div[style*="background:white"],
+#panel-investimentos > div > div > div[style*="background:white"],
+#panel-dividas > div > div > div[style*="background:white"],
+#panel-historico > div > div > div[style*="background:white"] {
+  background: rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(74,222,128,0.2) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 25px rgba(74,222,128,0.08), inset 0 1px 0 rgba(74,222,128,0.1) !important;
+  color: white !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#panel-calculadoras > div > div > div[style*="background:white"]:hover,
+#panel-investimentos > div > div > div[style*="background:white"]:hover,
+#panel-dividas > div > div > div[style*="background:white"]:hover,
+#panel-historico > div > div > div[style*="background:white"]:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 35px rgba(74,222,128,0.15), inset 0 1px 0 rgba(74,222,128,0.15) !important;
+  transform: translateY(-4px) !important;
+  border-color: rgba(74,222,128,0.4) !important;
+}
+
+/* PRO Card Titles */
+#panel-calculadoras h3,
+#panel-investimentos h3,
+#panel-dividas h3,
+#panel-historico h3 {
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 16px !important;
+}
+
+/* PRO Card Labels */
+#panel-calculadoras label,
+#panel-investimentos label,
+#panel-dividas label,
+#panel-historico label {
+  color: rgba(255,255,255,0.7) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* PRO Inputs - Premium */
+#panel-calculadoras input,
+#panel-calculadoras select,
+#panel-investimentos input,
+#panel-investimentos select,
+#panel-dividas input,
+#panel-dividas select,
+#panel-historico input,
+#panel-historico select {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(74,222,128,0.2) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+#panel-calculadoras input::placeholder,
+#panel-investimentos input::placeholder,
+#panel-dividas input::placeholder,
+#panel-historico input::placeholder {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+#panel-calculadoras input:focus,
+#panel-calculadoras select:focus,
+#panel-investimentos input:focus,
+#panel-investimentos select:focus,
+#panel-dividas input:focus,
+#panel-dividas select:focus,
+#panel-historico input:focus,
+#panel-historico select:focus {
+  border-color: rgba(74,222,128,0.6) !important;
+  background: rgba(255,255,255,0.1) !important;
+  box-shadow: 0 0 16px rgba(74,222,128,0.2) !important;
+  outline: none !important;
+}
+
+/* PRO Result Cards - Glow Green */
+#panel-calculadoras > div > div > div[style*="background:#f0faf4"],
+#panel-investimentos > div > div > div[style*="background:#f0faf4"],
+#panel-dividas > div > div > div[style*="background:#f0faf4"],
+#panel-historico > div > div > div[style*="background:#f0faf4"] {
+  background: rgba(74,222,128,0.08) !important;
+  border: 1px solid rgba(74,222,128,0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 0 20px rgba(74,222,128,0.1), inset 0 1px 0 rgba(74,222,128,0.2) !important;
+  border-radius: 14px !important;
+}
+
+#panel-calculadoras > div > div > div[style*="background:#f0faf4"] h4,
+#panel-investimentos > div > div > div[style*="background:#f0faf4"] h4,
+#panel-dividas > div > div > div[style*="background:#f0faf4"] h4,
+#panel-historico > div > div > div[style*="background:#f0faf4"] h4 {
+  color: #4ade80 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-size: 12px !important;
+}
+
+/* PRO Total Value - Highlighted */
+#panel-calculadoras span[style*="font-size:20px"],
+#panel-investimentos span[style*="font-size:20px"],
+#panel-dividas span[style*="font-size:20px"],
+#panel-historico span[style*="font-size:20px"] {
+  color: #4ade80 !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px rgba(74,222,128,0.3) !important;
+}
+
+/* PRO Border Dividers */
+#panel-calculadoras > div > div > div[style*="border-top:2px"],
+#panel-investimentos > div > div > div[style*="border-top:2px"],
+#panel-dividas > div > div > div[style*="border-top:2px"],
+#panel-historico > div > div > div[style*="border-top:2px"] {
+  border-top-color: rgba(74,222,128,0.3) !important;
+  border-top-style: solid !important;
+}
+
+/* PRO Scrollbar Styling */
+#panel-calculadoras::-webkit-scrollbar,
+#panel-investimentos::-webkit-scrollbar,
+#panel-dividas::-webkit-scrollbar,
+#panel-historico::-webkit-scrollbar {
+  width: 8px;
+}
+
+#panel-calculadoras::-webkit-scrollbar-track,
+#panel-investimentos::-webkit-scrollbar-track,
+#panel-dividas::-webkit-scrollbar-track,
+#panel-historico::-webkit-scrollbar-track {
+  background: rgba(74,222,128,0.05);
+}
+
+#panel-calculadoras::-webkit-scrollbar-thumb,
+#panel-investimentos::-webkit-scrollbar-thumb,
+#panel-dividas::-webkit-scrollbar-thumb,
+#panel-historico::-webkit-scrollbar-thumb {
+  background: rgba(74,222,128,0.3);
+  border-radius: 4px;
+}
+
+#panel-calculadoras::-webkit-scrollbar-thumb:hover,
+#panel-investimentos::-webkit-scrollbar-thumb:hover,
+#panel-dividas::-webkit-scrollbar-thumb:hover,
+#panel-historico::-webkit-scrollbar-thumb:hover {
+  background: rgba(74,222,128,0.5);
+}
 </style>
 </head>
 <body>
