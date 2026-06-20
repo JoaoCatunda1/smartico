@@ -321,6 +321,169 @@ body {
   .content { margin-left: 0; padding: 0 16px 40px; }
   .cards { grid-template-columns: 1fr 1fr; }
 }
+
+/* SMARTICO PREMIUM UPGRADE SYSTEM */
+.smartico-insight-card {
+  margin: 20px 0;
+  padding: 22px 24px;
+  border-radius: 24px;
+  color: white;
+  background:
+    radial-gradient(circle at top right, rgba(74,222,128,.18), transparent 34%),
+    linear-gradient(135deg,#07120d,#0f1a14);
+  border: 1px solid rgba(74,222,128,.24);
+  box-shadow: 0 22px 60px rgba(7,18,13,.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+.smartico-insight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180px;
+  width: 180px;
+  height: 2px;
+  background: linear-gradient(90deg,transparent,#4ade80,transparent);
+  animation: energySweep 3s infinite;
+}
+
+@keyframes energySweep {
+  to { left: 100%; }
+}
+
+.smartico-insight-card h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 950;
+  color: white;
+}
+
+.smartico-insight-card p {
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  line-height: 1.45;
+  font-size: 13px;
+}
+
+.smartico-insight-card a {
+  background: linear-gradient(135deg,#15803d,#14b8a6);
+  color: white;
+  text-decoration: none;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+  font-size: 13px;
+  transition: all .2s;
+}
+
+.smartico-insight-card a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74,222,128,.4);
+}
+
+/* FINANCE SCORE */
+.smartico-score-card {
+  margin: 20px 0;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(74,222,128,.16);
+  box-shadow: 0 18px 50px rgba(15,26,20,.15);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.smartico-score-number {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 950;
+  color: #fff;
+  background: conic-gradient(#4ade80 84%, rgba(74,222,128,.3) 0);
+  box-shadow: 0 0 30px rgba(74,222,128,.28);
+}
+
+.smartico-score-card h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 950;
+  color: #fff;
+}
+
+.smartico-score-card p {
+  margin: 0;
+  color: rgba(255,255,255,.65);
+  font-weight: 650;
+  font-size: 13px;
+}
+
+.smartico-level-badge {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(74,222,128,.15);
+  color: #4ade80;
+  font-weight: 900;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+/* GAMIFICAÇÃO */
+.smartico-level-card {
+  margin: 20px 0;
+  padding: 22px 24px;
+  border-radius: 24px;
+  background: linear-gradient(135deg,rgba(74,222,128,.06),rgba(20,184,166,.04));
+  border: 1px solid rgba(74,222,128,.14);
+  box-shadow: 0 16px 44px rgba(15,26,20,.12);
+}
+
+.smartico-level-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.smartico-level-head strong {
+  font-size: 16px;
+  color: #e5e7eb;
+  font-weight: 900;
+}
+
+.smartico-level-progress {
+  height: 10px;
+  background: rgba(74,222,128,.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.smartico-level-progress span {
+  display: block;
+  width: 68%;
+  height: 100%;
+  background: linear-gradient(90deg,#15803d,#4ade80);
+  box-shadow: 0 0 18px rgba(74,222,128,.35);
+}
+
+.smartico-level-card p {
+  margin: 10px 0 0;
+  color: rgba(255,255,255,.62);
+  font-weight: 650;
+  font-size: 12px;
+}
 </style>
 <style>
 .icon { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 18px; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; vertical-align: middle; user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -1856,6 +2019,35 @@ tr:last-child td { border-bottom: none; }
 
   <!-- Patrimônio Líquido -->
   <div id="dash-patrimonio" style="margin-bottom:16px"></div>
+
+  <!-- SMARTICO PREMIUM: Finance Score -->
+  <section class="smartico-score-card">
+    <div class="smartico-score-number" id="finance-score-number">84</div>
+    <div>
+      <h3 id="finance-score-title">Seu Finance Score está forte</h3>
+      <p id="finance-score-desc">Você está mantendo balan­ço positivo, controle de dívidas e evolução patrimonial.</p>
+    </div>
+    <span class="smartico-level-badge">Saúde financeira</span>
+  </section>
+
+  <!-- SMARTICO PREMIUM: Insight MARTI -->
+  <section class="smartico-insight-card">
+    <div>
+      <h3>Oportunidade encontrada pela IA</h3>
+      <p>Peça para MARTI analisar seus gastos, encontrar desperdícios invisíveis e montar um plano de economia personali­zado.</p>
+    </div>
+    <a href="javascript:navTo('marti')">Conversar com IA</a>
+  </section>
+
+  <!-- SMARTICO PREMIUM: Gamificação -->
+  <section class="smartico-level-card">
+    <div class="smartico-level-head">
+      <strong id="level-name">Guardião da Reserva</strong>
+      <span class="smartico-level-badge" id="level-badge">Nível 3</span>
+    </div>
+    <div class="smartico-level-progress"><span id="level-progress" style="width:68%"></span></div>
+    <p id="level-message">Continue guardando dinheiro para avançar ao próximo nível.</p>
+  </section>
 
   <!-- Calendário interativo lado a lado com Babilônia mini -->
   <div class="chart-card" style="overflow:hidden;margin-bottom:16px">
@@ -3545,6 +3737,12 @@ function renderDashboard() {
   if(saldoAnterior>0) tips.push(` Você trouxe ${fmt(saldoAnterior)} do mês anterior. Saldo total: ${fmt(saldoTotal)}.`);
   if(!tips.length) tips.push(' Tudo em ordem! Continue monitorando.');
   document.getElementById('tips-section').innerHTML=`<div class="tips"><h3> Análise do mês</h3>${tips.map(t=>`<div class="tip">${t}</div>`).join('')}</div>`;
+
+  // SMARTICO PREMIUM: Atualizar Finance Score e Gamification
+  setTimeout(() => {
+    updateFinanceScore();
+    updateGameLevel();
+  }, 100);
 }
 
 function toggleSaldoEdit() {
@@ -5986,6 +6184,142 @@ function goToKiwifyCheckout() {
 // ═══════════════════════════════════════════════════════════
 function openMarti() {
   window.location.href = '/marti.html';
+}
+
+// ═══════════════════════════════════════════════════════════
+// SMARTICO PREMIUM: Finance Score & Gamification
+// ═══════════════════════════════════════════════════════════
+
+function calculateFinanceScore() {
+  const { saldoTotal } = calcMonth(currentMonth);
+  const dividas = data['__dividas'] || [];
+  const totalDividas = dividas.reduce((s, d) => s + d.saldo, 0);
+  const carteira = data['__carteira'] || [];
+  const totalCarteira = carteira.reduce((s, i) => s + i.valor, 0);
+
+  let score = 50; // base
+
+  // Saldo positivo (+15 pontos)
+  if (saldoTotal > 0) score += 15;
+  else if (saldoTotal < -5000) score -= 10;
+
+  // Controle de dívidas (+20 pontos)
+  if (totalDividas === 0) score += 20;
+  else if (totalDividas < 5000) score += 10;
+  else score -= 5;
+
+  // Patrimônio (+15 pontos)
+  if (totalCarteira > 10000) score += 15;
+  else if (totalCarteira > 5000) score += 10;
+  else if (totalCarteira > 0) score += 5;
+
+  // Evolução mensal (+10 pontos)
+  const prevM = getPrevMonth(currentMonth);
+  const prevMd = getMonthData(prevM);
+  const prevSaldo = (prevMd.saldoFinal || 0) + (prevMd.saldoAnterior || 0);
+  if (saldoTotal > prevSaldo) score += 10;
+
+  return Math.max(0, Math.min(100, score));
+}
+
+function updateFinanceScore() {
+  const score = calculateFinanceScore();
+  const scoreEl = document.getElementById('finance-score-number');
+  if (scoreEl) {
+    scoreEl.textContent = Math.round(score);
+    scoreEl.style.background = `conic-gradient(#4ade80 ${score}%, rgba(74,222,128,.3) 0)`;
+  }
+
+  // Atualizar mensagem
+  const titleEl = document.getElementById('finance-score-title');
+  const descEl = document.getElementById('finance-score-desc');
+  if (titleEl && descEl) {
+    if (score >= 80) {
+      titleEl.textContent = 'Sua saúde financeira está excelente!';
+      descEl.textContent = 'Saldo positivo, sem dívidas e patrimônio em crescimento.';
+    } else if (score >= 60) {
+      titleEl.textContent = 'Seu Finance Score está forte';
+      descEl.textContent = 'Você está mantendo balanço positivo e controle sobre as dívidas.';
+    } else if (score >= 40) {
+      titleEl.textContent = 'Há espaço para melhorar';
+      descEl.textContent = 'Foque em aumentar sua reserva de emergência e reduzir dívidas.';
+    } else {
+      titleEl.textContent = 'Precisamos agir rápido';
+      descEl.textContent = 'Crie um plano com a IA para recuperar sua saúde financeira.';
+    }
+  }
+}
+
+function calculateGameLevel() {
+  const { saldoTotal } = calcMonth(currentMonth);
+  const dividas = data['__dividas'] || [];
+  const totalDividas = dividas.reduce((s, d) => s + d.saldo, 0);
+  const goals = data['__metas'] || [];
+  const completedGoals = goals.filter(g => g.atingida).length;
+
+  let points = 0;
+
+  // Pontos por saldo
+  if (saldoTotal > 50000) points += 100;
+  else if (saldoTotal > 20000) points += 75;
+  else if (saldoTotal > 10000) points += 50;
+  else if (saldoTotal > 5000) points += 25;
+  else if (saldoTotal > 0) points += 10;
+
+  // Pontos por dívidas pagas
+  if (totalDividas === 0) points += 50;
+  else if (totalDividas < 3000) points += 25;
+
+  // Pontos por metas
+  points += completedGoals * 15;
+
+  let level = 1;
+  let levelName = 'Iniciante da Riqueza';
+  let progress = (points % 100) / 100;
+
+  if (points >= 300) {
+    level = 5;
+    levelName = 'Mestre da Riqueza';
+    progress = ((points - 300) % 100) / 100;
+  } else if (points >= 240) {
+    level = 4;
+    levelName = 'Guarião do Patrimônio';
+    progress = ((points - 240) % 100) / 100;
+  } else if (points >= 180) {
+    level = 3;
+    levelName = 'Guardião da Reserva';
+    progress = ((points - 180) % 100) / 100;
+  } else if (points >= 100) {
+    level = 2;
+    levelName = 'Construtor de Riqueza';
+    progress = ((points - 100) % 100) / 100;
+  }
+
+  return { level, levelName, progress: Math.round(progress * 100), points };
+}
+
+function updateGameLevel() {
+  const { level, levelName, progress } = calculateGameLevel();
+
+  const nameEl = document.getElementById('level-name');
+  const badgeEl = document.getElementById('level-badge');
+  const progressEl = document.getElementById('level-progress');
+  const messageEl = document.getElementById('level-message');
+
+  if (nameEl) nameEl.textContent = levelName;
+  if (badgeEl) badgeEl.textContent = `Nível ${level}`;
+  if (progressEl) progressEl.style.width = `${progress}%`;
+
+  if (messageEl) {
+    const messages = [
+      'Registre seus primeiros gastos e receitas.',
+      'Continue economizando para subir de nível.',
+      'Continue guardando dinheiro para avançar ao próximo nível.',
+      'Você está perto! Elimine mais dívidas para subir.',
+      'Parabéns! Você atingiu o nível máximo. Continue crescendo!'
+    ];
+    messageEl.textContent = messages[level - 1] || messages[2];
+  }
 }
 </script>
 </body>
