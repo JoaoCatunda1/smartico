@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smartico — Suas Finanças na Sua Mão</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-50:  #f0faf4;
+      --green-100: #d9f2e4;
+      --green-400: #4ade80;
+      --green-500: #22c55e;
+      --green-600: #16a34a;
+      --green-700: #15803d;
+      --teal-500:  #14b8a6;
+      --teal-600:  #0d9488;
+      --gold:      #f5c542;
+      --dark:      #0f1a14;
+      --dark2:     #1a2e22;
+      --gray-50:   #f8faf9;
+      --gray-200:  #e5ebe8;
+      --gray-400:  #9aada3;
+      --gray-600:  #4d6358;
+      --gray-800:  #243329;
+      --white:     #ffffff;
+      --radius:    16px;
+      --shadow:    0 4px 32px rgba(15,26,20,.10);
+      --shadow-lg: 0 12px 56px rgba(15,26,20,.16);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    .material-icons-round { vertical-align: middle; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6%;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -.5px; color: var(--green-700); }
+    .logo span { color: var(--teal-500); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a { text-decoration: none; color: var(--gray-600); font-size: .9rem; font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: var(--green-700); }
+    .nav-cta {
+      background: var(--green-600); color: var(--white);
+      padding: 10px 24px; border-radius: 50px; font-weight: 600;
+      font-size: .9rem; text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--green-700); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: auto;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(145deg, #f0faf4 0%, #e6f5f0 50%, #d9f0ea 100%);
+      padding: 80px 6% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(20,184,166,.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(34,197,94,.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── COLUNA ESQUERDA ── */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--green-100);
+      color: var(--green-700);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(15,26,20,.06);
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green-500);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.2px;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--green-700);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--gray-600);
+      max-width: 420px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* Benefícios */
+    .benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .benefit {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+
+    .benefit .material-icons-round {
+      font-size: 16px;
+      color: var(--green-500);
+    }
+
+    /* CTAs */
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-600), var(--teal-600));
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(22,163,74,.3);
+      transition: transform .2s, box-shadow .2s;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(22,163,74,.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--green-700);
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 2px solid var(--green-400);
+      transition: background .2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--green-50);
+    }
+
+    /* Prova Social */
+    .social-proof {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .stars .material-icons-round {
+      font-size: 14px;
+      color: #f59e0b;
+    }
+
+    .proof-text {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    /* ── COLUNA DIREITA ── */
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* Badge Virada Black - COM ANIMAÇÃO */
+    .virada-badge {
+      background: var(--white);
+      border: 1px solid rgba(34,197,94,.1);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      box-shadow:
+        0 2px 8px rgba(15,26,20,.05),
+        0 0 16px rgba(34,197,94,.12);
+      position: relative;
+      overflow: visible;
+    }
+
+    /* Brilho deslizante */
+    .virada-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(34,197,94,.15), transparent);
+      animation: shine 3s infinite;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Raio verde piscando */
+    .virada-badge::after {
+      content: '⚡';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green-400);
+      font-size: 16px;
+      font-weight: 900;
+      animation: lightning-flash 2.5s ease-in-out infinite;
+      text-shadow: 0 0 8px rgba(34,197,94,.6);
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    @keyframes lightning-flash {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      12% { opacity: 0; }
+      13% { opacity: 1; }
+      15% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .virada-badge-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(34,197,94,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-600);
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(34,197,94,.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    .virada-badge-icon .material-icons-round {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .virada-badge-text {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      line-height: 1.3;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Imagem Principal - PROPORÇÃO 4:3 */
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow:
+        0 30px 60px rgba(0,0,0,.15),
+        0 0 1px rgba(0,0,0,.1);
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Card Virada Black - REDUZIDO 20% */
+    .virada-card {
+      width: 100%;
+      background: linear-gradient(135deg, #0f1a14 0%, #1a2e22 100%);
+      border: 1px solid rgba(74,222,128,.12);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 80px 1fr 65px;
+      gap: 12px;
+      align-items: center;
+      box-shadow:
+        0 10px 28px rgba(34,197,94,.08),
+        inset 0 1px 0 rgba(74,222,128,.08);
+    }
+
+    .virada-cover {
+      width: 80px;
+      height: 115px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 6px 14px rgba(34,197,94,.18);
+    }
+
+    .virada-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .virada-content h3 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 0 3px 0;
+    }
+
+    .virada-content p {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,.65);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .virada-content strong {
+      color: var(--green-400);
+      font-size: 0.75rem;
+    }
+
+    .virada-price {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .virada-price .old {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,.25);
+      text-decoration: line-through;
+      margin: 0;
+    }
+
+    .virada-price .current {
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: var(--green-400);
+      margin: 0;
+    }
+
+    .virada-price .label {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,.35);
+      margin: 1px 0 0 0;
+      line-height: 1.2;
+    }
+
+    /* ── SOCIAL PROOF TICKER ── */
+    .proof {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      background: linear-gradient(90deg, #0a1f12 0%, #0d2b1a 40%, #0b2218 60%, #0a1f12 100%);
+      box-shadow: 0 0 32px rgba(34,197,94,.25), 0 0 64px rgba(20,184,166,.12), inset 0 1px 0 rgba(74,222,128,.15), inset 0 -1px 0 rgba(74,222,128,.15);
+    }
+    /* glow lines top/bottom */
+    .proof::before, .proof::after {
+      content: '';
+      position: absolute; left: 0; right: 0; height: 1px; z-index: 2;
+      background: linear-gradient(90deg, transparent 0%, var(--green-400) 25%, var(--teal-500) 75%, transparent 100%);
+      animation: linePulse 3s ease-in-out infinite;
+      filter: blur(1px);
+    }
+    .proof::before { top: 0; }
+    .proof::after  { bottom: 0; animation-delay: 1.5s; }
+    @keyframes linePulse {
+      0%,100% { opacity: .4; }
+      50%      { opacity: 1; }
+    }
+    /* fade edges */
+    .proof-fade-left, .proof-fade-right {
+      position: absolute; top: 0; bottom: 0; width: 140px; z-index: 2; pointer-events: none;
+    }
+    .proof-fade-left  { left: 0;  background: linear-gradient(90deg, #0a1f12, transparent); }
+    .proof-fade-right { right: 0; background: linear-gradient(270deg, #0a1f12, transparent); }
+
+    .proof-track-wrap { overflow: hidden; padding: 16px 0; }
+    .proof-track {
+      display: flex; align-items: center;
+      width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    .proof-track:hover { animation-play-state: paused; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .proof-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 52px; white-space: nowrap;
+    }
+    .proof-item .num { font-size: 1.3rem; font-weight: 900; color: var(--green-400); text-shadow: 0 0 12px rgba(74,222,128,.5); }
+    .proof-item .txt { font-size: .78rem; color: rgba(255,255,255,.6); font-weight: 500; }
+    .proof-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--teal-500);
+      flex-shrink: 0; opacity: .6;
+      box-shadow: 0 0 6px var(--teal-500);
+    }
+    .proof-divider { display: none; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 100px 6%; }
+    .section-label { font-size: .8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-600); margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.2; letter-spacing: -.5px; margin-bottom: 20px; }
+    .section-sub { font-size: 1.05rem; color: var(--gray-600); max-width: 580px; }
+    .centered { text-align: center; }
+    .centered .section-sub { margin: 0 auto; }
+
+    /* ── PROBLEM ── */
+    .problem-grid { max-width: 1100px; margin: 60px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .problem-card {
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: var(--radius); padding: 28px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .problem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .problem-card .p-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #fef2f2; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .problem-card .p-icon .material-icons-round { color: #dc2626; font-size: 24px; }
+    .problem-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
+    .problem-card p { font-size: .88rem; color: var(--gray-600); line-height: 1.6; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--green-50); }
+
+    /* 4 steps horizontal */
+    .steps-wrapper { max-width: 1100px; margin: 48px auto 0; }
+
+    /* linha + números */
+    .steps-connector {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px; padding: 0 calc(12.5% - 26px);
+      position: relative;
+    }
+    .steps-connector-line {
+      flex: 1; height: 2px;
+      background: linear-gradient(90deg, var(--green-500), var(--teal-400));
+    }
+    .step-num {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--green-600); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.05rem; flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(22,163,74,.3);
+      position: relative; z-index: 1;
+      transition: box-shadow .25s, transform .2s; cursor: default;
+    }
+    .step-num:hover {
+      box-shadow: 0 6px 28px rgba(22,163,74,.55), 0 0 0 6px rgba(22,163,74,.12);
+      transform: scale(1.08);
+    }
+
+    /* conteúdo abaixo */
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    }
+    .step-col {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 0 16px;
+    }
+    .step-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--white); border: 1px solid var(--green-100);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; box-shadow: 0 2px 8px rgba(15,26,20,.06);
+    }
+    .step-icon .material-icons-round { color: var(--green-600); font-size: 22px; }
+    .step-col h3 { font-size: .93rem; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+    .step-col p  { font-size: .8rem; color: var(--gray-600); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .steps-connector { padding: 0 calc(25% - 26px); }
+      .steps-grid { grid-template-columns: repeat(2,1fr); gap: 32px 0; }
+    }
+
+    /* ── FEATURES ── */
+    .features-grid { max-width: 1100px; margin: 60px auto 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .feature-card {
+      background: var(--white); border: 1px solid var(--gray-200);
+      border-radius: 20px; padding: 32px;
+      box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s;
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .feature-icon .material-icons-round { font-size: 26px; }
+    .fi-green { background: var(--green-100); }
+    .fi-green .material-icons-round { color: var(--green-700); }
+    .fi-teal  { background: #ccfbf1; }
+    .fi-teal  .material-icons-round { color: var(--teal-600); }
+    .fi-gold  { background: #fef9c3; }
+    .fi-gold  .material-icons-round { color: #92400e; }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { font-size: .88rem; color: var(--gray-600); line-height: 1.65; }
+
+    /* ── REVIEWS CAROUSEL ── */
+    .reviews { background: var(--white); padding-bottom: 80px; }
+    .reviews-header { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .reviews-rating {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gray-50); border: 1px solid var(--gray-200);
+      border-radius: 50px; padding: 8px 20px; margin-bottom: 40px;
+    }
+    .reviews-rating .rs-num { font-size: 1.1rem; font-weight: 900; color: var(--dark); }
+    .reviews-rating .rs-stars { display: flex; gap: 2px; }
+    .reviews-rating .rs-stars .material-icons-round { color: #f59e0b; font-size: 16px; }
+    .reviews-rating .rs-label { font-size: .78rem; color: var(--gray-400); font-weight: 500; }
+
+    /* carousel track */
+    .rv-wrap { overflow: hidden; position: relative; }
+    .rv-wrap::before, .rv-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none;
+    }
+    .rv-wrap::before { left: 0; background: linear-gradient(90deg, var(--white), transparent); }
+    .rv-wrap::after  { right: 0; background: linear-gradient(270deg, var(--white), transparent); }
+
+    .rv-track {
+      display: flex; gap: 18px; width: max-content;
+      animation: rvScroll 36s linear infinite;
+      padding: 12px 0;
+    }
+    .rv-track:hover { animation-play-state: paused; }
+    @keyframes rvScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .rv-card {
+      width: 300px; flex-shrink: 0;
+      background: var(--white);
+      border: 1.5px solid rgba(22,163,74,.18);
+      border-radius: 18px; padding: 20px 22px;
+      box-shadow: 0 0 0 0 rgba(22,163,74,0), 0 2px 12px rgba(15,26,20,.06);
+      transition: box-shadow .3s, border-color .3s;
+    }
+    .rv-card:hover {
+      border-color: rgba(22,163,74,.45);
+      box-shadow: 0 0 18px rgba(22,163,74,.18), 0 4px 20px rgba(15,26,20,.08);
+    }
+    .rv-stars { display: flex; gap: 2px; margin-bottom: 10px; }
+    .rv-stars .material-icons-round { color: #f59e0b; font-size: 15px; }
+    .rv-text { font-size: .85rem; color: var(--gray-700); line-height: 1.65; margin-bottom: 16px; font-style: italic; }
+    .rv-author { display: flex; align-items: center; gap: 10px; }
+    .rv-avatar {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .82rem; color: #fff;
+    }
+    .rv-name { font-weight: 700; font-size: .82rem; color: var(--dark); }
+    .rv-role { font-size: .7rem; color: var(--gray-400); }
+    .av-g { background: linear-gradient(135deg, var(--green-600), var(--teal-500)); }
+    .av-b { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .av-o { background: linear-gradient(135deg, #f97316, #ef4444); }
+    .av-t { background: linear-gradient(135deg, var(--teal-600), #0ea5e9); }
+    .av-p { background: linear-gradient(135deg, #ec4899, #f43f5e); }
+    .av-y { background: linear-gradient(135deg, #f59e0b, #f97316); }
+    .av-r { background: linear-gradient(135deg, #10b981, #059669); }
+
+    /* ── QUOTES ── */
+    .quotes { background: var(--dark); color: var(--white); overflow: hidden; }
+    .quotes-inner { max-width: 1100px; margin: 0 auto; }
+    .quotes-headline { text-align: center; margin-bottom: 52px; }
+
+    .quotes-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; align-items: stretch;
+    }
+    .quote-col { display: flex; flex-direction: column; }
+
+    /* Card com capa como background */
+    .quote-card {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 32px 28px;
+      width: 100%; flex: 1;
+      transition: border-color .3s;
+    }
+    .quote-card:hover { border-color: rgba(74,222,128,.3); }
+
+    /* Imagem de fundo com overlay */
+    .quote-card-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center top;
+      border-radius: 20px;
+      opacity: .13;
+      transition: opacity .3s;
+    }
+    .quote-card:hover .quote-card-bg { opacity: .18; }
+
+    /* Overlay escuro sobre a imagem */
+    .quote-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, var(--dark2) 0%, rgba(15,26,20,.85) 100%);
+      border-radius: 20px; z-index: 1;
+    }
+    .quote-card > * { position: relative; z-index: 2; }
+
+    .quote-text {
+      font-size: .9rem; font-style: italic;
+      color: rgba(255,255,255,.8); line-height: 1.75;
+      margin-bottom: 20px; text-align: center;
+    }
+    .quote-divider {
+      width: 32px; height: 2px; margin: 0 auto 18px;
+      background: linear-gradient(90deg, var(--green-500), var(--teal-500));
+      border-radius: 2px;
+    }
+    .quote-author { display: flex; align-items: center; gap: 10px; justify-content: center; }
+    .quote-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--green-700); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .75rem; color: #fff; flex-shrink: 0; }
+    .quote-name { font-weight: 700; font-size: .82rem; color: var(--white); }
+    .quote-role { font-size: .68rem; color: var(--green-400); }
+
+    .book-ref {
+      max-width: 860px; margin: 40px auto 0;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; padding: 20px 28px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .book-icon-wrap .material-icons-round { font-size: 28px; color: var(--green-400); }
+    .book-text { font-size: .82rem; color: rgba(255,255,255,.45); line-height: 1.65; }
+    .book-text strong { color: var(--green-400); }
+
+    @media (max-width: 768px) {
+      .quotes-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* ── PRICING ── */
+    .pricing-layout {
+      max-width: 820px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1.12fr;
+      gap: 18px; align-items: start;
+    }
+    /* FREE card */
+    .pc-free {
+      border-radius: 16px; padding: 20px 22px;
+      border: 1.5px solid var(--gray-200); background: var(--white);
+      box-shadow: 0 2px 12px rgba(15,26,20,.06);
+      text-align: left;
+    }
+    .pc-free-label { font-size: .65rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 8px; }
+    .pc-free h3 { font-size: 1.15rem; font-weight: 900; color: var(--dark); margin-bottom: 2px; }
+    .pc-free .pc-price { font-size: 2rem; font-weight: 900; color: var(--dark); line-height: 1; margin: 6px 0 2px; }
+    .pc-free .pc-sub { font-size: .78rem; color: var(--gray-400); margin-bottom: 14px; }
+    .pc-free .pc-features { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .pc-free .pc-features li { font-size: .8rem; color: var(--gray-600); display: flex; align-items: center; gap: 7px; }
+    .pc-free .pc-features li .material-icons-round { color: var(--gray-400); font-size: 15px; flex-shrink: 0; }
+    .pc-free-cta {
+      display: block; text-align: center; text-decoration: none;
+      padding: 10px; border-radius: 50px; font-weight: 700; font-size: .84rem;
+      border: 1.5px solid var(--gray-200); color: var(--gray-600); transition: all .2s;
+    }
+    .pc-free-cta:hover { border-color: var(--green-400); color: var(--green-700); }
+    .pc-forever { margin-top: 10px; text-align: center; font-size: .68rem; color: var(--gray-400); display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .pc-forever .material-icons-round { font-size: 12px; color: var(--green-500); }
+
+    /* PRO card */
+    .pc-pro {
+      border-radius: 20px; padding: 22px 28px;
+      background: linear-gradient(160deg, #0f1a14 0%, #1a2e22 100%);
+      box-shadow: 0 16px 48px rgba(15,26,20,.28), 0 0 0 1px rgba(74,222,128,.12);
+      position: relative; overflow: hidden; text-align: left;
+    }
+    .pc-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--green-500), var(--teal-500)); }
+    .pc-pro-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.25); color: var(--green-400); font-size: .62rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 50px; margin-bottom: 8px; }
+    .pc-pro-badge .material-icons-round { font-size: 11px; }
+    .pc-discount-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: linear-gradient(135deg, #f5c542, #f0a500);
+      color: #7c4a00; font-size: .68rem; font-weight: 900;
+      letter-spacing: .5px; padding: 3px 12px; border-radius: 50px;
+      box-shadow: 0 2px 10px rgba(245,197,66,.4);
+      margin-left: 8px; vertical-align: middle;
+    }
+    .pc-pro h3 { font-size: 1.25rem; font-weight: 900; color: var(--white); margin-bottom: 2px; }
+    .pc-pro .pc-old { font-size: .75rem; color: rgba(255,255,255,.3); text-decoration: line-through; margin-bottom: 0; }
+    .pc-pro .pc-price-wrap { margin: 4px 0 2px; display: flex; align-items: flex-end; gap: 4px; }
+    .pc-pro .pc-price { font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; }
+    .pc-pro .pc-period { font-size: .85rem; color: rgba(255,255,255,.4); font-weight: 400; margin-bottom: 4px; }
+    .pc-coffee { font-size: .75rem; color: var(--green-400); font-weight: 600; display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+    .pc-coffee .material-icons-round { font-size: 13px; }
+    .pc-impact { background: rgba(74,222,128,.07); border: 1px solid rgba(74,222,128,.18); border-radius: 10px; padding: 9px 12px; margin-bottom: 10px; }
+    .pc-impact p { font-size: .76rem; color: rgba(255,255,255,.75); line-height: 1.45; }
+    .pc-impact strong { color: var(--green-400); }
+    .pc-persuasion { font-size: .76rem; color: rgba(255,255,255,.45); line-height: 1.55; margin-bottom: 12px; padding-left: 10px; border-left: 2px solid rgba(74,222,128,.3); }
+    .pc-benefits { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; margin-bottom: 18px; }
+    .pc-benefits li { font-size: .78rem; color: rgba(255,255,255,.85); display: flex; align-items: center; gap: 6px; }
+    .pc-benefits li .material-icons-round { color: var(--green-400); font-size: 14px; flex-shrink: 0; }
+    .pc-pro-cta { display: block; text-align: center; text-decoration: none; padding: 13px; border-radius: 50px; font-weight: 800; font-size: .9rem; background: linear-gradient(135deg, var(--green-500), var(--teal-500)); color: var(--white); box-shadow: 0 8px 24px rgba(34,197,94,.35); transition: transform .2s, box-shadow .2s; }
+    .pc-pro-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(34,197,94,.45); }
+    .pc-urgency { text-align: center; font-size: .65rem; color: rgba(255,255,255,.28); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .pc-urgency .material-icons-round { font-size: 11px; color: #f87171; }
+
+    @media (max-width: 768px) { .pricing-layout { grid-template-columns: 1fr; } .pc-benefits { grid-template-columns: 1fr; } }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green-700), var(--teal-600));
+      padding: 100px 6%; text-align: center; color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 20px; position: relative; line-height: 1.25; }
+    .cta-section .cta-sub { font-size: 1.1rem; opacity: .9; max-width: 520px; margin: 0 auto 16px; position: relative; line-height: 1.65; }
+    .cta-section .cta-price-line {
+      font-size: 1.05rem; font-weight: 700;
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      display: inline-block; padding: 8px 24px; border-radius: 50px;
+      margin-bottom: 36px; position: relative;
+    }
+    .cta-section .btn-white {
+      background: var(--white); color: var(--green-700);
+      padding: 18px 48px; border-radius: 50px;
+      font-weight: 800; font-size: 1.05rem; text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      transition: transform .2s, box-shadow .2s;
+      display: inline-flex; align-items: center; gap: 8px; position: relative;
+    }
+    .cta-section .btn-white:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,.25); }
+    .cta-note { margin-top: 20px; font-size: .8rem; opacity: .6; position: relative; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.5);
+      padding: 48px 6% 32px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 20px;
+    }
+    footer .logo { color: var(--green-400); font-size: 1.3rem; }
+    footer p { font-size: .8rem; }
+    footer a { color: var(--green-400); text-decoration: none; }
+
+    /* ── PROBLEM SECTION ── */
+    .problem-section {
+      background: var(--dark); color: var(--white);
+      padding: 80px 6%; text-align: center;
+    }
+    .problem-section .section-label { color: #f87171; }
+    .problem-section .section-title { color: var(--white); margin-bottom: 12px; }
+    .problem-section .section-sub { color: rgba(255,255,255,.55); margin: 0 auto 52px; max-width: 540px; }
+
+    /* 4 cards lado a lado */
+    .prob-cards {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 16px; max-width: 1100px; margin: 0 auto 56px;
+    }
+    .prob-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; padding: 24px 20px; text-align: left;
+      transition: background .2s, border-color .2s;
+    }
+    .prob-card:hover { background: rgba(239,68,68,.07); border-color: rgba(239,68,68,.25); }
+    .prob-card-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(239,68,68,.12); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 16px;
+    }
+    .prob-card-icon .material-icons-round { color: #f87171; font-size: 22px; }
+    .prob-card h3 { font-size: .95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .prob-card p  { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.6; }
+
+    /* Antes x Depois */
+    .prob-compare {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 0; max-width: 900px; margin: 0 auto;
+      align-items: stretch;
+    }
+    .prob-compare-divider {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 0 24px; gap: 8px;
+    }
+    .prob-compare-divider .vs {
+      font-size: .72rem; font-weight: 800; letter-spacing: 2px;
+      color: rgba(255,255,255,.2); text-transform: uppercase;
+      background: rgba(255,255,255,.06); border-radius: 50px;
+      padding: 6px 14px;
+    }
+    .prob-compare-divider .arrow-line {
+      width: 1px; flex: 1; background: rgba(255,255,255,.08);
+    }
+
+    .pcomp-box {
+      border-radius: 20px; padding: 28px; text-align: left;
+    }
+    .pcomp-box.before {
+      background: rgba(239,68,68,.06);
+      border: 1.5px solid rgba(239,68,68,.2);
+    }
+    .pcomp-box.after {
+      background: rgba(22,163,74,.06);
+      border: 1.5px solid rgba(22,163,74,.2);
+    }
+    .pcomp-label {
+      font-size: .65rem; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .pcomp-label.red  { color: #f87171; }
+    .pcomp-label.green { color: var(--green-400); }
+    .pcomp-label .material-icons-round { font-size: 14px; }
+
+    /* Before rows */
+    .pcomp-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .84rem;
+    }
+    .pcomp-row:last-child { border-bottom: none; }
+    .pcomp-row .cat { color: rgba(255,255,255,.4); }
+    .pcomp-row .unk { color: rgba(255,255,255,.22); font-style: italic; }
+    .pcomp-total {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid rgba(239,68,68,.3);
+      display: flex; justify-content: space-between; align-items: center;
+      font-weight: 800; font-size: .95rem;
+    }
+    .pcomp-total .cat { color: rgba(255,255,255,.6); }
+    .pcomp-total .shock { color: #f87171; font-size: 1.1rem; }
+
+    /* After bars */
+    .pcomp-bar-row { margin-bottom: 12px; }
+    .pcomp-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: .8rem; margin-bottom: 5px;
+    }
+    .pcomp-bar-label .cat { color: rgba(255,255,255,.5); }
+    .pcomp-bar-label .val { font-weight: 700; color: var(--white); }
+    .pcomp-bar-label .val.grn { color: var(--green-400); }
+    .pv-bar-track { height: 7px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; }
+    .pv-bar-fill { height: 100%; border-radius: 99px; }
+    .pv-bar-fill.red { background: linear-gradient(90deg,#ef4444,#f97316); }
+    .pv-bar-fill.grn { background: linear-gradient(90deg,var(--green-500),var(--teal-500)); }
+    .pv-bar-fill.yel { background: linear-gradient(90deg,#f59e0b,#fbbf24); }
+    .pcomp-badge {
+      margin-top: 16px; background: var(--green-700);
+      border: 1px solid rgba(74,222,128,.2);
+      border-radius: 12px; padding: 12px 14px;
+      font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.9); line-height: 1.5;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pcomp-badge .material-icons-round { font-size: 18px; color: var(--green-400); flex-shrink: 0; }
+
+    @media (max-width: 900px) {
+      .prob-cards { grid-template-columns: repeat(2,1fr); }
+      .prob-compare { grid-template-columns: 1fr; }
+      .prob-compare-divider { flex-direction: row; padding: 16px 0; }
+      .prob-compare-divider .arrow-line { width: 40px; height: 1px; flex: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 6% 40px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+      }
+
+      nav ul { display: none; }
+      .proof-divider { display: none; }
+      .proof-inner { gap: 28px; }
+      footer { flex-direction: column; text-align: center; }
+      .review-summary { flex-direction: column; align-items: center; }
+      .problem-layout { grid-template-columns: 1fr; }
+
+      /* Mobile CTA: stack buttons, both full-width */
+      .btn-primary, .btn-secondary {
+        width: 100%; text-align: center; justify-content: center;
+        padding: 16px 20px; font-size: .95rem;
+      }
+      /* Garante que o btn secundário aparece no mobile */
+      .btn-secondary { display: flex !important; }
+
+      .hero-sub { font-size: 1rem; }
+      h1 { font-size: 2.2rem; }
+      .cta-section { padding: 60px 6%; }
+      .cta-section h2 { font-size: 1.8rem; }
+      .section { padding: 60px 6%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">smart<span>ico</span></div>
+  <ul>
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#precos">Preços</a></li>
+  </ul>
+  <a href="/auth" class="nav-cta">Começar grátis →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- ── COLUNA ESQUERDA ── -->
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Controle financeiro inteligente
+      </div>
+
+      <h1>Seu salário entra.<br/>Seu dinheiro <em>desaparece</em>.</h1>
+
+      <p class="hero-sub">O Smartico mostra exatamente para onde seu dinheiro está indo para que você economize mais, elimine desperdícios e volte a ter controle financeiro.</p>
+
+      <!-- Benefícios -->
+      <div class="benefits">
+        <div class="benefit">
+          <span class="material-icons-round">check_circle</span>
+          Gratuito para começar
+        </div>
+        <div class="benefit">
+          <span class="material-icons-round">check_circle</span>
+          Sem cartão de crédito
+        </div>
+        <div class="benefit">
+          <span class="material-icons-round">check_circle</span>
+          Configuração em menos de 2 minutos
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-actions">
+        <a href="#precos" class="btn-primary">QUERO ASSUMIR O CONTROLE</a>
+        <a href="#" class="btn-secondary">Ver demonstração</a>
+      </div>
+
+      <!-- Prova Social -->
+      <div class="social-proof">
+        <div class="stars">
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+        </div>
+        <p class="proof-text">Mais de 1.000 usuários já organizam suas finanças com o Smartico.</p>
+      </div>
+    </div>
+
+    <!-- ── COLUNA DIREITA ── -->
+    <div class="hero-visual">
+
+      <!-- Badge Virada Black com Animação -->
+      <div class="virada-badge">
+        <div class="virada-badge-icon">
+          <span class="material-icons-round">electric_bolt</span>
+        </div>
+        <div class="virada-badge-text">
+          Recupere até R$1.500/mês<br/>
+          eliminando desperdícios invisíveis
+        </div>
+      </div>
+
+      <!-- Imagem Principal - PROPORÇÃO 4:3 -->
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img src="prova-social-hero.png" alt="Usuário Smartico">
+        </div>
+      </div>
+
+      <!-- Card Virada Black - REDUZIDO 20% -->
+      <div class="virada-card">
+        <div class="virada-cover">
+          <img src="capa-virada-black.png" alt="Capa Virada Black">
+        </div>
+
+        <div class="virada-content">
+          <h3>VIRADA BLACK</h3>
+          <p>
+            <strong>RECUPERE ATÉ<br/>R$1.500/MÊS</strong><br/>
+            Descubra os desperdícios invisíveis que estão consumindo seu salário e aprenda um método prático para recuperar seu dinheiro.
+          </p>
+        </div>
+
+        <div class="virada-price">
+          <p class="old">De R$47</p>
+          <p class="current">R$17</p>
+          <p class="label">Pagamento<br/>único</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- SOCIAL PROOF TICKER -->
+<div class="proof">
+  <div class="proof-fade-left"></div>
+  <div class="proof-fade-right"></div>
+  <div class="proof-track-wrap">
+    <div class="proof-track">
+      <!-- original set -->
+      <div class="proof-item"><span class="num">687</span><span class="txt">pessoas transformando suas finanças</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">4.9★</span><span class="txt">avaliação média</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">87%</span><span class="txt">reduziram dívidas em 3 meses</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">2 min</span><span class="txt">para começar a usar</span></div>
+      <div class="proof-dot"></div>
+      <!-- duplicado para loop contínuo -->
+      <div class="proof-item"><span class="num">687</span><span class="txt">pessoas transformando suas finanças</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">4.9★</span><span class="txt">avaliação média</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">87%</span><span class="txt">reduziram dívidas em 3 meses</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">2 min</span><span class="txt">para começar a usar</span></div>
+      <div class="proof-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section">
+  <div class="section-label" style="color:#f87171;text-align:center">O problema</div>
+  <h2 class="section-title" style="color:#fff;text-align:center;margin-bottom:12px">Você trabalha duro.<br/>O dinheiro some antes do dia 30.</h2>
+  <p class="section-sub" style="color:rgba(255,255,255,.5);text-align:center;margin:0 auto 48px;max-width:520px">Isso não é falta de esforço — é falta de visibilidade. Quem não enxerga para onde o dinheiro vai, nunca consegue mudar de rota.</p>
+
+  <!-- 4 cards lado a lado -->
+  <div class="prob-cards">
+    <div class="prob-card">
+      <div class="prob-card-icon"><span class="material-icons-round">sentiment_very_dissatisfied</span></div>
+      <h3>Ansiedade todo mês</h3>
+      <p>Aquela sensação sufocante de que as contas sempre superam o salário, sem saída à vista.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-card-icon"><span class="material-icons-round">loop</span></div>
+      <h3>Corrida dos ratos sem fim</h3>
+      <p>Ganhar mais, gastar mais. Um ciclo que rouba anos da sua vida sem que você perceba.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-card-icon"><span class="material-icons-round">visibility_off</span></div>
+      <h3>Sem perspectiva real</h3>
+      <p>Sem metas e acompanhamento, o futuro parece uma névoa distante e fora de alcance.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-card-icon"><span class="material-icons-round">table_chart</span></div>
+      <h3>Planilhas que ninguém usa</h3>
+      <p>Você já tentou antes. Complicadas demais, frias demais — abandonadas na primeira semana.</p>
+    </div>
+  </div>
+
+  <!-- Antes x Depois -->
+  <div class="prob-compare">
+
+    <!-- ANTES -->
+    <div class="pcomp-box before">
+      <div class="pcomp-label red">
+        <span class="material-icons-round">close</span>
+        Sem o Smartico
+      </div>
+      <div class="pcomp-row"><span class="cat">Alimentação</span><span class="unk">não sei...</span></div>
+      <div class="pcomp-row"><span class="cat">Assinaturas</span><span class="unk">acho que R$89</span></div>
+      <div class="pcomp-row"><span class="cat">Transferências</span><span class="unk">?????</span></div>
+      <div class="pcomp-row"><span class="cat">Lazer</span><span class="unk">fui no mercado...</span></div>
+      <div class="pcomp-row"><span class="cat">Outros</span><span class="unk">não lembro</span></div>
+      <div class="pcomp-total">
+        <span class="cat">Saldo no dia 22</span>
+        <span class="shock">R$0,00</span>
+      </div>
+    </div>
+
+    <!-- DIVISOR -->
+    <div class="prob-compare-divider">
+      <div class="arrow-line"></div>
+      <div class="vs">VS</div>
+      <div class="arrow-line"></div>
+    </div>
+
+    <!-- DEPOIS -->
+    <div class="pcomp-box after">
+      <div class="pcomp-label green">
+        <span class="material-icons-round">check_circle</span>
+        Com o Smartico
+      </div>
+      <div class="pcomp-bar-row">
+        <div class="pcomp-bar-label"><span class="cat">Gastos fixos</span><span class="val">R$1.840</span></div>
+        <div class="pv-bar-track"><div class="pv-bar-fill red" style="width:62%"></div></div>
+      </div>
+      <div class="pcomp-bar-row">
+        <div class="pcomp-bar-label"><span class="cat">Lazer</span><span class="val">R$420</span></div>
+        <div class="pv-bar-track"><div class="pv-bar-fill yel" style="width:28%"></div></div>
+      </div>
+      <div class="pcomp-bar-row">
+        <div class="pcomp-bar-label"><span class="cat">Alimentação</span><span class="val">R$600</span></div>
+        <div class="pv-bar-track"><div class="pv-bar-fill yel" style="width:40%"></div></div>
+      </div>
+      <div class="pcomp-bar-row">
+        <div class="pcomp-bar-label"><span class="cat">Guardado</span><span class="val grn">R$940 ✓</span></div>
+        <div class="pv-bar-track"><div class="pv-bar-fill grn" style="width:32%"></div></div>
+      </div>
+      <div class="pcomp-badge">
+        <span class="material-icons-round">trending_up</span>
+        Você guardou 30% a mais que no mês passado. Continue assim!
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how" id="como-funciona">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label centered">Como funciona</div>
+    <h2 class="section-title centered">Simples como deve ser.<br/>Poderoso como você precisa.</h2>
+    <p class="section-sub centered" style="max-width:520px;margin:0 auto">Nada de complicação. Nada de planilhas intermináveis. Só você, seus números e um plano claro para finalmente virar a chave.</p>
+    <div class="steps-wrapper">
+      <!-- Linha com números -->
+      <div class="steps-connector">
+        <div class="step-num">1</div>
+        <div class="steps-connector-line"></div>
+        <div class="step-num">2</div>
+        <div class="steps-connector-line"></div>
+        <div class="step-num">3</div>
+        <div class="steps-connector-line"></div>
+        <div class="step-num">4</div>
+      </div>
+      <!-- Conteúdo alinhado abaixo de cada número -->
+      <div class="steps-grid">
+        <div class="step-col">
+          <div class="step-icon"><span class="material-icons-round">upload_file</span></div>
+          <h3>Lance seus gastos</h3>
+          <p>Registre o que entra e sai em segundos. Importe o extrato CSV ou adicione manualmente.</p>
+        </div>
+        <div class="step-col">
+          <div class="step-icon"><span class="material-icons-round">bar_chart</span></div>
+          <h3>Veja o retrato real</h3>
+          <p>Saiba exatamente quanto recebeu, gastou e sobrou. Gráficos claros, mês a mês.</p>
+        </div>
+        <div class="step-col">
+          <div class="step-icon"><span class="material-icons-round">flag</span></div>
+          <h3>Metas e dívidas</h3>
+          <p>Crie metas com prazo e veja o caminho exato para quitar suas dívidas sem sufoco.</p>
+        </div>
+        <div class="step-col">
+          <div class="step-icon"><span class="material-icons-round">trending_up</span></div>
+          <h3>Construa patrimônio</h3>
+          <p>Pague-se primeiro. Faça o dinheiro trabalhar por você, como nos maiores livros de finanças.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="funcionalidades">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-label centered">Funcionalidades</div>
+    <h2 class="section-title centered">Tudo que você precisa.<br/>Nada que vai te travar.</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-green"><span class="material-icons-round">upload_file</span></div>
+        <h3>Importação de Extrato CSV</h3>
+        <p>Importe o extrato direto do seu banco. O Smartico lê, classifica e organiza tudo automaticamente. Zero retrabalho.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-teal"><span class="material-icons-round">cloud_sync</span></div>
+        <h3>Sincronização em Nuvem</h3>
+        <p>Seus dados seguros e acessíveis em qualquer dispositivo. Backup automático com código de recuperação — nunca mais perde nada.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-gold"><span class="material-icons-round">picture_as_pdf</span></div>
+        <h3>Exportar PDF do Extrato</h3>
+        <p>Gere relatórios em PDF com um clique. Perfeito para acompanhar sua evolução ou consultar com quem você confia.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-green"><span class="material-icons-round">flag</span></div>
+        <h3>Metas Financeiras</h3>
+        <p>Crie metas com valor e prazo. Acompanhe o progresso visualmente e sinta a diferença de ter um objetivo real à vista.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-teal"><span class="material-icons-round">credit_card_off</span></div>
+        <h3>Controle de Dívidas</h3>
+        <p>Liste todas as suas dívidas, acompanhe o saldo devedor e veja mês a mês como você se aproxima do zero — e da liberdade.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-gold"><span class="material-icons-round">bar_chart</span></div>
+        <h3>Histórico com Variação Mensal</h3>
+        <p>Compare seu desempenho mês a mês com porcentagens claras. Veja sua evolução acontecendo — isso motiva de verdade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="proof">
+  <div class="proof-fade-left"></div>
+  <div class="proof-fade-right"></div>
+  <div class="proof-track-wrap">
+    <div class="proof-track">
+      <div class="proof-item"><span class="num">Controle total</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Sem planilhas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Liberdade financeira</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Dívidas zeradas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Metas atingidas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Patrimônio crescendo</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Controle total</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Sem planilhas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Liberdade financeira</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Dívidas zeradas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Metas atingidas</span></div>
+      <div class="proof-dot"></div>
+      <div class="proof-item"><span class="num">Patrimônio crescendo</span></div>
+      <div class="proof-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="section reviews" id="avaliacoes">
+  <div class="reviews-header">
+    <div class="section-label centered">Avaliações</div>
+    <h2 class="section-title centered">Quem usou, virou a chave.</h2>
+    <p class="section-sub centered" style="margin:0 auto 28px">Pessoas reais. Resultados reais.</p>
+    <div style="display:flex;justify-content:center">
+      <div class="reviews-rating">
+        <span class="rs-num">4.9</span>
+        <div class="rs-stars">
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star</span>
+          <span class="material-icons-round">star_half</span>
+        </div>
+        <span class="rs-label">· 687 avaliações</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel -->
+  <div class="rv-wrap">
+    <div class="rv-track">
+
+      <!-- Card 1 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Eu nunca soube para onde meu dinheiro ia. Com o Smartico vi que gastava R$800 em coisas que nem lembrava. Em 2 meses quitei R$1.400 de dívida."</p>
+        <div class="rv-author"><div class="rv-avatar av-g">MC</div><div><div class="rv-name">Mariana Costa</div><div class="rv-role">Designer · São Paulo</div></div></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Sempre achei que precisava ganhar mais para guardar. O Smartico me mostrou que eu já ganho o suficiente. Hoje tenho R$3.200 guardados."</p>
+        <div class="rv-author"><div class="rv-avatar av-b">RL</div><div><div class="rv-name">Rafael Lima</div><div class="rv-role">Professor · Belo Horizonte</div></div></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Simples, bonito e direto ao ponto. Sem planilhas confusas. É o app que eu procurava há anos. Minha relação com dinheiro mudou de vez."</p>
+        <div class="rv-author"><div class="rv-avatar av-o">JS</div><div><div class="rv-name">Juliana Santos</div><div class="rv-role">Enfermeira · Recife</div></div></div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Entrei devendo no cartão, cheque especial e crediário. Em 4 meses zerei tudo. Foi só questão de enxergar o que eu não enxergava antes."</p>
+        <div class="rv-author"><div class="rv-avatar av-t">FA</div><div><div class="rv-name">Felipe Andrade</div><div class="rv-role">Autônomo · Curitiba</div></div></div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Defini uma meta de R$5.000 para viagem. Achei que levaria um ano. Levei 6 meses. O app te faz ver que é possível — e isso muda tudo."</p>
+        <div class="rv-author"><div class="rv-avatar av-p">CP</div><div><div class="rv-name">Camila Pereira</div><div class="rv-role">Advogada · Brasília</div></div></div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star_half</span></div>
+        <p class="rv-text">"Finalmente dormi sem ansiedade financeira. Saber que cada centavo está no lugar certo é uma sensação que eu não tinha há anos."</p>
+        <div class="rv-author"><div class="rv-avatar av-y">BM</div><div><div class="rv-name">Bruno Moraes</div><div class="rv-role">Comerciante · Fortaleza</div></div></div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Nunca imaginei que por R$19,90 eu teria tanta clareza sobre meu dinheiro. Me paguei o primeiro mês com a primeira semana de uso."</p>
+        <div class="rv-author"><div class="rv-avatar av-r">TN</div><div><div class="rv-name">Thais Nunes</div><div class="rv-role">Servidora pública · Goiânia</div></div></div>
+      </div>
+
+      <!-- Duplicado para loop contínuo -->
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Eu nunca soube para onde meu dinheiro ia. Com o Smartico vi que gastava R$800 em coisas que nem lembrava. Em 2 meses quitei R$1.400 de dívida."</p>
+        <div class="rv-author"><div class="rv-avatar av-g">MC</div><div><div class="rv-name">Mariana Costa</div><div class="rv-role">Designer · São Paulo</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Sempre achei que precisava ganhar mais para guardar. O Smartico me mostrou que eu já ganho o suficiente. Hoje tenho R$3.200 guardados."</p>
+        <div class="rv-author"><div class="rv-avatar av-b">RL</div><div><div class="rv-name">Rafael Lima</div><div class="rv-role">Professor · Belo Horizonte</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Simples, bonito e direto ao ponto. Sem planilhas confusas. É o app que eu procurava há anos. Minha relação com dinheiro mudou de vez."</p>
+        <div class="rv-author"><div class="rv-avatar av-o">JS</div><div><div class="rv-name">Juliana Santos</div><div class="rv-role">Enfermeira · Recife</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Entrei devendo no cartão, cheque especial e crediário. Em 4 meses zerei tudo. Foi só questão de enxergar o que eu não enxergava antes."</p>
+        <div class="rv-author"><div class="rv-avatar av-t">FA</div><div><div class="rv-name">Felipe Andrade</div><div class="rv-role">Autônomo · Curitiba</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Defini uma meta de R$5.000 para viagem. Achei que levaria um ano. Levei 6 meses. O app te faz ver que é possível — e isso muda tudo."</p>
+        <div class="rv-author"><div class="rv-avatar av-p">CP</div><div><div class="rv-name">Camila Pereira</div><div class="rv-role">Advogada · Brasília</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star_half</span></div>
+        <p class="rv-text">"Finalmente dormi sem ansiedade financeira. Saber que cada centavo está no lugar certo é uma sensação que eu não tinha há anos."</p>
+        <div class="rv-author"><div class="rv-avatar av-y">BM</div><div><div class="rv-name">Bruno Moraes</div><div class="rv-role">Comerciante · Fortaleza</div></div></div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars"><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span><span class="material-icons-round">star</span></div>
+        <p class="rv-text">"Nunca imaginei que por R$19,90 eu teria tanta clareza sobre meu dinheiro. Me paguei o primeiro mês com a primeira semana de uso."</p>
+        <div class="rv-author"><div class="rv-avatar av-r">TN</div><div><div class="rv-name">Thais Nunes</div><div class="rv-role">Servidora pública · Goiânia</div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES / INSPIRATION -->
+<section class="section quotes">
+  <div class="quotes-inner">
+
+    <div class="quotes-headline">
+      <div class="section-label centered" style="color:var(--green-400)">Inspiração</div>
+      <h2 class="section-title centered" style="color:#fff;margin-bottom:48px">Construído sobre<br/>sabedoria comprovada</h2>
+    </div>
+
+    <div class="quotes-grid">
+
+      <!-- Babilônia -->
+      <div class="quote-col">
+        <div class="quote-card">
+          <div class="quote-card-bg" style="background-image:url('hrb.png')"></div>
+          <p class="quote-text">"Uma parte de tudo que você ganhar é sua para guardar."</p>
+          <div class="quote-divider"></div>
+          <div class="quote-author">
+            <div class="quote-avatar">HB</div>
+            <div>
+              <div class="quote-name">O Homem Mais Rico da Babilônia</div>
+              <div class="quote-role">George S. Clason</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pai Rico -->
+      <div class="quote-col">
+        <div class="quote-card">
+          <div class="quote-card-bg" style="background-image:url('pai-rico.png')"></div>
+          <p class="quote-text">"Os ricos adquirem ativos. Os pobres adquirem passivos que pensam ser ativos."</p>
+          <div class="quote-divider"></div>
+          <div class="quote-author">
+            <div class="quote-avatar">PR</div>
+            <div>
+              <div class="quote-name">Pai Rico Pai Pobre</div>
+              <div class="quote-role">Robert T. Kiyosaki</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quem Pensa Enriquece -->
+      <div class="quote-col">
+        <div class="quote-card">
+          <div class="quote-card-bg" style="background-image:url('quem-pensa.png')"></div>
+          <p class="quote-text">"Qualquer coisa que a mente do homem possa conceber e acreditar, ela pode realizar."</p>
+          <div class="quote-divider"></div>
+          <div class="quote-author">
+            <div class="quote-avatar">PE</div>
+            <div>
+              <div class="quote-name">Quem Pensa Enriquece</div>
+              <div class="quote-role">Napoleon Hill</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="book-ref">
+      <div class="book-icon-wrap"><span class="material-icons-round">menu_book</span></div>
+      <p class="book-text">O Smartico foi construído com base nos princípios dos maiores best-sellers de finanças do mundo: <strong>O Homem Mais Rico da Babilônia</strong>, <strong>Pai Rico Pai Pobre</strong> e <strong>Quem Pensa Enriquece</strong>. Não é só um app — é uma mudança de mentalidade.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="precos" style="padding-top:52px;padding-bottom:52px">
+  <div style="max-width:960px;margin:0 auto;text-align:center">
+    <div class="section-label centered">Preços</div>
+    <h2 class="section-title centered" style="margin-bottom:8px">Uma decisão. Duas realidades.</h2>
+    <p class="section-sub" style="margin:0 auto 28px;text-align:center;max-width:520px;font-size:.95rem">Continuar sem saber para onde o dinheiro vai — ou assumir o controle por menos de um cafézinho por semana.</p>
+
+    <div class="pricing-layout">
+
+      <!-- CARD GRATUITO -->
+      <div class="pc-free">
+        <div class="pc-free-label">Plano gratuito</div>
+        <h3>Começar</h3>
+        <div class="pc-price">R$0</div>
+        <p class="pc-sub">Descubra para onde seu dinheiro está indo.</p>
+        <ul class="pc-features">
+          <li><span class="material-icons-round">check</span>Controle de receitas e gastos</li>
+          <li><span class="material-icons-round">check</span>Resumo mensal</li>
+          <li><span class="material-icons-round">check</span>1 meta financeira</li>
+          <li><span class="material-icons-round">check</span>Histórico de 3 meses</li>
+        </ul>
+        <a href="/auth" class="pc-free-cta">Experimentar grátis</a>
+        <p class="pc-forever">
+          <span class="material-icons-round">all_inclusive</span>
+          Grátis para sempre — sem cartão
+        </p>
+      </div>
+
+      <!-- CARD PRO -->
+      <div class="pc-pro">
+        <div class="pc-pro-badge">
+          <span class="material-icons-round">star</span>
+          Mais escolhido
+        </div>
+        <h3>Assumir o Controle</h3>
+        <div class="pc-old">De R$44,99/mês <span class="pc-discount-badge">-67% OFF</span></div>
+        <div class="pc-price-wrap">
+          <div class="pc-price">R$19,90</div>
+          <div class="pc-period">/mês</div>
+        </div>
+        <div class="pc-coffee">
+          <span class="material-icons-round">coffee</span>
+          Menos que um café por semana
+        </div>
+
+        <div class="pc-impact">
+          <p>Se você economizar apenas <strong>R$1 por dia</strong> usando o Smartico, ele já se paga sozinho — e ainda sobra.</p>
+        </div>
+
+        <p class="pc-persuasion">
+          Enquanto você adia sua organização financeira, mais um mês passa sem saber para onde seu dinheiro foi. Por apenas R$19,90 você enxerga tudo, elimina desperdícios e começa a construir patrimônio.
+        </p>
+
+        <ul class="pc-benefits">
+          <li><span class="material-icons-round">check_circle</span>Saiba exatamente para onde seu dinheiro vai</li>
+          <li><span class="material-icons-round">check_circle</span>Crie uma reserva de emergência</li>
+          <li><span class="material-icons-round">check_circle</span>Organize e quite suas dívidas</li>
+          <li><span class="material-icons-round">check_circle</span>Pare de gastar sem perceber</li>
+          <li><span class="material-icons-round">check_circle</span>Tome decisões financeiras com confiança</li>
+          <li><span class="material-icons-round">check_circle</span>Acompanhe sua evolução mês após mês</li>
+          <li><span class="material-icons-round">check_circle</span>Construa patrimônio com clareza</li>
+        </ul>
+
+        <a href="https://pay.kiwify.com.br/QPkpfKK" target="_blank" class="pc-pro-cta">Quero assumir o controle agora</a>
+        <p class="pc-urgency">
+          <span class="material-icons-round">timer</span>
+          Oferta por tempo limitado — cancele quando quiser
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="comecar">
+  <h2>Sua vida financeira<br/>muda quando você<br/>decide enxergar a verdade.</h2>
+  <p class="cta-sub">Cada mês que passa sem controle é dinheiro que some sem deixar rastro. Hoje você pode mudar isso.<br/><strong style="opacity:1;font-size:1.15rem">Agora. Em 2 minutos.</strong></p>
+  <div class="cta-price-line">Plano Pro com <strong>67% OFF</strong></div>
+  <br>
+  <a href="#precos" class="btn-white">
+    <span class="material-icons-round" style="font-size:20px;color:var(--green-600)">bolt</span>
+    Quero assumir o controle agora
+  </a>
+  <p class="cta-note">Grátis para começar &nbsp;·&nbsp; Sem cartão &nbsp;·&nbsp; Cancele quando quiser</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">smart<span style="color:var(--teal-500)">ico</span></div>
+  <p>© 2026 Smartico. Feito com cuidado para quem quer mais da vida.</p>
+  <p><a href="#">Privacidade</a> · <a href="#">Termos</a> · <a href="#">Contato</a></p>
+</footer>
+
+</body>
+</html>
