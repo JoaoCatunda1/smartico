@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARTI - Consultor IA Financeiro</title>
+  <title>MARTI - Seu Agente Financeiro Inteligente</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,114 +14,246 @@
     }
 
     :root {
-      --primary: #10b981;
-      --primary-dark: #059669;
-      --neon: #4ade80;
-      --bg-dark: #0a0e27;
-      --bg-card: #1a1f3a;
-      --text-light: #e0e0e0;
-      --text-muted: #888;
+      --smartico-green: #15803d;
+      --smartico-bright: #4ade80;
+      --smartico-teal: #14b8a6;
+      --smartico-navy: #0f1a14;
+      --smartico-dark: #07110d;
+      --smartico-card: rgba(15, 26, 20, 0.72);
+      --smartico-border: rgba(74, 222, 128, 0.22);
+    }
+
+    html {
+      font-size: 16px;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1729 100%);
-      color: var(--text-light);
-      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+      color: #e5e7eb;
+      height: 100vh;
       overflow: hidden;
     }
 
-    /* CONTAINER */
-    .marti-container {
+    /* MAIN LAYOUT */
+    .marti-page {
       display: flex;
       height: 100vh;
       gap: 0;
     }
 
-    /* SIDEBAR - HISTÓRICO */
+    /* ═══════════════════════════════════════ SIDEBAR ═══════════════════════════════════════ */
     .marti-sidebar {
-      width: 220px;
-      background: rgba(10, 14, 39, 0.95);
-      border-right: 1px solid rgba(16, 185, 129, 0.15);
+      width: 280px;
+      background: linear-gradient(180deg, rgba(7, 17, 13, 0.95) 0%, rgba(15, 26, 20, 0.95) 100%);
+      border-right: 1px solid var(--smartico-border);
       display: flex;
       flex-direction: column;
+      padding: 20px;
+      gap: 16px;
       overflow-y: auto;
-      padding: 20px 12px;
+      backdrop-filter: blur(10px);
     }
 
-    .sidebar-header {
-      font-size: 11px;
-      color: var(--primary);
+    .marti-sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .marti-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .marti-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(74, 222, 128, 0.2);
+      border-radius: 3px;
+    }
+
+    .marti-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(74, 222, 128, 0.4);
+    }
+
+    .marti-history-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
       text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      margin-bottom: 12px;
-      padding: 0 8px;
+      letter-spacing: 1px;
+      color: var(--smartico-bright);
     }
 
-    .sidebar-item {
-      padding: 12px 10px;
-      margin-bottom: 8px;
-      background: rgba(16, 185, 129, 0.05);
-      border: 1px solid rgba(16, 185, 129, 0.1);
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--smartico-bright);
+      border-radius: 50%;
+      animation: pulse-status 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-status {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .new-analysis-btn {
+      background: linear-gradient(135deg, var(--smartico-green) 0%, var(--smartico-teal) 100%);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #fff;
+      padding: 10px 16px;
       border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-size: 12px;
-      line-height: 1.4;
-      color: var(--text-light);
-      border-left: 3px solid transparent;
+      font-family: inherit;
     }
 
-    .sidebar-item:hover {
-      background: rgba(16, 185, 129, 0.12);
-      border-left-color: var(--primary);
+    .new-analysis-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(20, 184, 166, 0.3);
+      border-color: var(--smartico-bright);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .history-item {
+      background: rgba(74, 222, 128, 0.05);
+      border: 1px solid rgba(74, 222, 128, 0.15);
+      border-left: 3px solid transparent;
+      color: #e5e7eb;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      font-family: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .history-item:hover {
+      background: rgba(74, 222, 128, 0.1);
+      border-left-color: var(--smartico-bright);
       transform: translateX(4px);
     }
 
-    .sidebar-item.active {
-      background: rgba(16, 185, 129, 0.15);
-      border-left-color: var(--neon);
-      box-shadow: 0 0 12px rgba(74, 222, 128, 0.2);
+    .history-item.active {
+      background: rgba(74, 222, 128, 0.15);
+      border-left-color: var(--smartico-bright);
+      box-shadow: inset 0 0 12px rgba(74, 222, 128, 0.1);
     }
 
-    .sidebar-time {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 4px;
+    .history-item strong {
+      font-weight: 600;
+      color: #fff;
     }
 
-    /* MAIN AREA */
-    .marti-main {
+    .history-item span {
+      font-size: 11px;
+      color: #888;
+    }
+
+    /* ═══════════════════════════════════════ CHAT SECTION ═══════════════════════════════════════ */
+    .marti-chat {
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(135deg, #0f1729 0%, #1a1f3a 100%);
+      background: linear-gradient(135deg, rgba(10, 14, 39, 0.5) 0%, rgba(26, 31, 58, 0.5) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* BACKGROUND EFFECTS */
+    .marti-background-effects {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .energy-orb {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: float-orb 12s ease-in-out infinite;
+      top: 10%;
+      right: -10%;
+    }
+
+    @keyframes float-orb {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-30px, 30px); }
+      50% { transform: translate(-60px, 0); }
+      75% { transform: translate(-30px, -30px); }
+    }
+
+    .grid-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(0deg, transparent 24%, rgba(74, 222, 128, 0.05) 25%, rgba(74, 222, 128, 0.05) 26%, transparent 27%, transparent 74%, rgba(74, 222, 128, 0.05) 75%, rgba(74, 222, 128, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(74, 222, 128, 0.05) 25%, rgba(74, 222, 128, 0.05) 26%, transparent 27%, transparent 74%, rgba(74, 222, 128, 0.05) 75%, rgba(74, 222, 128, 0.05) 76%, transparent 77%, transparent);
+      background-size: 50px 50px;
+      animation: grid-shift 20s linear infinite;
+    }
+
+    @keyframes grid-shift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(50px); }
+    }
+
+    .neural-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle at 20% 50%, rgba(74, 222, 128, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(20, 184, 166, 0.08) 0%, transparent 50%);
+      animation: neural-pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes neural-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     /* HEADER */
     .marti-header {
-      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
-      border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--smartico-border);
+      background: rgba(15, 26, 20, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      position: relative;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .back-btn {
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      color: #fff;
-      width: 36px;
-      height: 36px;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid var(--smartico-border);
+      color: var(--smartico-bright);
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
@@ -128,83 +261,106 @@
       justify-content: center;
       transition: all 0.2s ease;
       font-size: 18px;
+      font-family: inherit;
     }
 
     .back-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(74, 222, 128, 0.2);
       transform: translateX(-2px);
     }
 
     .header-title {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .header-right {
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .header-title p {
+      font-size: 12px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    .marti-status {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
-    .usage-info {
-      text-align: right;
-      font-size: 12px;
-    }
-
-    .usage-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    /* CHAT AREA */
-    .marti-chat {
-      flex: 1;
+    .online-indicator {
       display: flex;
-      flex-direction: column;
-      padding: 24px;
-      overflow: hidden;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #888;
     }
 
-    .messages-wrapper {
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--smartico-bright);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.8);
+      animation: pulse-status 2s ease-in-out infinite;
+    }
+
+    .premium-badge {
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid var(--smartico-border);
+      color: var(--smartico-bright);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* MESSAGES */
+    .chat-messages {
       flex: 1;
       overflow-y: auto;
+      padding: 24px 32px;
       display: flex;
       flex-direction: column;
       gap: 16px;
-      padding-right: 8px;
+      z-index: 1;
+      position: relative;
     }
 
-    .messages-wrapper::-webkit-scrollbar {
+    .chat-messages::-webkit-scrollbar {
       width: 6px;
     }
 
-    .messages-wrapper::-webkit-scrollbar-track {
-      background: rgba(16, 185, 129, 0.05);
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(74, 222, 128, 0.2);
       border-radius: 3px;
     }
 
-    .messages-wrapper::-webkit-scrollbar-thumb {
-      background: rgba(16, 185, 129, 0.3);
-      border-radius: 3px;
+    .chat-messages::-webkit-scrollbar-thumb:hover {
+      background: rgba(74, 222, 128, 0.4);
     }
 
-    .messages-wrapper::-webkit-scrollbar-thumb:hover {
-      background: rgba(16, 185, 129, 0.5);
-    }
-
-    /* MENSAGENS */
     .message {
       display: flex;
       gap: 12px;
       animation: fadeIn 0.4s ease;
+      max-width: 80%;
     }
 
     @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(12px);
       }
       to {
         opacity: 1;
@@ -213,32 +369,37 @@
     }
 
     .message.user {
-      justify-content: flex-end;
+      align-self: flex-end;
+      max-width: 70%;
     }
 
     .message.ai {
-      justify-content: flex-start;
+      align-self: flex-start;
+      max-width: 75%;
     }
 
     .message-bubble {
-      max-width: 65%;
-      padding: 12px 16px;
+      background: var(--smartico-card);
+      border: 1px solid var(--smartico-border);
       border-radius: 12px;
+      padding: 14px 16px;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.6;
       word-wrap: break-word;
+      backdrop-filter: blur(10px);
     }
 
     .message.ai .message-bubble {
-      background: rgba(16, 185, 129, 0.12);
-      border-left: 3px solid var(--primary);
-      color: var(--text-light);
+      border-left: 3px solid var(--smartico-bright);
+      background: rgba(15, 26, 20, 0.6);
+      box-shadow: 0 4px 16px rgba(74, 222, 128, 0.1);
     }
 
     .message.user .message-bubble {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: linear-gradient(135deg, rgba(21, 128, 61, 0.4) 0%, rgba(20, 184, 166, 0.3) 100%);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-left: 3px solid var(--smartico-bright);
       color: #fff;
-      border-radius: 12px 0px 12px 12px;
     }
 
     /* THINKING INDICATOR */
@@ -246,18 +407,21 @@
       display: flex;
       gap: 4px;
       align-items: center;
-      padding: 12px 16px;
-      background: rgba(16, 185, 129, 0.12);
-      border-left: 3px solid var(--primary);
+      padding: 14px 16px;
+      background: var(--smartico-card);
+      border: 1px solid var(--smartico-border);
+      border-left: 3px solid var(--smartico-bright);
       border-radius: 12px;
       width: fit-content;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(74, 222, 128, 0.1);
     }
 
     .thinking-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--neon);
+      background: var(--smartico-bright);
       animation: pulse 1.4s ease-in-out infinite;
     }
 
@@ -270,33 +434,65 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* QUICK ACTIONS */
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 0 32px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .quick-actions button {
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid var(--smartico-border);
+      color: var(--smartico-bright);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .quick-actions button:hover {
+      background: rgba(74, 222, 128, 0.2);
+      border-color: var(--smartico-bright);
     }
 
     /* INPUT AREA */
     .marti-input-area {
+      padding: 20px 32px;
       display: flex;
       gap: 12px;
-      align-items: flex-end;
-      padding-top: 16px;
-      border-top: 1px solid rgba(16, 185, 129, 0.1);
+      border-top: 1px solid var(--smartico-border);
+      background: rgba(15, 26, 20, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      position: relative;
     }
 
     .input-wrapper {
       flex: 1;
       display: flex;
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      background: rgba(74, 222, 128, 0.08);
+      border: 1px solid var(--smartico-border);
       border-radius: 10px;
       padding: 12px 16px;
       transition: all 0.3s ease;
+      align-items: center;
     }
 
     .input-wrapper:focus-within {
-      background: rgba(16, 185, 129, 0.12);
-      border-color: var(--primary);
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
+      background: rgba(74, 222, 128, 0.12);
+      border-color: var(--smartico-bright);
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
     }
 
     .marti-input {
@@ -312,11 +508,11 @@
     }
 
     .marti-input::placeholder {
-      color: rgba(255, 255, 255, 0.4);
+      color: #666;
     }
 
     .send-btn {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: linear-gradient(135deg, var(--smartico-green) 0%, var(--smartico-teal) 100%);
       border: none;
       color: #fff;
       width: 40px;
@@ -327,13 +523,13 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s ease;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+      font-family: inherit;
     }
 
     .send-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 6px 16px rgba(20, 184, 166, 0.4);
     }
 
     .send-btn:active {
@@ -345,239 +541,364 @@
       cursor: not-allowed;
     }
 
-    /* MOBILE */
+    .send-icon {
+      font-family: 'Material Symbols Rounded';
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .marti-sidebar {
+        width: 240px;
+      }
+
+      .marti-header {
+        padding: 16px 24px;
+      }
+
+      .chat-messages {
+        padding: 20px 24px;
+      }
+
+      .marti-input-area {
+        padding: 16px 24px;
+      }
+
+      .quick-actions {
+        padding: 0 24px;
+      }
+    }
+
     @media (max-width: 768px) {
-      .marti-container {
+      .marti-page {
         flex-direction: column;
       }
 
       .marti-sidebar {
         width: 100%;
-        height: auto;
         padding: 12px;
         border-right: none;
-        border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+        border-bottom: 1px solid var(--smartico-border);
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+        height: auto;
+        max-height: 160px;
+        overflow: hidden;
+      }
+
+      .marti-history-header {
+        grid-column: 1 / -1;
+      }
+
+      .new-analysis-btn {
+        grid-column: 1 / -1;
+      }
+
+      .history-list {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 8px;
       }
 
-      .sidebar-header {
-        display: none;
+      .message {
+        max-width: 90%;
       }
 
-      .sidebar-item {
-        padding: 8px;
-        margin-bottom: 0;
-        font-size: 11px;
-      }
-
-      .message-bubble {
+      .message.ai {
         max-width: 85%;
       }
 
-      .marti-chat {
+      .chat-messages {
         padding: 16px;
+      }
+
+      .marti-input-area {
+        padding: 12px 16px;
+      }
+
+      .quick-actions {
+        padding: 0 16px;
+      }
+
+      .marti-status {
+        gap: 12px;
       }
     }
 
     @media (max-width: 480px) {
-      .header-right {
-        display: none;
-      }
-
-      .header-title {
+      .header-title h1 {
         font-size: 18px;
       }
 
+      .header-title p {
+        display: none;
+      }
+
+      .marti-status {
+        display: none;
+      }
+
       .message-bubble {
-        max-width: 90%;
         font-size: 13px;
+        padding: 12px 14px;
+      }
+
+      .chat-messages {
+        padding: 12px;
+      }
+
+      .marti-input-area {
         padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .send-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .send-icon {
+        font-size: 18px;
+      }
+
+      .marti-input {
+        font-size: 13px;
+      }
+
+      .quick-actions {
+        padding: 0 12px;
+      }
+
+      .quick-actions button {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+    }
+
+    /* ACCESSIBILITY */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
-  <div class="marti-container">
+  <main class="marti-page">
     <!-- SIDEBAR -->
-    <div class="marti-sidebar">
-      <div class="sidebar-header">Histórico</div>
-      <div class="sidebar-item active" onclick="selectHistory(this)">
-        <div>Comissões e vendas</div>
-        <div class="sidebar-time">Agora</div>
+    <aside class="marti-sidebar">
+      <div class="marti-history-header">
+        <span class="status-dot"></span>
+        <span>Histórico</span>
       </div>
-      <div class="sidebar-item" onclick="selectHistory(this)">
-        <div>Análise de gastos</div>
-        <div class="sidebar-time">2h atrás</div>
-      </div>
-      <div class="sidebar-item" onclick="selectHistory(this)">
-        <div>Meta de economia</div>
-        <div class="sidebar-time">1 dia</div>
-      </div>
-      <div class="sidebar-item" onclick="selectHistory(this)">
-        <div>Fluxo de caixa</div>
-        <div class="sidebar-time">3 dias</div>
-      </div>
-      <div class="sidebar-item" onclick="selectHistory(this)">
-        <div>Cálculo de juros</div>
-        <div class="sidebar-time">1 sem</div>
-      </div>
-    </div>
 
-    <!-- MAIN -->
-    <div class="marti-main">
+      <button class="new-analysis-btn">+ Nova análise</button>
+
+      <div class="history-list">
+        <button class="history-item active" onclick="selectHistory(this)">
+          <strong>Comissões e vendas</strong>
+          <span>Agora</span>
+        </button>
+        <button class="history-item" onclick="selectHistory(this)">
+          <strong>Análise de gastos</strong>
+          <span>2h atrás</span>
+        </button>
+        <button class="history-item" onclick="selectHistory(this)">
+          <strong>Meta de economia</strong>
+          <span>1 dia</span>
+        </button>
+        <button class="history-item" onclick="selectHistory(this)">
+          <strong>Fluxo de caixa</strong>
+          <span>3 dias</span>
+        </button>
+        <button class="history-item" onclick="selectHistory(this)">
+          <strong>Cálculo de juros</strong>
+          <span>1 semana</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- CHAT SECTION -->
+    <section class="marti-chat">
+      <!-- BACKGROUND EFFECTS -->
+      <div class="marti-background-effects">
+        <div class="energy-orb"></div>
+        <div class="grid-glow"></div>
+        <div class="neural-lines"></div>
+      </div>
+
       <!-- HEADER -->
-      <div class="marti-header">
+      <header class="marti-header">
         <div class="header-left">
-          <button class="back-btn" onclick="window.location.href='/app'" title="Voltar">&larr;</button>
-          <div class="header-title">MARTI</div>
+          <button class="back-btn" onclick="window.location.href='/app'">←</button>
+          <div class="header-title">
+            <h1>MARTI</h1>
+            <p>Seu agente financeiro inteligente</p>
+          </div>
         </div>
-        <div class="header-right">
-          <div class="usage-info">
-            <div style="color: rgba(255,255,255,0.7); font-size: 11px;">PREMIUM</div>
-            <div class="usage-value" id="usage-counter">0/50</div>
+
+        <div class="marti-status">
+          <div class="online-indicator">
+            <span class="online-dot"></span>
+            <span>Online agora</span>
+          </div>
+          <div class="premium-badge">Premium 0/50</div>
+        </div>
+      </header>
+
+      <!-- MESSAGES -->
+      <div class="chat-messages" id="chat-messages">
+        <div class="message ai">
+          <div class="message-bubble">
+            Olá! Sou o MARTI, seu agente financeiro inteligente. Analiso seus gastos, encontro desperdícios invisíveis e te mostro como economizar mais. Como posso ajudá-lo?
           </div>
         </div>
       </div>
 
-      <!-- CHAT -->
-      <div class="marti-chat">
-        <div class="messages-wrapper" id="messages">
-          <div class="message ai">
-            <div class="message-bubble">
-              Olá! Sou o MARTI, seu consultor financeiro IA. Como posso ajudar com suas finanças?
-            </div>
-          </div>
-        </div>
-
-        <!-- INPUT -->
-        <div class="marti-input-area">
-          <div class="input-wrapper">
-            <input
-              type="text"
-              class="marti-input"
-              id="marti-input"
-              placeholder="Faça uma pergunta sobre suas finanças..."
-              onkeypress="handleKeyPress(event)"
-            />
-          </div>
-          <button class="send-btn" id="send-btn" onclick="sendMessage()">&rarr;</button>
-        </div>
+      <!-- QUICK ACTIONS -->
+      <div class="quick-actions">
+        <button onclick="quickAction('Analisar meus gastos este mês')">Analisar gastos</button>
+        <button onclick="quickAction('Onde estou gastando mais dinheiro?')">Encontrar desperdícios</button>
+        <button onclick="quickAction('Criar uma meta de economia realista')">Criar meta</button>
+        <button onclick="quickAction('Montar um plano para economizar 30%')">Planejar economia</button>
       </div>
-    </div>
-  </div>
+
+      <!-- INPUT -->
+      <form class="marti-input-area" onsubmit="handleSubmit(event)">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            class="marti-input"
+            id="marti-input"
+            placeholder="Pergunte ao MARTI onde seu dinheiro está escapando..."
+            autocomplete="off"
+          />
+        </div>
+        <button type="submit" class="send-btn" id="send-btn">
+          <span class="send-icon">send</span>
+        </button>
+      </form>
+    </section>
+  </main>
 
   <script>
-    const messagesDiv = document.getElementById('messages');
-    const inputField = document.getElementById('marti-input');
+    const chatMessages = document.getElementById('chat-messages');
+    const input = document.getElementById('marti-input');
     const sendBtn = document.getElementById('send-btn');
-    const usageCounter = document.getElementById('usage-counter');
 
-    let messagesCount = 0;
-    const maxMessages = 50;
+    let messageCount = 0;
+    const MAX_MESSAGES = 50;
 
-    // MOCK RESPONSES (quando API não responde)
     const mockResponses = [
-      'Com base em seus gastos, identifiquei que você gasta em média R$ 1.200/mês com alimentação. Se reduzir para R$ 800, economiza R$ 4.800/ano.',
-      'Sua margem de lucro está em 22%. Recomendo diversificar sua renda para aumentar esse percentual.',
-      'Você tem R$ 3.400 disponíveis em liquidez. Seria uma boa oportunidade investir 30% em renda fixa.',
-      'Identifiquei um padrão: seus maiores gastos são nas terças-feiras. Pode ser um excelente dia para planejar compras.',
-      'Seu fluxo de caixa está positivo em R$ 2.100 esse mês. Continue assim!',
-      'Se você poupar R$ 500/mês, em 1 ano terá uma reserva de emergência completa.',
-      'Detectei que você está pagando R$ 89/mês em assinaturas que não usa. Poderia economizar R$ 1.068/ano!',
+      "Com base em seus padrões de consumo, identifiquei que você gasta em média R$ 1.200/mês com alimentação. Se reduzir para R$ 800, economiza R$ 4.800/ano.",
+      "Sua margem de lucro está em 22%. Recomendo diversificar sua renda para aumentar esse percentual.",
+      "Você tem R$ 3.400 disponíveis em liquidez. Seria uma boa oportunidade investir 30% em renda fixa.",
+      "Identifiquei um padrão: seus maiores gastos são nas terças-feiras. Pode ser um excelente dia para planejar compras.",
+      "Seu fluxo de caixa está positivo em R$ 2.100 esse mês. Continue assim!",
+      "Se você poupar R$ 500/mês, em 1 ano terá uma reserva de emergência completa.",
+      "Detectei que você está pagando R$ 89/mês em assinaturas que quase não usa. Poderia economizar R$ 1.068/ano!",
+      "Quer que eu monte um plano prático para os próximos 30 dias?",
+      "Encontrei uma oportunidade de economia. Quer ver os detalhes?",
+      "Baseado no seu histórico, essa é a melhor época para investir em educação financeira."
     ];
 
-    function sendMessage() {
-      const message = inputField.value.trim();
+    function addMessage(text, role = 'user') {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${role}`;
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.textContent = text;
+
+      msgDiv.appendChild(bubble);
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addThinkingIndicator() {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'message ai';
+      msgDiv.id = 'thinking-msg';
+
+      const indicator = document.createElement('div');
+      indicator.className = 'thinking-indicator';
+      indicator.innerHTML = `
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+      `;
+
+      msgDiv.appendChild(indicator);
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeThinking() {
+      const thinkingMsg = document.getElementById('thinking-msg');
+      if (thinkingMsg) thinkingMsg.remove();
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      const message = input.value.trim();
       if (!message || sendBtn.disabled) return;
 
-      // Verificar limite
-      if (messagesCount >= maxMessages) {
-        addMessage('Você atingiu o limite de 50 perguntas. Faça upgrade para Smartico para mais acesso.', 'ai');
+      if (messageCount >= MAX_MESSAGES) {
+        addMessage('Você atingiu o limite de 50 consultas. Faça upgrade para Smartico para mais acesso.', 'ai');
         return;
       }
 
-      // Adicionar mensagem do usuário
       addMessage(message, 'user');
-      inputField.value = '';
-      inputField.style.height = 'auto';
-
+      input.value = '';
       sendBtn.disabled = true;
 
-      // Mostrar thinking indicator
-      const thinkingMsg = document.createElement('div');
-      thinkingMsg.className = 'message ai';
-      thinkingMsg.id = 'thinking';
-      thinkingMsg.innerHTML = `
-        <div class="thinking-indicator">
-          <div class="thinking-dot"></div>
-          <div class="thinking-dot"></div>
-          <div class="thinking-dot"></div>
-        </div>
-      `;
-      messagesDiv.appendChild(thinkingMsg);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      addThinkingIndicator();
 
-      // Simular resposta (substituir por API real depois)
       setTimeout(() => {
-        const thinking = document.getElementById('thinking');
-        if (thinking) thinking.remove();
-
+        removeThinking();
         const response = mockResponses[Math.floor(Math.random() * mockResponses.length)];
         addMessage(response, 'ai');
 
-        messagesCount++;
-        updateUsageCounter();
+        messageCount++;
+        document.querySelector('.premium-badge').textContent = `Premium ${messageCount}/50`;
 
         sendBtn.disabled = false;
-        inputField.focus();
-      }, 1500);
+        input.focus();
+      }, 1500 + Math.random() * 1000);
     }
 
-    function addMessage(text, sender) {
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `message ${sender}`;
-      msgDiv.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
-      messagesDiv.appendChild(msgDiv);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    }
-
-    function escapeHtml(text) {
-      const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      };
-      return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    function updateUsageCounter() {
-      usageCounter.textContent = `${messagesCount}/${maxMessages}`;
-    }
-
-    function handleKeyPress(event) {
-      if (event.key === 'Enter' && !event.shiftKey) {
-        event.preventDefault();
-        sendMessage();
-      }
+    function quickAction(text) {
+      input.value = text;
+      input.focus();
+      setTimeout(() => sendBtn.click(), 100);
     }
 
     function selectHistory(element) {
-      document.querySelectorAll('.sidebar-item').forEach(item => {
+      document.querySelectorAll('.history-item').forEach(item => {
         item.classList.remove('active');
       });
       element.classList.add('active');
     }
 
-    inputField.addEventListener('input', () => {
-      inputField.style.height = 'auto';
-      inputField.style.height = Math.min(inputField.scrollHeight, 100) + 'px';
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendBtn.click();
+      }
     });
 
-    inputField.focus();
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+    });
+
+    input.focus();
   </script>
 </body>
 </html>
