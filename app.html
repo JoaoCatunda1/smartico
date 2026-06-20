@@ -2387,7 +2387,8 @@ function navTo(name, el) {
 }
 
 function isPro() {
-  return localStorage.getItem('is_pro') === 'true' || data.is_pro === true;
+  // 🔓 TESTE: Acesso liberado para todas as features PRO
+  return true; // localStorage.getItem('is_pro') === 'true' || data.is_pro === true;
 }
 
 function openUpgradeModal() {
