@@ -1,4 +1,6 @@
 {
-  "buildCommand": "echo 'Static files only'",
-  "outputDirectory": "."
+  "rewrites": [
+    { "source": "/auth", "destination": "/app.html" },
+    { "source": "/app", "destination": "/app.html" }
+  ]
 }
