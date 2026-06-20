@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MARTI - Seu Consultor Financeiro IA</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>MARTI - Consultor IA Financeiro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,78 +12,82 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-      min-height: 100vh;
+    :root {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --neon: #4ade80;
+      --bg-dark: #0a0e27;
+      --bg-card: #1a1f3a;
+      --text-light: #e0e0e0;
+      --text-muted: #888;
     }
 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1729 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* CONTAINER */
     .marti-container {
       display: flex;
       height: 100vh;
-      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-      color: #fff;
+      gap: 0;
     }
 
     /* SIDEBAR - HISTÓRICO */
     .marti-sidebar {
-      width: 200px;
-      background: rgba(10, 14, 39, 0.9);
-      border-right: 1px solid rgba(16, 185, 129, 0.2);
+      width: 220px;
+      background: rgba(10, 14, 39, 0.95);
+      border-right: 1px solid rgba(16, 185, 129, 0.15);
       display: flex;
       flex-direction: column;
-      padding: 16px 12px;
       overflow-y: auto;
+      padding: 20px 12px;
     }
 
-    .marti-sidebar::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .marti-sidebar::-webkit-scrollbar-track {
-      background: rgba(16, 185, 129, 0.1);
-    }
-
-    .marti-sidebar::-webkit-scrollbar-thumb {
-      background: rgba(16, 185, 129, 0.4);
-      border-radius: 3px;
-    }
-
-    .marti-historico-title {
+    .sidebar-header {
       font-size: 11px;
-      color: #10b981;
+      color: var(--primary);
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 15px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      padding: 0 8px;
     }
 
-    .historico-item {
-      padding: 12px;
-      margin-bottom: 10px;
-      background: rgba(16, 185, 129, 0.08);
-      border-left: 3px solid #10b981;
-      border-radius: 6px;
+    .sidebar-item {
+      padding: 12px 10px;
+      margin-bottom: 8px;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: 12px;
       line-height: 1.4;
+      color: var(--text-light);
+      border-left: 3px solid transparent;
     }
 
-    .historico-item:hover {
+    .sidebar-item:hover {
+      background: rgba(16, 185, 129, 0.12);
+      border-left-color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .sidebar-item.active {
       background: rgba(16, 185, 129, 0.15);
-      transform: translateX(5px);
+      border-left-color: var(--neon);
+      box-shadow: 0 0 12px rgba(74, 222, 128, 0.2);
     }
 
-    .historico-item.active {
-      background: rgba(16, 185, 129, 0.2);
-      border-left-color: #059669;
-    }
-
-    .historico-time {
+    .sidebar-time {
       font-size: 10px;
-      color: #888;
-      margin-top: 6px;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     /* MAIN AREA */
@@ -94,34 +98,36 @@
       background: linear-gradient(135deg, #0f1729 0%, #1a1f3a 100%);
     }
 
-    /* HEADER COM CONTADOR */
+    /* HEADER */
     .marti-header {
-      background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-      padding: 24px;
-      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
-      animation: glow 3s ease-in-out infinite;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+      border-bottom: 1px solid rgba(74, 222, 128, 0.2);
     }
 
-    .marti-header-top {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
     }
 
     .back-btn {
       background: rgba(255, 255, 255, 0.2);
       border: none;
       color: #fff;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-      font-size: 20px;
+      transition: all 0.2s ease;
+      font-size: 18px;
     }
 
     .back-btn:hover {
@@ -129,44 +135,31 @@
       transform: translateX(-2px);
     }
 
-    .marti-title {
-      font-size: 22px;
+    .header-title {
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: 0.5px;
-      flex: 1;
-      text-align: center;
     }
 
-    .marti-header-bottom {
+    .header-right {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
+      align-items: center;
+      gap: 16px;
     }
 
-    .marti-usage-text {
+    .usage-info {
+      text-align: right;
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.95);
-      font-weight: 500;
     }
 
-    .usage-bar {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .usage-fill {
-      height: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      width: 90%;
-      border-radius: 3px;
-      transition: width 0.3s ease;
+    .usage-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
     }
 
     /* CHAT AREA */
-    .marti-chat-container {
+    .marti-chat {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -174,38 +167,44 @@
       overflow: hidden;
     }
 
-    .marti-messages {
+    .messages-wrapper {
       flex: 1;
       overflow-y: auto;
-      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
       gap: 16px;
+      padding-right: 8px;
     }
 
-    .marti-messages::-webkit-scrollbar {
+    .messages-wrapper::-webkit-scrollbar {
       width: 6px;
     }
 
-    .marti-messages::-webkit-scrollbar-track {
+    .messages-wrapper::-webkit-scrollbar-track {
       background: rgba(16, 185, 129, 0.05);
+      border-radius: 3px;
     }
 
-    .marti-messages::-webkit-scrollbar-thumb {
+    .messages-wrapper::-webkit-scrollbar-thumb {
       background: rgba(16, 185, 129, 0.3);
       border-radius: 3px;
     }
 
+    .messages-wrapper::-webkit-scrollbar-thumb:hover {
+      background: rgba(16, 185, 129, 0.5);
+    }
+
+    /* MENSAGENS */
     .message {
       display: flex;
       gap: 12px;
-      animation: slideIn 0.4s ease;
+      animation: fadeIn 0.4s ease;
     }
 
-    @keyframes slideIn {
+    @keyframes fadeIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(8px);
       }
       to {
         opacity: 1;
@@ -222,184 +221,44 @@
     }
 
     .message-bubble {
-      max-width: 70%;
+      max-width: 65%;
       padding: 12px 16px;
       border-radius: 12px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.5;
+      word-wrap: break-word;
     }
 
     .message.ai .message-bubble {
-      background: rgba(16, 185, 129, 0.15);
-      border-left: 3px solid #10b981;
-      color: #e0e0e0;
+      background: rgba(16, 185, 129, 0.12);
+      border-left: 3px solid var(--primary);
+      color: var(--text-light);
     }
 
     .message.user .message-bubble {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #fff;
       border-radius: 12px 0px 12px 12px;
     }
 
-    /* INPUT AREA */
-    .marti-input-area {
-      display: flex;
-      gap: 12px;
-      align-items: flex-end;
-    }
-
-    .marti-input-wrapper {
-      flex: 1;
-      display: flex;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 12px;
-      padding: 12px 16px;
-      transition: all 0.3s ease;
-    }
-
-    .marti-input-wrapper:focus-within {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: #10b981;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
-    }
-
-    .marti-input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 13px;
-      outline: none;
-      font-family: inherit;
-      resize: none;
-      max-height: 100px;
-    }
-
-    .marti-input::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .marti-send-btn {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      border: none;
-      color: #fff;
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .marti-send-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
-    }
-
-    .marti-send-btn:active {
-      transform: translateY(0);
-    }
-
-    .marti-send-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* ANIMAÇÕES */
-    @keyframes glow {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-      }
-      50% {
-        box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-    }
-
-    @keyframes typing {
-      0%, 20%, 50%, 80%, 100% {
-        opacity: 1;
-      }
-      40% {
-        opacity: 0.3;
-      }
-      60% {
-        opacity: 0.7;
-      }
-    }
-
-    .typing-indicator {
+    /* THINKING INDICATOR */
+    .thinking-indicator {
       display: flex;
       gap: 4px;
       align-items: center;
       padding: 12px 16px;
-      background: rgba(16, 185, 129, 0.15);
-      border-left: 3px solid #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      border-left: 3px solid var(--primary);
       border-radius: 12px;
-      max-width: 80px;
-    }
-
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      animation: typing 1.4s infinite;
-    }
-
-    .typing-dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .typing-dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .error-message {
-      color: #f87171;
-      font-size: 12px;
-      padding: 8px;
-      background: rgba(248, 113, 113, 0.1);
-      border-left: 3px solid #f87171;
-      border-radius: 6px;
-    }
-
-    /* THINKING INDICATOR - Tipo Claude */
-    @keyframes thinking-pulse {
-      0%, 100% {
-        opacity: 0.4;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    .thinking-indicator {
-      display: inline-flex;
-      gap: 3px;
-      align-items: center;
-      padding: 4px 0;
+      width: fit-content;
     }
 
     .thinking-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #10b981;
-      animation: thinking-pulse 1s ease-in-out infinite;
+      background: var(--neon);
+      animation: pulse 1.4s ease-in-out infinite;
     }
 
     .thinking-dot:nth-child(2) {
@@ -409,37 +268,182 @@
     .thinking-dot:nth-child(3) {
       animation-delay: 0.4s;
     }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* INPUT AREA */
+    .marti-input-area {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      padding-top: 16px;
+      border-top: 1px solid rgba(16, 185, 129, 0.1);
+    }
+
+    .input-wrapper {
+      flex: 1;
+      display: flex;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      transition: all 0.3s ease;
+    }
+
+    .input-wrapper:focus-within {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: var(--primary);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.2);
+    }
+
+    .marti-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+      resize: none;
+      max-height: 100px;
+    }
+
+    .marti-input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+    }
+
+    .send-btn:active {
+      transform: translateY(0);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .marti-container {
+        flex-direction: column;
+      }
+
+      .marti-sidebar {
+        width: 100%;
+        height: auto;
+        padding: 12px;
+        border-right: none;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
+      }
+
+      .sidebar-header {
+        display: none;
+      }
+
+      .sidebar-item {
+        padding: 8px;
+        margin-bottom: 0;
+        font-size: 11px;
+      }
+
+      .message-bubble {
+        max-width: 85%;
+      }
+
+      .marti-chat {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-right {
+        display: none;
+      }
+
+      .header-title {
+        font-size: 18px;
+      }
+
+      .message-bubble {
+        max-width: 90%;
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="marti-container">
-    <!-- SIDEBAR - HISTÓRICO -->
+    <!-- SIDEBAR -->
     <div class="marti-sidebar">
-      <div class="marti-historico-title">📌 Histórico</div>
-      <div id="historico-container"></div>
+      <div class="sidebar-header">📌 Histórico</div>
+      <div class="sidebar-item active" onclick="selectHistory(this)">
+        <div>Comissões e vendas</div>
+        <div class="sidebar-time">Agora</div>
+      </div>
+      <div class="sidebar-item" onclick="selectHistory(this)">
+        <div>Análise de gastos</div>
+        <div class="sidebar-time">2h atrás</div>
+      </div>
+      <div class="sidebar-item" onclick="selectHistory(this)">
+        <div>Meta de economia</div>
+        <div class="sidebar-time">1 dia</div>
+      </div>
+      <div class="sidebar-item" onclick="selectHistory(this)">
+        <div>Fluxo de caixa</div>
+        <div class="sidebar-time">3 dias</div>
+      </div>
+      <div class="sidebar-item" onclick="selectHistory(this)">
+        <div>Cálculo de juros</div>
+        <div class="sidebar-time">1 sem</div>
+      </div>
     </div>
 
-    <!-- MAIN AREA -->
+    <!-- MAIN -->
     <div class="marti-main">
-      <!-- HEADER COM CONTADOR -->
+      <!-- HEADER -->
       <div class="marti-header">
-        <div class="marti-header-top">
-          <button onclick="window.location.href='/app'" class="back-btn" title="Voltar">
-            <span style="font-size: 20px;">←</span>
-          </button>
-          <div class="marti-title">MARTI</div>
+        <div class="header-left">
+          <button class="back-btn" onclick="window.location.href='/app'" title="Voltar">←</button>
+          <div class="header-title">MARTI</div>
         </div>
-        <div class="marti-header-bottom">
-          <div class="marti-usage-text" id="usage-text">Premium: 0/50 perguntas usadas</div>
-          <div class="usage-bar">
-            <div class="usage-fill" id="usage-fill"></div>
+        <div class="header-right">
+          <div class="usage-info">
+            <div style="color: rgba(255,255,255,0.7); font-size: 11px;">PREMIUM</div>
+            <div class="usage-value" id="usage-counter">0/50</div>
           </div>
         </div>
       </div>
 
       <!-- CHAT -->
-      <div class="marti-chat-container">
-        <div class="marti-messages" id="marti-messages">
+      <div class="marti-chat">
+        <div class="messages-wrapper" id="messages">
           <div class="message ai">
             <div class="message-bubble">
               👋 Olá! Sou o MARTI, seu consultor financeiro IA. Como posso ajudar com suas finanças?
@@ -449,102 +453,62 @@
 
         <!-- INPUT -->
         <div class="marti-input-area">
-          <div class="marti-input-wrapper">
-            <input type="text" class="marti-input" id="marti-input" placeholder="Digite sua pergunta aqui..." />
+          <div class="input-wrapper">
+            <input
+              type="text"
+              class="marti-input"
+              id="marti-input"
+              placeholder="Faça uma pergunta sobre suas finanças..."
+              onkeypress="handleKeyPress(event)"
+            />
           </div>
-          <button class="marti-send-btn" id="marti-send-btn">▶️</button>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">→</button>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // ============================================
-    // CONFIGURAÇÃO SUPABASE
-    // ============================================
-    const SUPABASE_URL = localStorage.getItem('supabase_url') || 'https://seu-projeto.supabase.co';
-    const SUPABASE_KEY = localStorage.getItem('supabase_key') || 'sua-chave-publica';
-    const CLAUDE_API_ENDPOINT = localStorage.getItem('claude_endpoint') || '/api/claude';
-    const CLAUDE_API_KEY = localStorage.getItem('claude_api_key') || '';
+    const messagesDiv = document.getElementById('messages');
+    const inputField = document.getElementById('marti-input');
+    const sendBtn = document.getElementById('send-btn');
+    const usageCounter = document.getElementById('usage-counter');
 
-    let supabase = null;
-    let userId = null;
-    let userPlan = 'premium';
-    let messagesUsedToday = 0;
-    let maxMessagesPerDay = 50;
+    let messagesCount = 0;
+    const maxMessages = 50;
 
-    // Inicializar Supabase
-    async function initSupabase() {
-      try {
-        const { createClient } = window.supabase;
-        supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+    // MOCK RESPONSES (quando API não responde)
+    const mockResponses = [
+      'Com base em seus gastos, identifiquei que você gasta em média R$ 1.200/mês com alimentação. Se reduzir para R$ 800, economiza R$ 4.800/ano! 💰',
+      'Sua margem de lucro está em 22%. Recomendo diversificar sua renda para aumentar esse percentual.',
+      'Você tem R$ 3.400 disponíveis em liquidez. Seria uma boa oportunidade investir 30% em renda fixa.',
+      'Identifiquei um padrão: seus maiores gastos são nas terças-feiras. Pode ser um excelente dia para planejar compras.',
+      'Seu fluxo de caixa está positivo em R$ 2.100 esse mês! Continue assim! ✨',
+      'Se você poupar R$ 500/mês, em 1 ano terá uma reserva de emergência completa.',
+      'Detectei que você está pagando R$ 89/mês em assinaturas que não usa. Poderia economizar R$ 1.068/ano!',
+    ];
 
-        // Pegar usuário logado
-        const { data: { user }, error } = await supabase.auth.getUser();
+    function sendMessage() {
+      const message = inputField.value.trim();
+      if (!message || sendBtn.disabled) return;
 
-        if (error || !user) {
-          console.log('Usuário não autenticado. Usando modo demo.');
-          userId = 'demo-user';
-          return;
-        }
-
-        userId = user.id;
-        await loadUserPlanAndUsage();
-      } catch (error) {
-        console.error('Erro ao inicializar Supabase:', error);
-        addErrorMessage('Erro ao conectar com o banco de dados');
+      // Verificar limite
+      if (messagesCount >= maxMessages) {
+        addMessage('⚠️ Você atingiu o limite de 50 perguntas. Upgrade para Smartico!', 'ai');
+        return;
       }
-    }
 
-    // Carregar plano e uso do usuário
-    async function loadUserPlanAndUsage() {
-      if (!supabase || !userId) return;
+      // Adicionar mensagem do usuário
+      addMessage(message, 'user');
+      inputField.value = '';
+      inputField.style.height = 'auto';
 
-      try {
-        // Buscar dados do usuário
-        const { data: userData, error: userError } = await supabase
-          .from('users')
-          .select('plan')
-          .eq('id', userId)
-          .single();
+      sendBtn.disabled = true;
 
-        if (!userError && userData) {
-          userPlan = userData.plan || 'premium';
-          maxMessagesPerDay = userPlan === 'smartico' ? 200 : 50;
-        }
-
-        // Buscar uso de hoje
-        const today = new Date().toISOString().split('T')[0];
-        const { data: usage, error: usageError } = await supabase
-          .from('marti_usage')
-          .select('message_count')
-          .eq('user_id', userId)
-          .eq('date', today)
-          .single();
-
-        if (!usageError && usage) {
-          messagesUsedToday = usage.message_count || 0;
-        } else {
-          messagesUsedToday = 0;
-        }
-
-        updateUsageBar();
-      } catch (error) {
-        console.error('Erro ao carregar uso:', error);
-      }
-    }
-
-    // ============================================
-    // UI FUNCTIONS
-    // ============================================
-    const input = document.querySelector('.marti-input');
-    const sendBtn = document.querySelector('.marti-send-btn');
-    const messagesContainer = document.querySelector('#marti-messages');
-
-    function addThinkingIndicator() {
+      // Mostrar thinking indicator
       const thinkingMsg = document.createElement('div');
       thinkingMsg.className = 'message ai';
-      thinkingMsg.id = 'thinking-indicator';
+      thinkingMsg.id = 'thinking';
       thinkingMsg.innerHTML = `
         <div class="thinking-indicator">
           <div class="thinking-dot"></div>
@@ -552,28 +516,31 @@
           <div class="thinking-dot"></div>
         </div>
       `;
-      messagesContainer.appendChild(thinkingMsg);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      return thinkingMsg;
+      messagesDiv.appendChild(thinkingMsg);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+      // Simular resposta (substituir por API real depois)
+      setTimeout(() => {
+        const thinking = document.getElementById('thinking');
+        if (thinking) thinking.remove();
+
+        const response = mockResponses[Math.floor(Math.random() * mockResponses.length)];
+        addMessage(response, 'ai');
+
+        messagesCount++;
+        updateUsageCounter();
+
+        sendBtn.disabled = false;
+        inputField.focus();
+      }, 1500);
     }
 
-    function addAIResponse(text) {
-      const typingEl = document.getElementById('typing-indicator');
-      if (typingEl) typingEl.remove();
-
-      const aiMsg = document.createElement('div');
-      aiMsg.className = 'message ai';
-      aiMsg.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
-      messagesContainer.appendChild(aiMsg);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    function addErrorMessage(text) {
-      const aiMsg = document.createElement('div');
-      aiMsg.className = 'message ai';
-      aiMsg.innerHTML = `<div class="error-message">${escapeHtml(text)}</div>`;
-      messagesContainer.appendChild(aiMsg);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    function addMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${sender}`;
+      msgDiv.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
+      messagesDiv.appendChild(msgDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
     function escapeHtml(text) {
@@ -587,180 +554,30 @@
       return text.replace(/[&<>"']/g, m => map[m]);
     }
 
-    function updateUsageBar() {
-      const percentage = (messagesUsedToday / maxMessagesPerDay) * 100;
-      document.querySelector('#usage-text').textContent =
-        `${userPlan === 'smartico' ? 'Smartico' : 'Premium'}: ${messagesUsedToday}/${maxMessagesPerDay} perguntas usadas`;
-      document.querySelector('#usage-fill').style.width = percentage + '%';
+    function updateUsageCounter() {
+      usageCounter.textContent = `${messagesCount}/${maxMessages}`;
+    }
 
-      if (messagesUsedToday >= maxMessagesPerDay) {
-        addErrorMessage(`⚠️ Você atingiu o limite de ${maxMessagesPerDay} perguntas para hoje. Tente novamente amanhã!`);
-        sendBtn.disabled = true;
-      } else {
-        sendBtn.disabled = false;
+    function handleKeyPress(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
       }
     }
 
-    // ============================================
-    // CLAUDE API
-    // ============================================
-    async function callClaudeAPI(userMessage) {
-      try {
-        // Opção 1: Chamar via backend endpoint (recomendado)
-        const response = await fetch(CLAUDE_API_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${CLAUDE_API_KEY}`
-          },
-          body: JSON.stringify({
-            message: userMessage,
-            userId: userId,
-            userPlan: userPlan
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`API Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data.response || 'Desculpe, não consegui processar sua pergunta.';
-      } catch (error) {
-        console.error('Erro ao chamar Claude API:', error);
-
-        // Fallback: resposta genérica
-        return '💭 Desculpe, não consegui conectar com a IA neste momento. Verifique suas configurações de API.';
-      }
+    function selectHistory(element) {
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
     }
 
-    // ============================================
-    // SUPABASE - SALVAR MENSAGEM
-    // ============================================
-    async function saveMessageToDatabase(userMessage, aiResponse) {
-      if (!supabase || !userId) return;
-
-      try {
-        // Salvar mensagem
-        const { error: insertError } = await supabase
-          .from('marti_messages')
-          .insert([{
-            user_id: userId,
-            user_message: userMessage,
-            ai_response: aiResponse,
-            created_at: new Date().toISOString()
-          }]);
-
-        if (insertError) {
-          console.error('Erro ao salvar mensagem:', insertError);
-          return;
-        }
-
-        // Atualizar contador de uso
-        const today = new Date().toISOString().split('T')[0];
-        const { data: existingUsage } = await supabase
-          .from('marti_usage')
-          .select('id, message_count')
-          .eq('user_id', userId)
-          .eq('date', today)
-          .single();
-
-        if (existingUsage) {
-          // Atualizar contador existente
-          await supabase
-            .from('marti_usage')
-            .update({ message_count: existingUsage.message_count + 1 })
-            .eq('id', existingUsage.id);
-        } else {
-          // Criar novo contador
-          await supabase
-            .from('marti_usage')
-            .insert([{
-              user_id: userId,
-              date: today,
-              message_count: 1
-            }]);
-        }
-
-        messagesUsedToday++;
-        updateUsageBar();
-      } catch (error) {
-        console.error('Erro ao salvar no banco:', error);
-      }
-    }
-
-    // ============================================
-    // EVENT LISTENERS
-    // ============================================
-    input.addEventListener('input', () => {
-      input.style.height = 'auto';
-      input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+    inputField.addEventListener('input', () => {
+      inputField.style.height = 'auto';
+      inputField.style.height = Math.min(inputField.scrollHeight, 100) + 'px';
     });
 
-    sendBtn.addEventListener('click', async () => {
-      const message = input.value.trim();
-      if (!message || sendBtn.disabled) return;
-
-      // Verificar limite
-      if (messagesUsedToday >= maxMessagesPerDay) {
-        addErrorMessage(`⚠️ Limite de ${maxMessagesPerDay} perguntas atingido!`);
-        return;
-      }
-
-      sendBtn.disabled = true;
-
-      // Adicionar mensagem do usuário
-      const userMsg = document.createElement('div');
-      userMsg.className = 'message user';
-      userMsg.innerHTML = `<div class="message-bubble">${escapeHtml(message)}</div>`;
-      messagesContainer.appendChild(userMsg);
-
-      input.value = '';
-      input.style.height = 'auto';
-
-      // Mostrar indicador de "pensando"
-      addThinkingIndicator();
-
-      // Chamar Claude API
-      const aiResponse = await callClaudeAPI(message);
-
-      // Remover indicador e adicionar resposta
-      const thinkingEl = document.getElementById('thinking-indicator');
-      if (thinkingEl) thinkingEl.remove();
-
-      addAIResponse(aiResponse);
-
-      // Salvar no banco de dados
-      await saveMessageToDatabase(message, aiResponse);
-
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      sendBtn.disabled = false;
-      input.focus();
-    });
-
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendBtn.click();
-      }
-    });
-
-    // ============================================
-    // INICIALIZAÇÃO
-    // ============================================
-    async function init() {
-      await initSupabase();
-      updateUsageBar();
-      input.focus();
-
-      // Verificar se há configurações faltando
-      if (!CLAUDE_API_KEY || SUPABASE_URL.includes('seu-projeto')) {
-        addErrorMessage('⚠️ Configure as variáveis de ambiente (Claude API Key e Supabase)');
-      }
-    }
-
-    // Iniciar aplicação
-    init();
+    inputField.focus();
   </script>
 </body>
 </html>
