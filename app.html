@@ -131,8 +131,14 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
   gap: 12px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.mini ~ .app-header {
+  margin-left: 70px;
 }
 
 /* CONTENT */
@@ -142,6 +148,19 @@ body {
   z-index: 1;
   padding: 20px 24px 40px;
   background: transparent;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.mini ~ .content {
+  margin-left: 70px;
+}
+
+.sidebar.closed ~ .app-header {
+  margin-left: 0;
+}
+
+.sidebar.closed ~ .content {
+  margin-left: 0;
 }
 
 .top-nav { display: none; }
