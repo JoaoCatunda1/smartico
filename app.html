@@ -390,29 +390,42 @@ body {
 /* FINANCE SCORE */
 .smartico-score-card {
   margin: 20px 0;
-  padding: 24px;
-  border-radius: 26px;
-  background: rgba(255,255,255,.94) !important;
-  border: 1px solid rgba(21,128,61,.18) !important;
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  border: 2px solid #d4a574 !important;
   color: #0f172a !important;
-  box-shadow: 0 16px 44px rgba(15,26,20,.08) !important;
+  box-shadow: 0 20px 60px rgba(212,165,116,.18), 0 0 30px rgba(212,165,116,.12) !important;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 20px;
+  gap: 24px;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.smartico-score-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #d4a574, #f5c542, #d4a574);
 }
 
 .smartico-score-number {
-  width: 92px;
-  height: 92px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 34px;
+  font-size: 38px;
   font-weight: 950;
   color: #ffffff !important;
-  background: conic-gradient(#4ade80 84%, rgba(74,222,128,.3) 0);
-  box-shadow: 0 0 30px rgba(74,222,128,.28);
+  background: conic-gradient(#f5c542 84%, rgba(245,197,66,.2) 0);
+  box-shadow: 0 0 40px rgba(245,197,66,.45), 0 12px 30px rgba(245,197,66,.25) !important;
+  flex-shrink: 0;
 }
 
 .smartico-score-card h3,
@@ -440,30 +453,44 @@ body {
   gap: 6px !important;
   padding: 8px 14px !important;
   border-radius: 8px !important;
-  background: #15803d !important;
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%) !important;
   color: #ffffff !important;
   font-weight: 900 !important;
   font-size: 11px !important;
   text-transform: uppercase !important;
   letter-spacing: .5px !important;
-  box-shadow: 0 4px 12px rgba(21,128,61,.2) !important;
+  box-shadow: 0 6px 16px rgba(21,128,61,.3) !important;
+  border: 1px solid rgba(74,222,128,.3) !important;
 }
 
 .smartico-level-badge::before {
   content: "✓" !important;
   display: inline-block !important;
   margin-right: 2px !important;
+  font-weight: 900 !important;
 }
 
 /* GAMIFICAÇÃO */
 .smartico-level-card {
   margin: 20px 0;
-  padding: 22px 24px;
-  border-radius: 24px;
-  background: rgba(255,255,255,.94) !important;
-  border: 1px solid rgba(21,128,61,.18) !important;
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+  border: 2px solid #15803d !important;
   color: #0f172a !important;
-  box-shadow: 0 16px 44px rgba(15,26,20,.08) !important;
+  box-shadow: 0 20px 60px rgba(21,128,61,.15), 0 0 30px rgba(74,222,128,.1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.smartico-level-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #15803d, #4ade80, #15803d);
 }
 
 .smartico-level-head {
@@ -482,18 +509,20 @@ body {
 }
 
 .smartico-level-progress {
-  height: 10px;
-  background: #dbeafe !important;
+  height: 12px;
+  background: linear-gradient(90deg, #dcfce7, #d1fae5) !important;
   border-radius: 999px;
   overflow: hidden;
+  border: 1px solid rgba(21,128,61,.2) !important;
 }
 
 .smartico-level-progress span {
   display: block;
   width: 68%;
   height: 100%;
-  background: linear-gradient(90deg,#15803d,#4ade80) !important;
-  box-shadow: 0 0 18px rgba(74,222,128,.35);
+  background: linear-gradient(90deg, #15803d, #22c55e, #4ade80) !important;
+  box-shadow: 0 0 20px rgba(74,222,128,.4), inset 0 1px 2px rgba(255,255,255,.3) !important;
+  transition: width 0.4s ease !important;
 }
 
 .smartico-level-card p,
