@@ -1244,315 +1244,415 @@ tr:last-child td { border-bottom: none; }
 }
 
 /* ═══════════════════════════════════════════════════════════ */
-/* 🌿 METAS & DÍVIDAS - PREMIUM LIGHT THEME                   */
+/* 🌿 SMARTICO — METAS & DÍVIDAS PREMIUM LIGHT FIX              */
 /* ═══════════════════════════════════════════════════════════ */
+/* Preserve: IDs, addGoal(), renderGoals(), addDividaFromTab()  */
+/* removeDivida(), renderDividasTab(), toggleForm(), data, JS   */
 
-#panel-dividas {
-  padding: 28px 20px 56px;
-  background:
-    radial-gradient(circle at top right, rgba(74,222,128,.14), transparent 32%),
-    radial-gradient(circle at 18% 65%, rgba(20,184,166,.10), transparent 34%),
-    linear-gradient(180deg, #f8fffb 0%, #eefbf5 100%);
-  color: #0f1a14;
-  position: relative;
+#panel-dividas{
+    padding:28px 20px 56px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(74,222,128,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(20,184,166,.06),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #f1f7f4 0%,
+            #e8f3ee 100%
+        ) !important;
+
+    color:#0f1a14;
+    position:relative;
 }
 
-#panel-dividas::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(21,128,61,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(21,128,61,.035) 1px, transparent 1px);
-  background-size: 42px 42px;
+#panel-dividas::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(rgba(21,128,61,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21,128,61,.035) 1px, transparent 1px);
+
+    background-size:42px 42px;
 }
 
-#panel-dividas > * {
-  position: relative;
-  z-index: 1;
+#panel-dividas > *{
+    position:relative;
+    z-index:1;
 }
 
 /* HEADERS PREMIUM */
 #panel-dividas .goals-hero,
-#panel-dividas .debts-hero,
-#panel-dividas > div > div:nth-child(2),
-#panel-dividas > div > div:nth-child(4) {
-  border-radius: 24px !important;
-  padding: 26px 30px !important;
-  margin-bottom: 20px !important;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 18px 50px rgba(15,26,20,.10) !important;
-  border: 1px solid rgba(15,26,20,.06);
+#panel-dividas .debts-hero{
+    position:relative;
+    border-radius:24px !important;
+    padding:26px 30px !important;
+    margin-bottom:20px !important;
+    overflow:hidden;
+
+    border:1px solid rgba(15,26,20,.06);
 }
 
-#panel-dividas .goals-hero,
-#panel-dividas > div > div:nth-child(2) {
-  background:
-    radial-gradient(circle at top right, rgba(251,191,36,.28), transparent 34%),
-    linear-gradient(135deg, #fffbeb 0%, #fef3c7 48%, #fde68a 100%) !important;
+/* METAS */
+#panel-dividas .goals-hero{
+    background:
+        linear-gradient(
+            135deg,
+            #9a6700 0%,
+            #b7791f 45%,
+            #d4a017 100%
+        ) !important;
+
+    box-shadow:
+        0 12px 30px rgba(183,121,31,.28) !important;
 }
 
-#panel-dividas .debts-hero,
-#panel-dividas > div > div:nth-child(4) {
-  background:
-    linear-gradient(
-      135deg,
-      #b91c1c 0%,
-      #dc2626 100%
-    ) !important;
+/* DÍVIDAS */
+#panel-dividas .debts-hero{
+    background:
+        linear-gradient(
+            135deg,
+            #b91c1c 0%,
+            #dc2626 100%
+        ) !important;
+
+    box-shadow:
+        0 12px 30px rgba(220,38,38,.28) !important;
 }
 
+/* BRILHO PREMIUM */
 #panel-dividas .goals-hero::after,
-#panel-dividas .debts-hero::after,
-#panel-dividas > div > div:nth-child(2)::after,
-#panel-dividas > div > div:nth-child(4)::after {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  border-radius: 999px;
-  right: -60px;
-  top: -60px;
-  background: rgba(255,255,255,.25);
-  pointer-events: none;
+#panel-dividas .debts-hero::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.65),
+            transparent
+        );
 }
 
-#panel-dividas .hero-label {
-  font-size: 11px !important;
-  font-weight: 950 !important;
-  letter-spacing: .14em !important;
-  text-transform: uppercase;
-  color: #92400e !important;
-  position: relative;
-  z-index: 2;
+/* ORBES DECORATIVOS */
+#panel-dividas .goals-hero::before,
+#panel-dividas .debts-hero::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:999px;
+    right:-60px;
+    top:-60px;
+    background:rgba(255,255,255,.14);
 }
 
-#panel-dividas .debts-hero .hero-label {
-  color: rgba(255,255,255,.8) !important;
+/* LABEL HERO */
+#panel-dividas .hero-label{
+    display:block;
+    font-size:11px !important;
+    font-weight:950 !important;
+    letter-spacing:.14em !important;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.75) !important;
+    margin-bottom:8px;
 }
 
+/* TÍTULOS HERO */
 #panel-dividas .goals-hero h2,
-#panel-dividas .debts-hero h2 {
-  color: #0f1a14 !important;
-  font-size: 28px !important;
-  font-weight: 950 !important;
-  letter-spacing: -.03em;
-  margin: 8px 0 8px !important;
-  text-shadow: none !important;
-  position: relative;
-  z-index: 2;
+#panel-dividas .debts-hero h2{
+    color:#ffffff !important;
+    font-size:28px !important;
+    font-weight:950 !important;
+    letter-spacing:-.03em;
+    margin:8px 0 8px !important;
+    text-shadow:0 2px 12px rgba(0,0,0,.25) !important;
 }
 
-#panel-dividas .debts-hero h2 {
-  color: #ffffff !important;
-}
-
+/* DESCRIÇÕES HERO */
 #panel-dividas .goals-hero p,
-#panel-dividas .debts-hero p {
-  color: #475569 !important;
-  font-size: 15px !important;
-  margin-bottom: 18px !important;
-  position: relative;
-  z-index: 2;
+#panel-dividas .debts-hero p{
+    color:rgba(255,255,255,.92) !important;
+    font-size:15px !important;
+    margin-bottom:18px !important;
 }
 
-#panel-dividas .debts-hero p {
-  color: rgba(255,255,255,.85) !important;
-}
-
-/* BOTÕES NOVA META/DÍVIDA */
-#panel-dividas button[onclick*="toggleForm"],
+/* BOTÃO CRIAR META */
 #panel-dividas button[onclick*="form-nova-meta"],
-#panel-dividas .btn-new-goal {
-  background: linear-gradient(135deg, #15803d, #14b8a6) !important;
-  color: #ffffff !important;
-  border: 0 !important;
-  border-radius: 14px !important;
-  padding: 12px 20px !important;
-  font-size: 14px !important;
-  font-weight: 900 !important;
-  box-shadow: 0 14px 32px rgba(20,184,166,.22);
+#panel-dividas button[onclick*="toggleForm"],
+#panel-dividas .btn-new-goal{
+    background:linear-gradient(135deg, #15803d, #14b8a6) !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:14px !important;
+    padding:12px 20px !important;
+    font-size:14px !important;
+    font-weight:900 !important;
+    box-shadow:0 14px 32px rgba(20,184,166,.22);
 }
 
 /* CARDS DE FORMULÁRIO */
 #panel-dividas .card-clean,
-#panel-dividas #form-nova-meta {
-  background: rgba(255,255,255,.88) !important;
-  border: 1px solid rgba(21,128,61,.12) !important;
-  border-radius: 24px !important;
-  padding: 24px !important;
-  box-shadow: 0 18px 46px rgba(15,26,20,.08) !important;
-  backdrop-filter: blur(18px);
-  margin-bottom: 18px !important;
+#panel-dividas #form-nova-meta{
+    background:#ffffff !important;
+    border:1px solid rgba(15,23,42,.08) !important;
+    border-radius:22px !important;
+    padding:24px !important;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.06) !important;
+
+    margin-bottom:18px !important;
+}
+
+#panel-dividas .card-clean:hover,
+#panel-dividas #form-nova-meta:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 14px 40px rgba(15,23,42,.08) !important;
+}
+
+#panel-dividas .card-clean,
+#panel-dividas .goals-hero,
+#panel-dividas .debts-hero{
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 #panel-dividas .card-clean h3,
-#panel-dividas .card-clean strong,
-#panel-dividas #form-nova-meta strong {
-  color: #0f1a14 !important;
-  font-weight: 950 !important;
+#panel-dividas .card-clean strong{
+    color:#0f1a14 !important;
+    font-weight:950 !important;
 }
 
 /* GRIDS RESPONSIVOS */
 #panel-dividas .goal-form-grid-1,
-#panel-dividas .debt-form-grid-1,
-#panel-dividas #form-nova-meta > div:first-of-type,
-#panel-dividas .card-clean > div:nth-child(2) {
-  display: grid !important;
-  grid-template-columns: 2fr 1fr 1fr !important;
-  gap: 14px !important;
+#panel-dividas .debt-form-grid-1{
+    display:grid !important;
+    grid-template-columns:2fr 1fr 1fr !important;
+    gap:14px !important;
 }
 
-#panel-dividas .goal-form-grid-2,
-#panel-dividas #form-nova-meta > div:nth-child(2) {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr auto !important;
-  gap: 14px !important;
-  align-items: end;
+#panel-dividas .goal-form-grid-2{
+    display:grid !important;
+    grid-template-columns:1fr 1fr 1fr auto !important;
+    gap:14px !important;
+    align-items:end;
 }
 
-#panel-dividas .debt-form-grid-2,
-#panel-dividas .card-clean > div:nth-child(3) {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr 1fr !important;
-  gap: 14px !important;
-  align-items: end;
+#panel-dividas .debt-form-grid-2{
+    display:grid !important;
+    grid-template-columns:1fr 1fr 1fr 1fr !important;
+    gap:14px !important;
+    align-items:end;
 }
 
-/* INPUTS */
-#panel-dividas .inp,
-#panel-dividas input,
-#panel-dividas select {
-  width: 100%;
-  min-height: 46px;
-  background: #ffffff !important;
-  color: #0f172a !important;
-  border: 1.5px solid rgba(21,128,61,.20) !important;
-  border-radius: 14px !important;
-  padding: 0 14px !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  outline: none !important;
-  box-shadow: 0 8px 22px rgba(15,26,20,.04);
-  transition: .22s ease;
-}
-
-#panel-dividas input::placeholder {
-  color: #64748b !important;
-  opacity: 1 !important;
-}
-
-#panel-dividas input:focus,
-#panel-dividas select:focus {
-  border-color: #4ade80 !important;
-  box-shadow:
-    0 0 0 4px rgba(74,222,128,.16),
-    0 12px 28px rgba(15,26,20,.08) !important;
+/* fallback para grids existentes */
+#panel-dividas .goal-grid,
+#panel-dividas .divida-grid{
+    gap:14px !important;
 }
 
 /* LABELS */
-#panel-dividas label {
-  color: #334155 !important;
-  font-size: 12px !important;
-  font-weight: 900 !important;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  margin-bottom: 7px !important;
-  display: block;
+#panel-dividas label{
+    color:#334155 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    margin-bottom:7px !important;
+    display:block;
 }
 
-/* BOTÕES */
-#panel-dividas button {
-  transition: .22s ease;
+/* INPUTS / SELECTS / TEXTAREA */
+#panel-dividas .inp,
+#panel-dividas input,
+#panel-dividas select,
+#panel-dividas textarea{
+    width:100%;
+    min-height:46px;
+
+    background:#ffffff !important;
+    color:#0f172a !important;
+
+    border:1.5px solid #cbd5e1 !important;
+    border-radius:14px !important;
+
+    padding:0 14px !important;
+
+    font-size:14px !important;
+    font-weight:700 !important;
+
+    outline:none !important;
+
+    box-shadow:
+        0 8px 22px rgba(15,26,20,.04);
+
+    transition:.22s ease;
 }
 
-#panel-dividas button:hover {
-  transform: translateY(-2px);
+#panel-dividas textarea{
+    padding:12px 14px !important;
+    min-height:90px;
 }
 
-/* BOTÃO SALVAR META */
-#panel-dividas button[onclick="addGoal()"] {
-  background: linear-gradient(135deg, #15803d, #14b8a6) !important;
-  color: white !important;
-  border: 0 !important;
-  border-radius: 14px !important;
-  padding: 12px 20px !important;
-  font-weight: 950 !important;
+#panel-dividas input::placeholder,
+#panel-dividas textarea::placeholder{
+    color:#64748b !important;
+    opacity:1 !important;
 }
 
-/* BOTÃO ADICIONAR DÍVIDA */
-#panel-dividas button[onclick="addDividaFromTab()"] {
-  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-  color: white !important;
-  border: 0 !important;
-  border-radius: 14px !important;
-  padding: 12px 20px !important;
-  font-weight: 950 !important;
+#panel-dividas input:focus,
+#panel-dividas select:focus,
+#panel-dividas textarea:focus{
+    border-color:#16a34a !important;
+
+    box-shadow:
+        0 0 0 4px rgba(74,222,128,.18),
+        0 12px 28px rgba(15,26,20,.08) !important;
 }
 
-/* LISTA DE METAS/DÍVIDAS */
+/* BOTÕES PRINCIPAIS */
+#panel-dividas button{
+    transition:.22s ease;
+}
+
+#panel-dividas button:hover{
+    transform:translateY(-2px);
+}
+
+/* SALVAR META */
+#panel-dividas button[onclick="addGoal()"]{
+    background:linear-gradient(135deg, #15803d, #14b8a6) !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:14px !important;
+    padding:12px 20px !important;
+    font-weight:950 !important;
+}
+
+/* ADICIONAR DÍVIDA */
+#panel-dividas button[onclick="addDividaFromTab()"]{
+    background:linear-gradient(135deg, #dc2626, #b91c1c) !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:14px !important;
+    padding:12px 20px !important;
+    font-weight:950 !important;
+}
+
+/* LISTAS */
 #panel-dividas #goals-list,
-#panel-dividas #dividas-list2 {
-  display: grid;
-  gap: 14px;
-  margin-bottom: 28px;
+#panel-dividas #dividas-list2{
+    display:grid;
+    gap:14px;
+    margin-bottom:28px;
 }
 
 #panel-dividas #goals-list > *,
-#panel-dividas #dividas-list2 > * {
-  background: rgba(255,255,255,.90) !important;
-  border: 1px solid rgba(21,128,61,.12) !important;
-  border-radius: 22px !important;
-  box-shadow: 0 16px 38px rgba(15,26,20,.07) !important;
-  color: #0f1a14 !important;
+#panel-dividas #dividas-list2 > *{
+    background:#ffffff !important;
+    border:1px solid rgba(21,128,61,.12) !important;
+    border-radius:22px !important;
+
+    box-shadow:
+        0 16px 38px rgba(15,26,20,.07) !important;
+
+    color:#0f1a14 !important;
 }
 
-/* TEXTOS INTERNOS */
 #panel-dividas #goals-list *,
-#panel-dividas #dividas-list2 * {
-  color: inherit;
+#panel-dividas #dividas-list2 *{
+    color:inherit;
 }
 
 #panel-dividas .text-muted,
-#panel-dividas small {
-  color: #64748b !important;
+#panel-dividas small{
+    color:#64748b !important;
 }
 
-/* BARRAS DE PROGRESSO */
+/* ESTADOS VAZIOS */
+#panel-dividas .empty-goals,
+#panel-dividas #goals-list:empty::before{
+    content:"Nenhuma meta cadastrada ainda. Clique em '+ Nova meta' para começar.";
+
+    display:block;
+
+    background:#ffffff;
+
+    border:1px dashed #cbd5e1;
+
+    border-radius:18px;
+
+    padding:32px;
+
+    color:#475569;
+
+    font-weight:600;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.04);
+}
+
+/* PROGRESS BARS */
 #panel-dividas .progress,
-#panel-dividas [class*="progress"] {
-  background: #e2e8f0 !important;
-  border-radius: 999px !important;
-  overflow: hidden;
+#panel-dividas [class*="progress"]{
+    background:#e2e8f0 !important;
+    border-radius:999px !important;
+    overflow:hidden;
 }
 
 #panel-dividas .progress span,
-#panel-dividas [class*="progress"] span {
-  background: linear-gradient(90deg, #15803d, #4ade80) !important;
-  box-shadow: 0 0 18px rgba(74,222,128,.35);
+#panel-dividas [class*="progress"] span{
+    background:linear-gradient(90deg, #15803d, #4ade80) !important;
+    box-shadow:0 0 18px rgba(74,222,128,.35);
 }
 
 /* MOBILE */
-@media (max-width: 900px) {
-  #panel-dividas .goal-form-grid-1,
-  #panel-dividas .debt-form-grid-1,
-  #panel-dividas .goal-form-grid-2,
-  #panel-dividas .debt-form-grid-2 {
-    grid-template-columns: 1fr !important;
-  }
+@media(max-width:900px){
+    #panel-dividas .goal-form-grid-1,
+    #panel-dividas .debt-form-grid-1,
+    #panel-dividas .goal-form-grid-2,
+    #panel-dividas .debt-form-grid-2,
+    #panel-dividas .goal-grid,
+    #panel-dividas .divida-grid{
+        grid-template-columns:1fr !important;
+    }
 
-  #panel-dividas {
-    padding: 20px 14px 42px;
-  }
+    #panel-dividas{
+        padding:20px 14px 42px;
+    }
 
-  #panel-dividas .goals-hero,
-  #panel-dividas .debts-hero,
-  #panel-dividas .card-clean,
-  #panel-dividas #form-nova-meta {
-    padding: 20px !important;
-  }
+    #panel-dividas .goals-hero,
+    #panel-dividas .debts-hero,
+    #panel-dividas .card-clean,
+    #panel-dividas #form-nova-meta{
+        padding:20px !important;
+    }
+
+    #panel-dividas .goals-hero h2,
+    #panel-dividas .debts-hero h2{
+        font-size:24px !important;
+    }
 }
 </style>
 </head>
