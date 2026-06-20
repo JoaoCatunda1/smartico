@@ -5,8 +5,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finanças Pessoais</title>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- PREMIUM DESIGN OVERRIDE -->
+<style>
+:root {
+  --green: #15803d;
+  --bright: #4ade80;
+  --teal: #14b8a6;
+  --navy: #0f1a14;
+  --dark: #07110d;
+  --bg: #f3fbf7;
+  --card: rgba(255,255,255,.88);
+  --border: rgba(21,128,61,.14);
+  --shadow: 0 18px 45px rgba(15,26,20,.08);
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: radial-gradient(circle at top right, rgba(74,222,128,.18), transparent 35%), linear-gradient(180deg,#f8fffb,var(--bg));
+  color: #0f1a14;
+}
+
+.sidebar {
+  width: 260px !important;
+  background: linear-gradient(180deg,#07110d,#111827) !important;
+  border-right: 1px solid rgba(255,255,255,.06) !important;
+}
+
+.sidebar-header {
+  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+  padding: 22px 14px !important;
+}
+
+.sidebar-logo {
+  font-size: 20px !important;
+  color: white !important;
+}
+
+.sidebar-menu {
+  padding: 14px 8px !important;
+}
+
+.sidebar-item {
+  color: rgba(255,255,255,.68) !important;
+  border-radius: 14px !important;
+  padding: 14px 16px !important;
+  margin-bottom: 6px !important;
+  transition: .25s !important;
+  font-weight: 700 !important;
+}
+
+.sidebar-item:hover {
+  color: white !important;
+  background: rgba(74,222,128,.08) !important;
+}
+
+.sidebar-item.active {
+  background: linear-gradient(135deg,var(--green),var(--teal)) !important;
+  color: white !important;
+  box-shadow: 0 12px 30px rgba(20,184,166,.25) !important;
+}
+
+.app-header {
+  background: linear-gradient(135deg,var(--green),var(--teal)) !important;
+  box-shadow: 0 10px 30px rgba(21,128,61,.22) !important;
+  height: 86px !important;
+  padding: 0 28px !important;
+}
+
+.app-header .logo {
+  display: none;
+}
+
+.app-header .controls {
+  display: none;
+}
+
+.app-header::after {
+  content: 'Smartico Dashboard';
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin: auto;
+}
+
+.content {
+  margin-left: 260px !important;
+  padding: 0 28px 40px !important;
+  background: #fff !important;
+}
+
+.card {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 22px !important;
+  padding: 20px !important;
+  box-shadow: var(--shadow) !important;
+  transition: .25s !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px) !important;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: auto -30px -40px auto;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle,rgba(74,222,128,.16),transparent 70%);
+  pointer-events: none;
+}
+
+.card-label {
+  font-size: 12px !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  color: #94a3b8 !important;
+  font-weight: 900 !important;
+}
+
+.card-value {
+  font-size: 24px !important;
+  font-weight: 900 !important;
+  margin-top: 8px !important;
+}
+
+.green { color: #166534 !important; }
+.red { color: #dc2626 !important; }
+.blue { color: #2563eb !important; }
+.orange { color: #b45309 !important; }
+
+.panel {
+  animation: none !important;
+  display: block !important;
+}
+
+.panel:not(.active) {
+  display: none !important;
+}
+
+@media(max-width:1100px) {
+  .sidebar { width: 80px; }
+  .sidebar-item span:last-child { display: none; }
+  .content { margin-left: 80px; }
+}
+
+@media(max-width:768px) {
+  .sidebar { position: fixed; }
+  .content { margin-left: 0; padding: 0 16px 40px; }
+}
+</style>
 <style>
 .icon { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; font-size: 18px; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; vertical-align: middle; user-select: none; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 .icon-sm { font-size: 16px; }
