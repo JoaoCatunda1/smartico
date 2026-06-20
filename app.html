@@ -995,291 +995,253 @@ tr:last-child td { border-bottom: none; }
 }
 
 /* ═══════════════════════════════════════════════════════════ */
-/* 💎 PRO PAGES - PREMIUM EXCLUSIVE VISUAL IDENTITY           */
+/* 💎 CALCULADORAS PRO - PREMIUM + LEGIBILIDADE PERFEITA     */
 /* ═══════════════════════════════════════════════════════════ */
 
-/* PRO Panel Container */
-#panel-calculadoras,
-#panel-investimentos,
-#panel-dividas,
-#panel-historico {
-  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%) !important;
-  min-height: calc(100vh - 70px) !important;
-  position: relative !important;
-  overflow: hidden !important;
+#panel-calculadoras {
+  min-height: calc(100vh - 70px);
+  padding: 32px 20px 56px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at top right, rgba(74,222,128,.12), transparent 32%),
+    radial-gradient(circle at 20% 70%, rgba(20,184,166,.10), transparent 34%),
+    linear-gradient(135deg, #0a0e27 0%, #10172f 55%, #0f1a14 100%);
+  position: relative;
 }
 
-/* PRO Panel Overlay Effects */
-#panel-calculadoras::before,
-#panel-investimentos::before,
-#panel-dividas::before,
-#panel-historico::before {
-  content: '';
+#panel-calculadoras::before {
+  content: "";
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 50%, rgba(74,222,128,.08), transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(20,184,166,.06), transparent 50%),
-    linear-gradient(rgba(74,222,128,.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(74,222,128,.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
   pointer-events: none;
-  z-index: 0;
+  background-image:
+    linear-gradient(rgba(74,222,128,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: .45;
 }
 
-#panel-calculadoras > div,
-#panel-investimentos > div,
-#panel-dividas > div,
-#panel-historico > div {
+#panel-calculadoras > div {
   position: relative;
   z-index: 1;
+  max-width: 760px !important;
+  margin: 0 auto !important;
 }
 
-/* PRO Header Styling */
-#panel-calculadoras h2,
-#panel-investimentos h2,
-#panel-dividas h2,
-#panel-historico h2 {
-  color: #fff !important;
-  font-size: 28px !important;
-  font-weight: 900 !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+/* HEADER */
+#panel-calculadoras h2 {
+  color: #ffffff !important;
+  font-size: 30px !important;
+  font-weight: 950 !important;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
 }
 
-#panel-calculadoras .icon,
-#panel-investimentos .icon,
-#panel-dividas .icon,
-#panel-historico .icon {
-  color: #4ade80 !important;
-  font-size: 28px !important;
-}
-
-/* PRO Badge - Exclusive */
-#panel-calculadoras span[style*="background:#f5c542"],
-#panel-investimentos span[style*="background:#f5c542"],
-#panel-dividas span[style*="background:#f5c542"],
-#panel-historico span[style*="background:#f5c542"] {
-  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
-  color: white !important;
-  font-weight: 900 !important;
-  padding: 4px 14px !important;
-  border-radius: 50px !important;
-  font-size: 12px !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
-  box-shadow: 0 4px 12px rgba(251,191,36,0.3) !important;
-  letter-spacing: 1px !important;
-}
-
-/* PRO Description Text */
-#panel-calculadoras p,
-#panel-investimentos p,
-#panel-dividas p,
-#panel-historico p {
-  color: rgba(255,255,255,0.75) !important;
+#panel-calculadoras p {
+  color: rgba(255,255,255,.78) !important;
   font-size: 15px !important;
-  line-height: 1.6 !important;
 }
 
-/* PRO Tabs - Premium */
-#panel-calculadoras > div > div > div[style*="display:flex;gap:0"],
-#panel-investimentos > div > div > div[style*="display:flex;gap:0"],
-#panel-dividas > div > div > div[style*="display:flex;gap:0"],
-#panel-historico > div > div > div[style*="display:flex;gap:0"] {
-  background: linear-gradient(135deg, rgba(15, 26, 20, 0.5), rgba(20, 50, 40, 0.3)) !important;
-  border: 1px solid rgba(74,222,128,0.25) !important;
-  backdrop-filter: blur(12px) !important;
+/* BADGE PRO */
+#panel-calculadoras [class*="badge"],
+#panel-calculadoras .pro-badge,
+#panel-calculadoras span[style*="background:#f5c542"] {
+  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  font-weight: 950 !important;
+  box-shadow: 0 8px 22px rgba(251,191,36,.28);
+}
+
+/* TABS */
+#panel-calculadoras .calc-tabs,
+#panel-calculadoras [role="tablist"],
+#panel-calculadoras > div > div > div[style*="display:flex;gap:0"] {
+  display: flex;
+  background: rgba(7,18,13,.72) !important;
+  border: 1px solid rgba(74,222,128,.24) !important;
+  border-radius: 16px !important;
+  padding: 4px !important;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.22);
+}
+
+#panel-calculadoras .calc-tabs button,
+#panel-calculadoras [role="tab"],
+#panel-calculadoras button[onclick*="calcTab"] {
+  flex: 1;
+  min-height: 44px;
+  border: 0 !important;
   border-radius: 12px !important;
-  padding: 2px !important;
-}
-
-#panel-calculadoras button[onclick*="calcTab"],
-#panel-investimentos button[onclick*="calcTab"],
-#panel-dividas button[onclick*="calcTab"],
-#panel-historico button[onclick*="calcTab"] {
   background: transparent !important;
-  color: rgba(255,255,255,0.6) !important;
-  border-color: rgba(74,222,128,0.15) !important;
-  font-weight: 700 !important;
-  transition: all 0.3s ease !important;
+  color: rgba(255,255,255,.68) !important;
+  font-size: 13px !important;
+  font-weight: 850 !important;
+  transition: all .22s ease;
 }
 
-#panel-calculadoras button[onclick*="calcTab"]:hover,
-#panel-investimentos button[onclick*="calcTab"]:hover,
-#panel-dividas button[onclick*="calcTab"]:hover,
-#panel-historico button[onclick*="calcTab"]:hover {
-  color: #4ade80 !important;
-  border-color: rgba(74,222,128,0.3) !important;
-  background: rgba(74,222,128,0.05) !important;
+#panel-calculadoras .calc-tabs button:hover,
+#panel-calculadoras button[onclick*="calcTab"]:hover {
+  background: rgba(74,222,128,.10) !important;
+  color: #ffffff !important;
 }
 
+#panel-calculadoras .calc-tabs button.active,
+#panel-calculadoras button.active,
 #panel-calculadoras button[onclick*="calcTab"][style*="background:#1e3a5f"],
-#panel-investimentos button[onclick*="calcTab"][style*="background:#1e3a5f"],
-#panel-dividas button[onclick*="calcTab"][style*="background:#1e3a5f"],
-#panel-historico button[onclick*="calcTab"][style*="background:#1e3a5f"] {
-  background: linear-gradient(135deg, #16a34a, #0d9488) !important;
-  color: white !important;
-  border-color: rgba(74,222,128,0.4) !important;
-  box-shadow: 0 4px 12px rgba(22,163,74,0.2) !important;
+#panel-calculadoras [aria-selected="true"] {
+  background: linear-gradient(135deg, #15803d, #14b8a6) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(20,184,166,.28);
 }
 
-/* PRO Cards - Glassmorphic Premium Dark */
-#panel-calculadoras > div > div > div[style*="background:white"],
-#panel-investimentos > div > div > div[style*="background:white"],
-#panel-dividas > div > div > div[style*="background:white"],
-#panel-historico > div > div > div[style*="background:white"] {
-  background: linear-gradient(135deg, rgba(15, 26, 20, 0.6), rgba(20, 50, 40, 0.4)) !important;
-  backdrop-filter: blur(15px) !important;
-  border: 1px solid rgba(74,222,128,0.25) !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 25px rgba(74,222,128,0.1), inset 0 1px 0 rgba(74,222,128,0.15) !important;
-  color: #fff !important;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-  position: relative !important;
-  overflow: hidden !important;
+/* CARD PRINCIPAL */
+#panel-calculadoras [id^="cpanel-"],
+#panel-calculadoras > div > div > div[style*="background:white"] {
+  background:
+    radial-gradient(circle at top right, rgba(74,222,128,.10), transparent 35%),
+    rgba(8, 18, 26, .88) !important;
+  border: 1px solid rgba(74,222,128,.26) !important;
+  border-radius: 22px !important;
+  padding: 28px !important;
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+  backdrop-filter: blur(18px);
 }
 
-#panel-calculadoras > div > div > div[style*="background:white"]:hover,
-#panel-investimentos > div > div > div[style*="background:white"]:hover,
-#panel-dividas > div > div > div[style*="background:white"]:hover,
-#panel-historico > div > div > div[style*="background:white"]:hover {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 35px rgba(74,222,128,0.2), inset 0 1px 0 rgba(74,222,128,0.2) !important;
-  transform: translateY(-4px) !important;
-  border-color: rgba(74,222,128,0.5) !important;
-  background: linear-gradient(135deg, rgba(15, 26, 20, 0.7), rgba(20, 50, 40, 0.5)) !important;
+#panel-calculadoras h3 {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 950 !important;
+  margin-bottom: 20px !important;
 }
 
-/* PRO Card Titles */
-#panel-calculadoras h3,
-#panel-investimentos h3,
-#panel-dividas h3,
-#panel-historico h3 {
-  color: #fff !important;
-  font-weight: 900 !important;
-  font-size: 16px !important;
-}
-
-/* PRO Card Labels */
-#panel-calculadoras label,
-#panel-investimentos label,
-#panel-dividas label,
-#panel-historico label {
-  color: rgba(255,255,255,0.7) !important;
-  font-weight: 700 !important;
+/* LABELS */
+#panel-calculadoras label {
+  color: rgba(255,255,255,.82) !important;
   font-size: 12px !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
+  font-weight: 850 !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 7px !important;
 }
 
-/* PRO Inputs - Premium */
+/* INPUTS E SELECTS - CORREÇÃO CRÍTICA ✅ */
 #panel-calculadoras input,
-#panel-calculadoras select,
-#panel-investimentos input,
-#panel-investimentos select,
-#panel-dividas input,
-#panel-dividas select,
-#panel-historico input,
-#panel-historico select {
-  background: rgba(30, 58, 95, 0.3) !important;
-  border: 1.5px solid rgba(74,222,128,0.25) !important;
-  color: #fff !important;
-  backdrop-filter: blur(10px) !important;
-  border-radius: 10px !important;
-  transition: all 0.3s ease !important;
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  padding: 10px 12px !important;
+#panel-calculadoras select {
+  width: 100%;
+  min-height: 48px;
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1.5px solid rgba(74,222,128,.42) !important;
+  border-radius: 14px !important;
+  padding: 0 14px !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  box-shadow:
+    0 8px 22px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.85);
+  outline: none !important;
+  transition: all .22s ease;
 }
 
-#panel-calculadoras input::placeholder,
-#panel-investimentos input::placeholder,
-#panel-dividas input::placeholder,
-#panel-historico input::placeholder {
-  color: rgba(255,255,255,0.5) !important;
+#panel-calculadoras input::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+  font-weight: 600;
+}
+
+#panel-calculadoras select {
+  appearance: auto;
 }
 
 #panel-calculadoras input:focus,
-#panel-calculadoras select:focus,
-#panel-investimentos input:focus,
-#panel-investimentos select:focus,
-#panel-dividas input:focus,
-#panel-dividas select:focus,
-#panel-historico input:focus,
-#panel-historico select:focus {
-  border-color: rgba(74,222,128,0.6) !important;
-  background: rgba(30, 58, 95, 0.5) !important;
-  box-shadow: 0 0 16px rgba(74,222,128,0.25), inset 0 0 8px rgba(74,222,128,0.1) !important;
-  outline: none !important;
+#panel-calculadoras select:focus {
+  background: #ffffff !important;
+  border-color: #4ade80 !important;
+  box-shadow:
+    0 0 0 4px rgba(74,222,128,.16),
+    0 12px 28px rgba(0,0,0,.22) !important;
 }
 
-/* PRO Result Cards - Glow Green */
-#panel-calculadoras > div > div > div[style*="background:#f0faf4"],
-#panel-investimentos > div > div > div[style*="background:#f0faf4"],
-#panel-dividas > div > div > div[style*="background:#f0faf4"],
-#panel-historico > div > div > div[style*="background:#f0faf4"] {
-  background: rgba(74,222,128,0.08) !important;
-  border: 1px solid rgba(74,222,128,0.3) !important;
-  backdrop-filter: blur(10px) !important;
-  box-shadow: 0 0 20px rgba(74,222,128,0.1), inset 0 1px 0 rgba(74,222,128,0.2) !important;
-  border-radius: 14px !important;
+/* RESULTADO - CORREÇÃO CRÍTICA ✅ */
+#panel-calculadoras [id$="-resultado"],
+#panel-calculadoras .resultado,
+#panel-calculadoras > div > div > div[style*="background:#f0faf4"] {
+  background:
+    linear-gradient(135deg, rgba(240,253,244,.98), rgba(220,252,231,.96)) !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(21,128,61,.28) !important;
+  border-radius: 18px !important;
+  padding: 22px !important;
+  margin-top: 22px !important;
+  box-shadow:
+    0 16px 38px rgba(21,128,61,.12),
+    inset 0 1px 0 rgba(255,255,255,.9);
 }
 
-#panel-calculadoras > div > div > div[style*="background:#f0faf4"] h4,
-#panel-investimentos > div > div > div[style*="background:#f0faf4"] h4,
-#panel-dividas > div > div > div[style*="background:#f0faf4"] h4,
-#panel-historico > div > div > div[style*="background:#f0faf4"] h4 {
-  color: #4ade80 !important;
-  font-weight: 900 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  font-size: 12px !important;
+#panel-calculadoras [id$="-resultado"] h4,
+#panel-calculadoras .resultado h4 {
+  color: #15803d !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+  text-transform: uppercase;
+  letter-spacing: .06em;
 }
 
-/* PRO Total Value - Highlighted */
-#panel-calculadoras span[style*="font-size:20px"],
-#panel-investimentos span[style*="font-size:20px"],
-#panel-dividas span[style*="font-size:20px"],
-#panel-historico span[style*="font-size:20px"] {
-  color: #4ade80 !important;
-  font-weight: 900 !important;
-  text-shadow: 0 0 10px rgba(74,222,128,0.3) !important;
+#panel-calculadoras [id$="-resultado"] *,
+#panel-calculadoras .resultado * {
+  color: inherit;
 }
 
-/* PRO Border Dividers */
-#panel-calculadoras > div > div > div[style*="border-top:2px"],
-#panel-investimentos > div > div > div[style*="border-top:2px"],
-#panel-dividas > div > div > div[style*="border-top:2px"],
-#panel-historico > div > div > div[style*="border-top:2px"] {
-  border-top-color: rgba(74,222,128,0.3) !important;
-  border-top-style: solid !important;
+#panel-calculadoras [id$="-itens"] div,
+#panel-calculadoras .result-row {
+  color: #334155 !important;
+  border-bottom: 1px solid rgba(21,128,61,.14);
+  padding: 9px 0;
 }
 
-/* PRO Scrollbar Styling */
-#panel-calculadoras::-webkit-scrollbar,
-#panel-investimentos::-webkit-scrollbar,
-#panel-dividas::-webkit-scrollbar,
-#panel-historico::-webkit-scrollbar {
-  width: 8px;
+#panel-calculadoras [id$="-total"],
+#panel-calculadoras .total-value {
+  color: #15803d !important;
+  font-size: 24px !important;
+  font-weight: 950 !important;
+  text-shadow: none !important;
 }
 
-#panel-calculadoras::-webkit-scrollbar-track,
-#panel-investimentos::-webkit-scrollbar-track,
-#panel-dividas::-webkit-scrollbar-track,
-#panel-historico::-webkit-scrollbar-track {
-  background: rgba(74,222,128,0.05);
+/* BOTÕES */
+#panel-calculadoras button:not([onclick*="calcTab"]) {
+  transition: all .22s ease;
 }
 
-#panel-calculadoras::-webkit-scrollbar-thumb,
-#panel-investimentos::-webkit-scrollbar-thumb,
-#panel-dividas::-webkit-scrollbar-thumb,
-#panel-historico::-webkit-scrollbar-thumb {
-  background: rgba(74,222,128,0.3);
-  border-radius: 4px;
+#panel-calculadoras button:not([onclick*="calcTab"]):hover {
+  transform: translateY(-2px);
 }
 
-#panel-calculadoras::-webkit-scrollbar-thumb:hover,
-#panel-investimentos::-webkit-scrollbar-thumb:hover,
-#panel-dividas::-webkit-scrollbar-thumb:hover,
-#panel-historico::-webkit-scrollbar-thumb:hover {
-  background: rgba(74,222,128,0.5);
+/* MOBILE */
+@media (max-width: 760px) {
+  #panel-calculadoras {
+    padding: 22px 14px 42px;
+  }
+
+  #panel-calculadoras h2 {
+    font-size: 24px !important;
+  }
+
+  #panel-calculadoras [id^="cpanel-"] {
+    padding: 20px !important;
+  }
+
+  #panel-calculadoras .calc-tabs,
+  #panel-calculadoras [role="tablist"] {
+    overflow-x: auto;
+  }
+
+  #panel-calculadoras .calc-tabs button,
+  #panel-calculadoras button[onclick*="calcTab"] {
+    min-width: 120px;
+  }
 }
 </style>
 </head>
