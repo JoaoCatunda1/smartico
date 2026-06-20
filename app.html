@@ -1013,7 +1013,7 @@ tr:last-child td { border-bottom: none; }
 
     <a href="#" onclick="openMarti()" class="sidebar-item" data-label="MARTI IA">
       <span class="icon">smart_toy</span>
-      <span>🤖 MARTI - Consultor IA</span>
+      <span>MARTI - Consultor IA</span>
     </a>
 
     <div class="sidebar-divider"></div>
@@ -1658,7 +1658,7 @@ tr:last-child td { border-bottom: none; }
   <div class="modal-box" style="max-width:480px;text-align:center">
     <button class="modal-close" onclick="closeUpgradeModal()"><span class="icon">close</span></button>
     <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#f5c542,#d4a017);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:40px">
-      ⭐
+      <span class="icon" style="font-size:48px;color:#fff">grade</span>
     </div>
     <h2 style="font-size:20px;margin-bottom:8px">Desbloqueie o Smartico Pro</h2>
     <p class="sub" style="margin-bottom:24px;font-size:14px">Acesse todas as funcionalidades premium: investimentos, dívidas, histórico completo e calculadoras profissionais.</p>
@@ -1682,8 +1682,8 @@ tr:last-child td { border-bottom: none; }
       </div>
     </div>
 
-    <button onclick="goToKiwifyCheckout()" style="width:100%;padding:14px;background:linear-gradient(135deg,#16a34a,#0d9488);color:white;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px">
-      <span class="icon" style="font-size:18px">bolt</span> Assinar Smartico Pro - R$ 19,90/mês
+    <button onclick="goToKiwifyCheckout()" style="width:100%;padding:14px;background:linear-gradient(135deg,#16a34a,#0d9488);color:white;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(22,163,74,0.3)" onmouseover="this.style.boxShadow='0 8px 20px rgba(22,163,74,0.5)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='0 4px 12px rgba(22,163,74,0.3)';this.style.transform='translateY(0)'">
+      <span class="icon" style="font-size:20px">flash_on</span> Assinar Smartico Pro - R$ 19,90/mês
     </button>
 
     <button onclick="closeUpgradeModal()" style="width:100%;padding:12px;background:white;color:#4a5568;border:1px solid #e2e8f0;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer">
@@ -1701,8 +1701,8 @@ tr:last-child td { border-bottom: none; }
     <h2><span class="icon" style="color:#4299e1">cloud_sync</span> Sincronização</h2>
     <p class="sub">Faça backup ou restaure todos os seus dados. Cole o código em outro dispositivo para sincronizar.</p>
     <div class="tab-btns">
-      <button id="sync-tab-exp" class="active" onclick="syncTab('exp')">⬆ Exportar</button>
-      <button id="sync-tab-imp" onclick="syncTab('imp')">⬇ Importar</button>
+      <button id="sync-tab-exp" class="active" onclick="syncTab('exp')" style="display:flex;align-items:center;gap:6px"><span class="icon" style="font-size:16px">upload</span> Exportar</button>
+      <button id="sync-tab-imp" onclick="syncTab('imp')" style="display:flex;align-items:center;gap:6px"><span class="icon" style="font-size:16px">download</span> Importar</button>
     </div>
     <!-- Exportar -->
     <div id="sync-exp-panel">
@@ -4651,13 +4651,18 @@ function openEbookModal() {
   modal.innerHTML = `
     <div style="background:white;border-radius:16px;padding:40px;max-width:500px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
       <div style="text-align:center;margin-bottom:24px">
-        <div style="font-size:48px;margin-bottom:16px">📚</div>
+        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1e40af);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+          <span class="icon" style="font-size:48px;color:white">book</span>
+        </div>
         <h2 style="font-size:24px;font-weight:900;margin-bottom:8px">Investimentos para Iniciantes</h2>
         <p style="color:#666;font-size:14px">Guia completo para começar a investir com segurança</p>
       </div>
 
       <div style="background:#f0faf4;padding:16px;border-radius:12px;margin-bottom:24px;font-size:13px;color:#1e3a5f">
-        <strong>✅ O que você aprende:</strong>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span class="icon" style="color:#16a34a;font-size:18px">check_circle</span>
+          <strong>O que você aprende:</strong>
+        </div>
         <div style="margin-top:8px;line-height:1.8">
           • Diferença entre ações, fundos e renda fixa<br>
           • Como abrir uma conta de investimento<br>
@@ -4672,8 +4677,8 @@ function openEbookModal() {
         <p style="text-align:center;color:#666;font-size:12px;margin-top:4px">Acesso vitalício + atualizações</p>
       </div>
 
-      <button onclick="goToKiwifyCheckout()" style="width:100%;padding:16px;background:#10b981;color:white;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:12px">
-        Comprar E-book Agora
+      <button onclick="goToKiwifyCheckout()" style="width:100%;padding:16px;background:#10b981;color:white;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s ease;box-shadow:0 4px 12px rgba(16,185,129,0.3)" onmouseover="this.style.boxShadow='0 8px 20px rgba(16,185,129,0.5)';this.style.transform='translateY(-2px)'" onmouseout="this.style.boxShadow='0 4px 12px rgba(16,185,129,0.3)';this.style.transform='translateY(0)'">
+        <span class="icon" style="font-size:18px">shopping_cart</span> Comprar E-book Agora
       </button>
 
       <button onclick="this.closest('div').parentElement.remove()" style="width:100%;padding:12px;background:#f3f4f6;color:#666;border:none;border-radius:8px;font-weight:600;cursor:pointer">
