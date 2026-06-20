@@ -415,7 +415,8 @@ body {
   box-shadow: 0 0 30px rgba(74,222,128,.28);
 }
 
-.smartico-score-card h3 {
+.smartico-score-card h3,
+.smartico-score-card h3 * {
   margin: 0 0 6px;
   font-size: 20px;
   font-weight: 950;
@@ -423,7 +424,8 @@ body {
   text-shadow: none !important;
 }
 
-.smartico-score-card p {
+.smartico-score-card p,
+.smartico-score-card p * {
   margin: 0;
   color: #475569 !important;
   opacity: 1 !important;
@@ -433,14 +435,24 @@ body {
 }
 
 .smartico-level-badge {
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: #dcfce7 !important;
-  color: #15803d !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  background: #15803d !important;
+  color: #ffffff !important;
   font-weight: 900 !important;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: .5px !important;
+  box-shadow: 0 4px 12px rgba(21,128,61,.2) !important;
+}
+
+.smartico-level-badge::before {
+  content: "✓" !important;
+  display: inline-block !important;
+  margin-right: 2px !important;
 }
 
 /* GAMIFICAÇÃO */
@@ -462,7 +474,8 @@ body {
   margin-bottom: 12px;
 }
 
-.smartico-level-head strong {
+.smartico-level-head strong,
+.smartico-level-head strong * {
   font-size: 16px;
   color: #0f172a !important;
   font-weight: 900;
@@ -483,7 +496,8 @@ body {
   box-shadow: 0 0 18px rgba(74,222,128,.35);
 }
 
-.smartico-level-card p {
+.smartico-level-card p,
+.smartico-level-card p * {
   margin: 10px 0 0;
   color: #475569 !important;
   opacity: 1 !important;
