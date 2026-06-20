@@ -93,10 +93,21 @@ body {
 
 /* SIDEBAR MARTI STYLE */
 .sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
   background: linear-gradient(180deg, rgba(7, 17, 13, 0.95) 0%, rgba(15, 26, 20, 0.95) 100%);
   border-right: 1px solid var(--smartico-border);
   z-index: 10;
   backdrop-filter: blur(10px);
+  overflow-y: auto;
+  transform: translateX(0);
+  transition: transform 0.3s ease, width 0.3s ease;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar-item {
@@ -360,39 +371,7 @@ body {
   input, textarea { padding: 12px !important; }
 }
 
-/* App header — GREEN SMARTICO */
-.app-header {
-  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-}
-
-html.dark-mode .app-header {
-  background: linear-gradient(90deg, #0f2a20 0%, #1a4a35 100%);
-}
-
-/* SIDEBAR */
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 260px;
-  height: 100vh;
-  background: #1a1a1a;
-  z-index: 999;
-  overflow-y: auto;
-  transform: translateX(0);
-  transition: transform 0.3s ease, width 0.3s ease;
-  box-shadow: 2px 0 12px rgba(0,0,0,0.3);
-  display: flex;
-  flex-direction: column;
-}
+/* SIDEBAR STATES (closed/mini) defined above in MARTI styles */
 
 .sidebar.closed {
   width: 0;
