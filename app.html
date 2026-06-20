@@ -9,160 +9,130 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- PREMIUM DESIGN OVERRIDE V2 -->
+<!-- DASHBOARD WITH MARTI VISUAL LANGUAGE -->
 <style>
 :root {
-  --green: #15803d;
-  --bright: #4ade80;
-  --teal: #14b8a6;
-  --navy: #0f1a14;
-  --dark: #07120d;
-  --card-light: rgba(255,255,255,.78);
-  --border-green: rgba(74,222,128,.22);
-  --shadow: 0 24px 70px rgba(7,18,13,.16);
+  --smartico-green: #15803d;
+  --smartico-bright: #4ade80;
+  --smartico-teal: #14b8a6;
+  --smartico-navy: #0f1a14;
+  --smartico-dark: #07110d;
+  --smartico-card: rgba(15, 26, 20, 0.72);
+  --smartico-border: rgba(74, 222, 128, 0.22);
 }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
-  background:
-    radial-gradient(circle at 80% 8%, rgba(74,222,128,.20), transparent 34%),
-    radial-gradient(circle at 35% 75%, rgba(20,184,166,.14), transparent 38%),
-    linear-gradient(135deg, #f7fff9 0%, #eefbf5 48%, #e9f8f2 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+  color: #e5e7eb;
   position: relative;
   overflow-x: hidden;
 }
 
-/* GRID DINÂMICO */
+/* FUNDO COM GRID E GLOW SUTIL */
 .smartico-bg-effects {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(21,128,61,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(21,128,61,.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(circle at center, black, transparent 78%);
+    radial-gradient(circle at 20% 50%, rgba(74,222,128,.08), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(20,184,166,.06), transparent 50%),
+    linear-gradient(rgba(74,222,128,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,222,128,.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+  overflow: hidden;
 }
 
 .orb {
   position: fixed;
   border-radius: 999px;
-  filter: blur(40px);
-  opacity: .35;
+  filter: blur(60px);
+  opacity: .12;
   pointer-events: none;
   z-index: 0;
 }
 
 .orb-1 {
-  width: 360px;
-  height: 360px;
-  background: rgba(74,222,128,.28);
-  right: 7%;
-  top: 13%;
-  animation: floatOrb 13s ease-in-out infinite;
+  width: 400px;
+  height: 400px;
+  background: rgba(74,222,128,.18);
+  right: -100px;
+  top: -100px;
 }
 
 .orb-2 {
-  width: 260px;
-  height: 260px;
-  background: rgba(20,184,166,.20);
-  left: 28%;
-  bottom: 12%;
-  animation: floatOrb 13s ease-in-out infinite;
-  animation-delay: 2s;
+  width: 300px;
+  height: 300px;
+  background: rgba(20,184,166,.14);
+  left: -80px;
+  bottom: -50px;
 }
 
 .orb-3 {
-  width: 170px;
-  height: 170px;
-  background: rgba(21,128,61,.18);
-  right: 32%;
-  bottom: 28%;
-  animation: floatOrb 13s ease-in-out infinite;
-  animation-delay: 4s;
+  width: 200px;
+  height: 200px;
+  background: rgba(21,128,61,.12);
+  right: 20%;
+  bottom: 15%;
 }
 
 .money-dot {
   position: fixed;
-  width: 7px;
-  height: 7px;
+  width: 5px;
+  height: 5px;
   border-radius: 999px;
-  background: rgba(21,128,61,.35);
-  box-shadow: 0 0 20px rgba(74,222,128,.5);
+  background: rgba(74,222,128,.3);
+  box-shadow: 0 0 12px rgba(74,222,128,.25);
   z-index: 0;
-  animation: floatDot 9s ease-in-out infinite;
 }
 
-.dot-1 { top: 28%; left: 38%; }
-.dot-2 { top: 62%; right: 15%; animation-delay: 1.7s; }
-.dot-3 { bottom: 20%; left: 70%; animation-delay: 3s; }
+.dot-1 { top: 30%; left: 40%; }
+.dot-2 { top: 65%; right: 25%; }
+.dot-3 { bottom: 25%; left: 60%; }
 
-@keyframes floatOrb {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-24px) scale(1.04); }
-}
-
-@keyframes floatDot {
-  0%, 100% { transform: translateY(0); opacity: .25; }
-  50% { transform: translateY(-18px); opacity: .8; }
-}
-
-@keyframes energySweep {
-  to { left: 100%; }
-}
-
-/* SIDEBAR PREMIUM */
+/* SIDEBAR MARTI STYLE */
 .sidebar {
-  background: radial-gradient(circle at top, rgba(74,222,128,.10), transparent 28%), linear-gradient(180deg, #06100c 0%, #0b1511 100%);
-  border-right: 1px solid rgba(255,255,255,.08);
-  box-shadow: 18px 0 50px rgba(7,18,13,.22);
+  background: linear-gradient(180deg, rgba(7, 17, 13, 0.95) 0%, rgba(15, 26, 20, 0.95) 100%);
+  border-right: 1px solid var(--smartico-border);
   z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .sidebar-item {
   color: rgba(255,255,255,.66);
-  border-radius: 18px;
-  transition: .25s ease;
-  font-weight: 800;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
   position: relative;
+  border-left: 3px solid transparent;
 }
 
 .sidebar-item:hover {
-  background: rgba(74,222,128,.08);
+  background: rgba(74, 222, 128, 0.1);
   color: white;
+  border-left-color: var(--smartico-bright);
 }
 
 .sidebar-item.active {
-  background: linear-gradient(135deg, var(--green), var(--teal));
+  background: rgba(74, 222, 128, 0.15);
   color: white;
-  box-shadow: 0 14px 34px rgba(20,184,166,.25);
+  border-left-color: var(--smartico-bright);
+  box-shadow: inset 0 0 12px rgba(74, 222, 128, 0.1);
 }
 
-.sidebar-item.active::before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  top: 14px;
-  bottom: 14px;
-  width: 4px;
-  border-radius: 999px;
-  background: var(--bright);
-  box-shadow: 0 0 18px rgba(74,222,128,.8);
-}
-
-/* HEADER PREMIUM */
+/* HEADER MARTI STYLE */
 .app-header {
-  background: linear-gradient(135deg, rgba(21,128,61,.96), rgba(20,184,166,.95));
-  box-shadow: 0 18px 50px rgba(21,128,61,.18);
-  height: 88px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+  height: 70px;
   margin-left: 260px;
   z-index: 2;
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 28px;
-  gap: 16px;
+  padding: 0 24px;
+  gap: 12px;
 }
 
 /* CONTENT */
@@ -170,126 +140,107 @@ body {
   margin-left: 260px;
   position: relative;
   z-index: 1;
-  padding: 0 28px 48px;
+  padding: 20px 24px 40px;
   background: transparent;
 }
 
 .top-nav { display: none; }
 
-/* CARDS PREMIUM */
+/* CARDS MODERNO */
 .card {
-  background: var(--card-light);
-  border: 1px solid var(--border-green);
-  border-radius: 24px;
-  box-shadow: 0 18px 44px rgba(15,26,20,.08);
-  backdrop-filter: blur(18px);
-  transition: transform .22s ease, box-shadow .22s ease;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--smartico-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 60px rgba(15,26,20,.12);
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  width: 110px;
-  height: 110px;
-  border-radius: 999px;
-  right: -34px;
-  bottom: -42px;
-  background: radial-gradient(circle, rgba(74,222,128,.16), transparent 70%);
-  pointer-events: none;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(74, 222, 128, 0.4);
 }
 
 .card-label {
-  font-size: 12px;
-  letter-spacing: .14em;
+  font-size: 11px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  font-weight: 950;
-  color: rgba(15,26,20,.45);
+  font-weight: 700;
+  color: #888;
 }
 
 .card-value {
-  font-size: 24px;
-  font-weight: 950;
+  font-size: 22px;
+  font-weight: 800;
   margin-top: 8px;
+  color: #fff;
 }
 
-.green { color: #1f6f43; }
-.red { color: #dc2626; }
-.blue { color: #2563eb; }
-.orange { color: #b45309; }
+.green { color: var(--smartico-bright); }
+.red { color: #ef4444; }
+.blue { color: #3b82f6; }
+.orange { color: #f59e0b; }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0,1fr));
-  gap: 16px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
-/* CARDS COM CORES SÓLIDAS */
-.card.green-solid {
-  background: linear-gradient(135deg, #1f6f43, #166534);
-  color: white;
-}
-
-.card.green-solid .card-label,
-.card.red-solid .card-label,
-.card.blue-solid .card-label {
-  color: rgba(255,255,255,.72);
-}
-
-.card.red-solid {
-  background: linear-gradient(135deg, #dc2626, #b91c1c);
-  color: white;
-}
-
-.card.blue-solid {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-}
-
-/* MARTI OPPORTUNITY */
+/* MARTI OPPORTUNITY CARD */
 .marti-insight-card {
-  background: radial-gradient(circle at top right, rgba(74,222,128,.20), transparent 38%), linear-gradient(135deg, #07120d, #0f1a14);
+  background: linear-gradient(135deg, rgba(15, 26, 20, 0.6), rgba(20, 184, 166, 0.1));
   color: white;
-  border: 1px solid rgba(74,222,128,.25);
-  border-radius: 28px;
-  padding: 24px;
-  margin-bottom: 20px;
-  box-shadow: 0 24px 70px rgba(7,18,13,.20);
+  border: 1px solid var(--smartico-border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
+  gap: 20px;
+  transition: all 0.3s ease;
   position: relative;
+  overflow: hidden;
 }
 
-.marti-insight-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -180px;
-  width: 180px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--bright), transparent);
-  animation: energySweep 3.2s infinite;
+.marti-insight-card:hover {
+  background: linear-gradient(135deg, rgba(15, 26, 20, 0.7), rgba(20, 184, 166, 0.15));
+  border-color: rgba(74, 222, 128, 0.35);
 }
 
-.marti-insight-card h3 { margin: 0 0 8px; font-size: 22px; }
-.marti-insight-card p { margin: 0; color: rgba(255,255,255,.72); }
+.marti-insight-card h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.marti-insight-card p {
+  margin: 0;
+  color: rgba(255,255,255,.7);
+  font-size: 13px;
+}
+
 .marti-insight-card a {
   color: white;
-  background: linear-gradient(135deg, var(--green), var(--teal));
-  padding: 13px 18px;
-  border-radius: 16px;
+  background: linear-gradient(135deg, var(--smartico-green), var(--smartico-teal));
+  padding: 11px 16px;
+  border-radius: 12px;
   text-decoration: none;
-  font-weight: 900;
-  box-shadow: 0 14px 34px rgba(20,184,166,.22);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.marti-insight-card a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {
