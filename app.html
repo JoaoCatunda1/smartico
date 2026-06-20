@@ -3117,16 +3117,17 @@ async function initAuth() {
     await syncFromCloud(false);
     renderAll();
   } else {
-    // Sem sessão — redireciona para login
-    window.location.href = '/auth';
-    return;
+    // Sem sessão — carrega mesmo assim (sem redirect)
+    // window.location.href = '/auth';
+    // return;
   }
   supa.auth.onAuthStateChange(async (event, session) => {
     _supaUser = session?.user || null;
     updateAuthUI(!!_supaUser);
     if (event === 'SIGNED_OUT') {
-      window.location.href = '/auth';
-      return;
+      // Sem redirect — carrega normal
+      // window.location.href = '/auth';
+      // return;
     }
     if (event === 'SIGNED_IN') {
       await syncFromCloud(false);
