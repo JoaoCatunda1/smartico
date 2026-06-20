@@ -402,7 +402,7 @@
   <div class="marti-container">
     <!-- SIDEBAR -->
     <div class="marti-sidebar">
-      <div class="sidebar-header">📌 Histórico</div>
+      <div class="sidebar-header">Histórico</div>
       <div class="sidebar-item active" onclick="selectHistory(this)">
         <div>Comissões e vendas</div>
         <div class="sidebar-time">Agora</div>
@@ -430,7 +430,7 @@
       <!-- HEADER -->
       <div class="marti-header">
         <div class="header-left">
-          <button class="back-btn" onclick="window.location.href='/app'" title="Voltar">←</button>
+          <button class="back-btn" onclick="window.location.href='/app'" title="Voltar">&larr;</button>
           <div class="header-title">MARTI</div>
         </div>
         <div class="header-right">
@@ -446,7 +446,7 @@
         <div class="messages-wrapper" id="messages">
           <div class="message ai">
             <div class="message-bubble">
-              👋 Olá! Sou o MARTI, seu consultor financeiro IA. Como posso ajudar com suas finanças?
+              Olá! Sou o MARTI, seu consultor financeiro IA. Como posso ajudar com suas finanças?
             </div>
           </div>
         </div>
@@ -462,7 +462,7 @@
               onkeypress="handleKeyPress(event)"
             />
           </div>
-          <button class="send-btn" id="send-btn" onclick="sendMessage()">→</button>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">&rarr;</button>
         </div>
       </div>
     </div>
@@ -479,11 +479,11 @@
 
     // MOCK RESPONSES (quando API não responde)
     const mockResponses = [
-      'Com base em seus gastos, identifiquei que você gasta em média R$ 1.200/mês com alimentação. Se reduzir para R$ 800, economiza R$ 4.800/ano! 💰',
+      'Com base em seus gastos, identifiquei que você gasta em média R$ 1.200/mês com alimentação. Se reduzir para R$ 800, economiza R$ 4.800/ano.',
       'Sua margem de lucro está em 22%. Recomendo diversificar sua renda para aumentar esse percentual.',
       'Você tem R$ 3.400 disponíveis em liquidez. Seria uma boa oportunidade investir 30% em renda fixa.',
       'Identifiquei um padrão: seus maiores gastos são nas terças-feiras. Pode ser um excelente dia para planejar compras.',
-      'Seu fluxo de caixa está positivo em R$ 2.100 esse mês! Continue assim! ✨',
+      'Seu fluxo de caixa está positivo em R$ 2.100 esse mês. Continue assim!',
       'Se você poupar R$ 500/mês, em 1 ano terá uma reserva de emergência completa.',
       'Detectei que você está pagando R$ 89/mês em assinaturas que não usa. Poderia economizar R$ 1.068/ano!',
     ];
@@ -494,7 +494,7 @@
 
       // Verificar limite
       if (messagesCount >= maxMessages) {
-        addMessage('⚠️ Você atingiu o limite de 50 perguntas. Upgrade para Smartico!', 'ai');
+        addMessage('Você atingiu o limite de 50 perguntas. Faça upgrade para Smartico para mais acesso.', 'ai');
         return;
       }
 
